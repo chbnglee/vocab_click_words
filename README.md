@@ -23,6 +23,26 @@ cd "C:\Users\IM_1500\Desktop\스토리 텍스트\02_Vocab"
 
 GitHub에 올릴 때는 API 키를 커밋하지 말고, 배포 환경의 secrets에 `GEMINI_API_KEY`로 등록하세요.
 
+### GitHub Desktop으로 올리기
+
+1. GitHub Desktop을 엽니다.
+2. `File` -> `Add local repository...`를 선택합니다.
+3. 이 폴더를 선택합니다: `02_Vocab/vocab_click_app`
+4. `Publish repository`를 누릅니다.
+5. 저장소 이름은 예: `vocab-click-app`
+6. 공개 범위는 콘텐츠 보호가 필요하면 `Private`, 여러 사람이 쉽게 접근해야 하면 `Public`으로 선택합니다.
+
+### Streamlit Community Cloud
+
+1. https://share.streamlit.io 에 접속합니다.
+2. `Create app`을 누릅니다.
+3. GitHub repo, branch `main`, main file path `streamlit_app.py`를 선택합니다.
+4. `Advanced settings` 또는 app settings에서 secrets에 아래 값을 등록합니다.
+
+```toml
+GEMINI_API_KEY = "your-api-key"
+```
+
 커밋 제외 권장:
 
 - `.venv*`
