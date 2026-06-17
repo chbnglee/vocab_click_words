@@ -1,0 +1,9 @@
+.venv/
+.venv*/
+__pycache__/
+*.pyc
+~$*.xlsx
+.streamlit/secrets.toml
+.env
+Story_Analysis_20*.xlsx
+*_before_easy_diff_fix_*

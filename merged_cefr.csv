@@ -1,0 +1,3290 @@
+word,cefr_level,source
+a,Pre A1,dataset_cambridge
+a few,A2,dataset_cambridge
+a little,A2,dataset_cambridge
+a lot,Pre A1,dataset_cambridge
+a lot of,Pre A1,dataset_cambridge
+a.m.,A2,dataset_cambridge
+abandon,B2,dataset_oxford3000
+ability,A2,dataset_oxford3000
+able,A2,dataset_oxford3000
+about,Pre A1,dataset_cambridge
+above,A1,dataset_cambridge
+abroad,A2,dataset_oxford3000
+absolute,B2,dataset_oxford3000
+absolutely,B1,dataset_oxford3000
+academic,B1,dataset_oxford3000
+accept,A2,dataset_oxford3000
+acceptable,B2,dataset_oxford3000
+access,B1,dataset_oxford3000
+accident,A2,dataset_oxford3000
+accommodation,B1,dataset_oxford3000
+accompany,B2,dataset_oxford3000
+according to,A2,dataset_oxford3000
+account,B1,dataset_oxford3000
+accurate,B2,dataset_oxford3000
+accuse,B2,dataset_oxford3000
+achieve,A2,dataset_oxford3000
+achievement,B1,dataset_oxford3000
+acknowledge,B2,dataset_oxford3000
+acquire,B2,dataset_oxford3000
+across,A2,dataset_cambridge
+act,A2,dataset_cambridge
+action,A1,dataset_oxford3000
+active,A2,dataset_oxford3000
+activity,A1,dataset_oxford3000
+actor,A2,dataset_cambridge
+actress,A1,dataset_oxford3000
+actual,B2,dataset_oxford3000
+actually,A2,dataset_cambridge
+ad,B1,dataset_oxford3000
+adapt,B2,dataset_oxford3000
+add,Pre A1,dataset_cambridge
+addition,B1,dataset_oxford3000
+additional,B2,dataset_oxford3000
+address,A1,dataset_cambridge
+administration,B2,dataset_oxford3000
+admire,B1,dataset_oxford3000
+admit,B1,dataset_oxford3000
+adopt,B2,dataset_oxford3000
+adult,A1,dataset_oxford3000
+advance,B2,dataset_oxford3000
+advanced,B1,dataset_oxford3000
+advantage,A2,dataset_oxford3000
+adventure,A2,dataset_cambridge
+advertise,A2,dataset_oxford3000
+advertisement,A2,dataset_oxford3000
+advertising,A2,dataset_oxford3000
+advice,A1,dataset_oxford3000
+advise,B1,dataset_oxford3000
+affair,B2,dataset_oxford3000
+affect,A2,dataset_oxford3000
+afford,B1,dataset_oxford3000
+afraid,A1,dataset_cambridge
+after,A2,dataset_cambridge
+afternoon,Pre A1,dataset_cambridge
+afterwards,B2,dataset_oxford3000
+again,Pre A1,dataset_cambridge
+against,A2,dataset_oxford3000
+age,A1,dataset_cambridge
+aged,B1,dataset_oxford3000
+agency,B2,dataset_oxford3000
+agenda,B2,dataset_oxford3000
+agent,B1,dataset_oxford3000
+aggressive,B2,dataset_oxford3000
+ago,A2,dataset_cambridge
+agree,A2,dataset_cambridge
+agreement,B1,dataset_oxford3000
+ah,A2,dataset_oxford3000
+ahead,B1,dataset_oxford3000
+aid,B2,dataset_oxford3000
+aim,B1,dataset_oxford3000
+air,A2,dataset_cambridge
+aircraft,B2,dataset_oxford3000
+airline,A2,dataset_oxford3000
+airport,A2,dataset_cambridge
+alarm,B1,dataset_oxford3000
+album,B1,dataset_oxford3000
+alcohol,B1,dataset_oxford3000
+alcoholic,B1,dataset_oxford3000
+alien,Pre A1,dataset_cambridge
+alive,A2,dataset_oxford3000
+all,A1,dataset_cambridge
+all right,A1,dataset_cambridge
+allow,A2,dataset_oxford3000
+almost,A2,dataset_oxford3000
+alone,A2,dataset_cambridge
+along,A1,dataset_cambridge
+alphabet,Pre A1,dataset_cambridge
+already,A2,dataset_cambridge
+also,A2,dataset_cambridge
+alter,B2,dataset_oxford3000
+alternative,A2,dataset_oxford3000
+although,A2,dataset_oxford3000
+always,A1,dataset_cambridge
+amazed,B1,dataset_oxford3000
+amazing,A2,dataset_cambridge
+ambition,B1,dataset_oxford3000
+ambitious,B1,dataset_oxford3000
+ambulance,A2,dataset_cambridge
+among,A2,dataset_oxford3000
+amount,A2,dataset_oxford3000
+an,Pre A1,dataset_cambridge
+analyse,B1,dataset_oxford3000
+analysis,B1,dataset_oxford3000
+ancient,A2,dataset_oxford3000
+and,Pre A1,dataset_cambridge
+anger,B2,dataset_oxford3000
+angle,B2,dataset_oxford3000
+angry,Pre A1,dataset_cambridge
+animal,Pre A1,dataset_cambridge
+ankle,A2,dataset_oxford3000
+anniversary,B2,dataset_oxford3000
+announce,B1,dataset_oxford3000
+announcement,B1,dataset_oxford3000
+annoy,B1,dataset_oxford3000
+annoyed,B1,dataset_oxford3000
+annoying,B1,dataset_oxford3000
+annual,B2,dataset_oxford3000
+another,A1,dataset_cambridge
+answer,Pre A1,dataset_cambridge
+anxious,B2,dataset_oxford3000
+any,A1,dataset_cambridge
+any more,A2,dataset_oxford3000
+anybody,A2,dataset_oxford3000
+anyone,A2,dataset_cambridge
+anything,A2,dataset_cambridge
+anyway,A2,dataset_oxford3000
+anywhere,A2,dataset_cambridge
+apart,B1,dataset_oxford3000
+apartment,Pre A1,dataset_cambridge
+apologize,B1,dataset_oxford3000
+app,A1,dataset_cambridge
+apparent,B2,dataset_oxford3000
+apparently,B2,dataset_oxford3000
+appeal,B2,dataset_oxford3000
+appear,A2,dataset_cambridge
+appearance,A2,dataset_oxford3000
+apple,Pre A1,dataset_cambridge
+application,B1,dataset_oxford3000
+apply,A2,dataset_oxford3000
+appointment,B1,dataset_oxford3000
+appreciate,B1,dataset_oxford3000
+approach,B2,dataset_oxford3000
+appropriate,B2,dataset_oxford3000
+approval,B2,dataset_oxford3000
+approve,B2,dataset_oxford3000
+approximately,B1,dataset_oxford3000
+april,A2,dataset_cambridge
+architect,A2,dataset_oxford3000
+architecture,A2,dataset_oxford3000
+area,A1,dataset_oxford3000
+argue,A2,dataset_oxford3000
+argument,A2,dataset_oxford3000
+arise,B2,dataset_oxford3000
+arm,Pre A1,dataset_cambridge
+armchair,Pre A1,dataset_cambridge
+armed,B2,dataset_oxford3000
+arms,B2,dataset_oxford3000
+army,A2,dataset_oxford3000
+around,A1,dataset_cambridge
+arrange,A2,dataset_oxford3000
+arrangement,A2,dataset_oxford3000
+arrest,B1,dataset_oxford3000
+arrival,B1,dataset_oxford3000
+arrive,A2,dataset_cambridge
+art,A2,dataset_cambridge
+article,A1,dataset_oxford3000
+artificial,B2,dataset_oxford3000
+artist,A2,dataset_cambridge
+artistic,B2,dataset_oxford3000
+as,A2,dataset_cambridge
+as ... as,A2,dataset_cambridge
+as as,A2,dataset_cambridge
+ashamed,B2,dataset_oxford3000
+ask,Pre A1,dataset_cambridge
+asleep,A1,dataset_cambridge
+aspect,B2,dataset_oxford3000
+assess,B2,dataset_oxford3000
+assessment,B2,dataset_oxford3000
+assignment,B1,dataset_oxford3000
+assist,B1,dataset_oxford3000
+assistant,A2,dataset_oxford3000
+associate,B2,dataset_oxford3000
+associated,B2,dataset_oxford3000
+association,B2,dataset_oxford3000
+assume,B2,dataset_oxford3000
+astronaut,A2,dataset_cambridge
+at,A1,dataset_cambridge
+at the moment,A2,dataset_cambridge
+athlete,A2,dataset_oxford3000
+atmosphere,B1,dataset_oxford3000
+attach,B1,dataset_oxford3000
+attack,A2,dataset_oxford3000
+attempt,B2,dataset_oxford3000
+attend,A2,dataset_oxford3000
+attention,A2,dataset_oxford3000
+attitude,B1,dataset_oxford3000
+attract,B1,dataset_oxford3000
+attraction,B1,dataset_oxford3000
+attractive,A2,dataset_oxford3000
+audience,A2,dataset_oxford3000
+august,A2,dataset_cambridge
+aunt,A1,dataset_cambridge
+author,A2,dataset_oxford3000
+authority,B1,dataset_oxford3000
+autumn,A2,dataset_cambridge
+available,A2,dataset_oxford3000
+average,A2,dataset_oxford3000
+avoid,A2,dataset_oxford3000
+awake,A1,dataset_cambridge
+award,A2,dataset_oxford3000
+aware,B1,dataset_oxford3000
+away,A2,dataset_cambridge
+awful,A2,dataset_oxford3000
+baby,Pre A1,dataset_cambridge
+back,A1,dataset_cambridge
+background,A2,dataset_oxford3000
+backpack,A2,dataset_cambridge
+backwards,B1,dataset_oxford3000
+bacteria,B2,dataset_oxford3000
+bad,A1,dataset_cambridge
+badly,A1,dataset_cambridge
+badminton,Pre A1,dataset_cambridge
+bag,Pre A1,dataset_cambridge
+bake,B1,dataset_oxford3000
+balance,B1,dataset_oxford3000
+balcony,A1,dataset_cambridge
+ball,Pre A1,dataset_cambridge
+balloon,Pre A1,dataset_cambridge
+ban,B1,dataset_oxford3000
+banana,Pre A1,dataset_cambridge
+band,A1,dataset_cambridge
+bandage,A2,dataset_cambridge
+bank,A2,dataset_cambridge
+bar,A2,dataset_oxford3000
+barrier,B2,dataset_oxford3000
+base,B1,dataset_oxford3000
+baseball,Pre A1,dataset_cambridge
+baseball cap,Pre A1,dataset_cambridge
+based,A2,dataset_oxford3000
+basement,A1,dataset_cambridge
+basic,B1,dataset_oxford3000
+basically,B2,dataset_oxford3000
+basis,B1,dataset_oxford3000
+basketball,Pre A1,dataset_cambridge
+bat,A1,dataset_cambridge
+bath,Pre A1,dataset_cambridge
+bathroom,Pre A1,dataset_cambridge
+battery,B1,dataset_oxford3000
+battle,B1,dataset_oxford3000
+be,Pre A1,dataset_cambridge
+be called,A1,dataset_cambridge
+beach,Pre A1,dataset_cambridge
+bean,Pre A1,dataset_cambridge
+bear,Pre A1,dataset_cambridge
+beard,A1,dataset_cambridge
+beat,A2,dataset_oxford3000
+beautiful,Pre A1,dataset_cambridge
+beauty,B1,dataset_oxford3000
+because,A1,dataset_cambridge
+become,A1,dataset_oxford3000
+bed,Pre A1,dataset_cambridge
+bedroom,Pre A1,dataset_cambridge
+bee,Pre A1,dataset_cambridge
+beef,A2,dataset_oxford3000
+beer,A1,dataset_oxford3000
+beetle,A2,dataset_cambridge
+before,A2,dataset_cambridge
+beg,B2,dataset_oxford3000
+begin,A2,dataset_cambridge
+beginning,A1,dataset_oxford3000
+behave,A2,dataset_oxford3000
+behaviour,A2,dataset_oxford3000
+behind,Pre A1,dataset_cambridge
+being,B2,dataset_oxford3000
+belief,B1,dataset_oxford3000
+believe,A2,dataset_cambridge
+bell,B1,dataset_oxford3000
+belong,A2,dataset_oxford3000
+below,A1,dataset_cambridge
+belt,A2,dataset_cambridge
+bend,B1,dataset_oxford3000
+benefit,A2,dataset_oxford3000
+bent,B2,dataset_oxford3000
+best,A1,dataset_cambridge
+bet,B2,dataset_oxford3000
+better,A1,dataset_cambridge
+between,Pre A1,dataset_cambridge
+beyond,B2,dataset_oxford3000
+bicycle,A2,dataset_cambridge
+big,Pre A1,dataset_cambridge
+bike,Pre A1,dataset_cambridge
+bill,A1,dataset_oxford3000
+billion,A2,dataset_oxford3000
+bin,A2,dataset_cambridge
+biology,A2,dataset_oxford3000
+bird,Pre A1,dataset_cambridge
+birth,A2,dataset_oxford3000
+birthday,Pre A1,dataset_cambridge
+biscuit,A2,dataset_cambridge
+bit,A2,dataset_cambridge
+bite,B1,dataset_oxford3000
+bitter,B2,dataset_oxford3000
+black,Pre A1,dataset_cambridge
+blame,B2,dataset_oxford3000
+blank,A2,dataset_oxford3000
+blanket,A1,dataset_cambridge
+blind,B2,dataset_oxford3000
+block,B1,dataset_oxford3000
+blog,A1,dataset_oxford3000
+blond,A1,dataset_cambridge
+blonde,A1,dataset_oxford3000
+blood,A2,dataset_oxford3000
+blow,A2,dataset_oxford3000
+blue,Pre A1,dataset_cambridge
+board,Pre A1,dataset_cambridge
+board game,Pre A1,dataset_cambridge
+boat,Pre A1,dataset_cambridge
+body,Pre A1,dataset_cambridge
+boil,A2,dataset_oxford3000
+bomb,B1,dataset_oxford3000
+bond,B2,dataset_oxford3000
+bone,A2,dataset_oxford3000
+book,Pre A1,dataset_cambridge
+bookcase,Pre A1,dataset_cambridge
+bookshop,Pre A1,dataset_cambridge
+boot,A1,dataset_oxford3000
+boots,Pre A1,dataset_cambridge
+border,B1,dataset_oxford3000
+bored,A2,dataset_cambridge
+boring,A1,dataset_cambridge
+born,A1,dataset_oxford3000
+borrow,A2,dataset_cambridge
+boss,A2,dataset_oxford3000
+both,A1,dataset_cambridge
+bother,B1,dataset_oxford3000
+bottle,A1,dataset_cambridge
+bottom,A1,dataset_cambridge
+bounce,Pre A1,dataset_cambridge
+bowl,A1,dataset_cambridge
+box,Pre A1,dataset_cambridge
+boy,Pre A1,dataset_cambridge
+boyfriend,A1,dataset_oxford3000
+bracelet,A2,dataset_cambridge
+brain,A2,dataset_oxford3000
+branch,B1,dataset_oxford3000
+brand,B1,dataset_oxford3000
+brave,A1,dataset_cambridge
+bread,Pre A1,dataset_cambridge
+break,A1,dataset_cambridge
+breakfast,Pre A1,dataset_cambridge
+breast,B2,dataset_oxford3000
+breath,B1,dataset_oxford3000
+breathe,B1,dataset_oxford3000
+breathing,B1,dataset_oxford3000
+bride,B1,dataset_oxford3000
+bridge,A2,dataset_cambridge
+brief,B2,dataset_oxford3000
+bright,A2,dataset_oxford3000
+brilliant,A1,dataset_cambridge
+bring,A1,dataset_cambridge
+broad,B2,dataset_oxford3000
+broadcast,B2,dataset_oxford3000
+broken,A2,dataset_cambridge
+brother,Pre A1,dataset_cambridge
+brown,Pre A1,dataset_cambridge
+brush,A2,dataset_cambridge
+bubble,B1,dataset_oxford3000
+budget,B2,dataset_oxford3000
+build,A1,dataset_cambridge
+building,A1,dataset_cambridge
+bullet,B2,dataset_oxford3000
+bunch,B2,dataset_oxford3000
+burger,Pre A1,dataset_cambridge
+burn,A2,dataset_cambridge
+bury,B1,dataset_oxford3000
+bus,Pre A1,dataset_cambridge
+bus station,A1,dataset_cambridge
+bus stop,A1,dataset_cambridge
+bush,B2,dataset_oxford3000
+business,A2,dataset_cambridge
+businessman,A2,dataset_cambridge
+businesswoman,A2,dataset_cambridge
+busy,A1,dataset_cambridge
+but,Pre A1,dataset_cambridge
+butter,A2,dataset_cambridge
+butterfly,A2,dataset_cambridge
+button,A2,dataset_oxford3000
+buy,A1,dataset_cambridge
+by,A1,dataset_cambridge
+by myself,A2,dataset_cambridge
+by yourself,A2,dataset_cambridge
+bye,Pre A1,dataset_cambridge
+cable,B2,dataset_oxford3000
+caf,A1,dataset_cambridge
+cafe,A1,dataset_oxford3000
+cage,A1,dataset_cambridge
+cake,Pre A1,dataset_cambridge
+calculate,B2,dataset_oxford3000
+calendar,A2,dataset_cambridge
+call,A1,dataset_cambridge
+calm,B1,dataset_oxford3000
+camel,A2,dataset_cambridge
+camera,Pre A1,dataset_cambridge
+camp,A2,dataset_cambridge
+campaign,B1,dataset_oxford3000
+camping,A2,dataset_oxford3000
+campus,B1,dataset_oxford3000
+can,Pre A1,dataset_cambridge
+cancel,B2,dataset_oxford3000
+cancer,B2,dataset_oxford3000
+candidate,B1,dataset_oxford3000
+candy,Pre A1,dataset_cambridge
+cannot,A1,dataset_oxford3000
+cap,B1,dataset_oxford3000
+capable,B2,dataset_oxford3000
+capacity,B2,dataset_oxford3000
+capital,A1,dataset_oxford3000
+captain,B1,dataset_oxford3000
+capture,B2,dataset_oxford3000
+car,Pre A1,dataset_cambridge
+car park,A1,dataset_cambridge
+card,A2,dataset_cambridge
+care,A2,dataset_oxford3000
+career,A1,dataset_oxford3000
+careful,A1,dataset_cambridge
+carefully,A1,dataset_cambridge
+careless,B1,dataset_oxford3000
+carpet,A2,dataset_oxford3000
+carrot,Pre A1,dataset_cambridge
+carry,A1,dataset_cambridge
+cartoon,A2,dataset_cambridge
+case,A2,dataset_oxford3000
+cash,A2,dataset_oxford3000
+cast,B2,dataset_oxford3000
+castle,A2,dataset_cambridge
+cat,Pre A1,dataset_cambridge
+catch,A1,dataset_cambridge
+category,B1,dataset_oxford3000
+cause,A2,dataset_oxford3000
+cave,A2,dataset_cambridge
+cd,A1,dataset_cambridge
+ceiling,B1,dataset_oxford3000
+celebrate,A2,dataset_oxford3000
+celebration,B1,dataset_oxford3000
+celebrity,A2,dataset_oxford3000
+cell,B2,dataset_oxford3000
+cent,A1,dataset_oxford3000
+central,B1,dataset_oxford3000
+centre,A1,dataset_cambridge
+century,A2,dataset_cambridge
+cereal,A2,dataset_cambridge
+ceremony,B1,dataset_oxford3000
+certain,A2,dataset_oxford3000
+certainly,A2,dataset_oxford3000
+chain,B1,dataset_oxford3000
+chair,Pre A1,dataset_cambridge
+chairman,B2,dataset_oxford3000
+challenge,B1,dataset_oxford3000
+champion,B1,dataset_oxford3000
+chance,A2,dataset_oxford3000
+change,A1,dataset_cambridge
+channel,A2,dataset_cambridge
+chapter,B1,dataset_oxford3000
+character,A2,dataset_oxford3000
+characteristic,B2,dataset_oxford3000
+charge,B1,dataset_oxford3000
+charity,A2,dataset_oxford3000
+chart,A1,dataset_oxford3000
+chat,A2,dataset_cambridge
+cheap,A2,dataset_cambridge
+cheat,B1,dataset_oxford3000
+check,A1,dataset_oxford3000
+cheerful,B1,dataset_oxford3000
+cheese,A1,dataset_cambridge
+chef,A2,dataset_oxford3000
+chemical,B1,dataset_oxford3000
+chemist,A2,dataset_cambridge
+chemistry,A2,dataset_oxford3000
+chess,A2,dataset_cambridge
+chest,B1,dataset_oxford3000
+chicken,Pre A1,dataset_cambridge
+chief,B2,dataset_oxford3000
+child,Pre A1,dataset_cambridge
+childhood,B1,dataset_oxford3000
+children,Pre A1,dataset_cambridge
+chip,A2,dataset_oxford3000
+chips,Pre A1,dataset_cambridge
+chocolate,Pre A1,dataset_cambridge
+choice,A2,dataset_oxford3000
+choose,Pre A1,dataset_cambridge
+chopsticks,A2,dataset_cambridge
+church,A2,dataset_oxford3000
+cigarette,A2,dataset_oxford3000
+cinema,A1,dataset_cambridge
+circle,A1,dataset_cambridge
+circumstance,B2,dataset_oxford3000
+circus,A1,dataset_cambridge
+cite,B2,dataset_oxford3000
+citizen,B2,dataset_oxford3000
+city,A1,dataset_cambridge
+city centre,A1,dataset_cambridge
+civil,B2,dataset_oxford3000
+claim,B1,dataset_oxford3000
+clap,Pre A1,dataset_cambridge
+class,Pre A1,dataset_cambridge
+classic,B2,dataset_oxford3000
+classical,A2,dataset_oxford3000
+classmate,Pre A1,dataset_cambridge
+classroom,Pre A1,dataset_cambridge
+clause,B1,dataset_oxford3000
+clean,Pre A1,dataset_cambridge
+clear,A2,dataset_oxford3000
+clearly,A2,dataset_oxford3000
+clever,A1,dataset_cambridge
+click,B1,dataset_oxford3000
+client,B1,dataset_oxford3000
+climate,A2,dataset_oxford3000
+climb,A1,dataset_cambridge
+clock,Pre A1,dataset_cambridge
+close,Pre A1,dataset_cambridge
+closed,Pre A1,dataset_cambridge
+closely,B2,dataset_oxford3000
+cloth,B1,dataset_oxford3000
+clothes,Pre A1,dataset_cambridge
+clothing,A2,dataset_oxford3000
+cloud,A1,dataset_cambridge
+cloudy,A1,dataset_cambridge
+clown,A1,dataset_cambridge
+club,A2,dataset_cambridge
+clue,B1,dataset_oxford3000
+coach,A2,dataset_oxford3000
+coal,B1,dataset_oxford3000
+coast,A2,dataset_oxford3000
+coat,A1,dataset_cambridge
+coconut,Pre A1,dataset_cambridge
+code,A2,dataset_oxford3000
+coffee,A1,dataset_cambridge
+coin,B1,dataset_oxford3000
+cold,A1,dataset_cambridge
+collapse,B2,dataset_oxford3000
+colleague,A2,dataset_oxford3000
+collect,A2,dataset_cambridge
+collection,B1,dataset_oxford3000
+college,A2,dataset_cambridge
+colour,Pre A1,dataset_cambridge
+coloured,B1,dataset_oxford3000
+column,A2,dataset_oxford3000
+comb,A2,dataset_cambridge
+combination,B2,dataset_oxford3000
+combine,B1,dataset_oxford3000
+come,Pre A1,dataset_cambridge
+come on,A1,dataset_cambridge
+comedy,A2,dataset_oxford3000
+comfort,B2,dataset_oxford3000
+comfortable,A2,dataset_oxford3000
+comic,A1,dataset_cambridge
+comic book,A1,dataset_cambridge
+command,B2,dataset_oxford3000
+comment,A2,dataset_oxford3000
+commercial,B1,dataset_oxford3000
+commission,B2,dataset_oxford3000
+commit,B1,dataset_oxford3000
+commitment,B2,dataset_oxford3000
+committee,B2,dataset_oxford3000
+common,A1,dataset_oxford3000
+commonly,B2,dataset_oxford3000
+communicate,A2,dataset_oxford3000
+communication,B1,dataset_oxford3000
+community,A2,dataset_oxford3000
+company,A1,dataset_oxford3000
+compare,A1,dataset_oxford3000
+comparison,B1,dataset_oxford3000
+compete,A2,dataset_oxford3000
+competition,A2,dataset_cambridge
+competitive,B1,dataset_oxford3000
+competitor,B1,dataset_oxford3000
+complain,A2,dataset_oxford3000
+complaint,B1,dataset_oxford3000
+complete,Pre A1,dataset_cambridge
+completely,A2,dataset_oxford3000
+complex,B1,dataset_oxford3000
+complicated,B2,dataset_oxford3000
+component,B2,dataset_oxford3000
+computer,Pre A1,dataset_cambridge
+concentrate,B1,dataset_oxford3000
+concentration,B2,dataset_oxford3000
+concept,B2,dataset_oxford3000
+concern,B2,dataset_oxford3000
+concerned,B2,dataset_oxford3000
+concert,A2,dataset_cambridge
+conclude,B1,dataset_oxford3000
+conclusion,B1,dataset_oxford3000
+condition,A2,dataset_oxford3000
+conduct,B2,dataset_oxford3000
+conference,A2,dataset_oxford3000
+confidence,B2,dataset_oxford3000
+confident,B1,dataset_oxford3000
+confirm,B1,dataset_oxford3000
+conflict,B2,dataset_oxford3000
+confuse,B1,dataset_oxford3000
+confused,B1,dataset_oxford3000
+confusing,B2,dataset_oxford3000
+connect,A2,dataset_oxford3000
+connected,A2,dataset_oxford3000
+connection,B1,dataset_oxford3000
+conscious,B2,dataset_oxford3000
+consequence,B1,dataset_oxford3000
+conservative,B2,dataset_oxford3000
+consider,A2,dataset_oxford3000
+consideration,B2,dataset_oxford3000
+consist,B1,dataset_oxford3000
+consistent,B2,dataset_oxford3000
+constant,B2,dataset_oxford3000
+constantly,B2,dataset_oxford3000
+construct,B2,dataset_oxford3000
+construction,B2,dataset_oxford3000
+consume,B1,dataset_oxford3000
+consumer,B1,dataset_oxford3000
+contact,B1,dataset_oxford3000
+contain,A2,dataset_oxford3000
+container,B1,dataset_oxford3000
+contemporary,B2,dataset_oxford3000
+content,B1,dataset_oxford3000
+contest,B2,dataset_oxford3000
+context,A2,dataset_oxford3000
+continent,A2,dataset_oxford3000
+continue,A2,dataset_oxford3000
+continuous,B1,dataset_oxford3000
+contract,B2,dataset_oxford3000
+contrast,B1,dataset_oxford3000
+contribute,B2,dataset_oxford3000
+contribution,B2,dataset_oxford3000
+control,A2,dataset_oxford3000
+convenient,B1,dataset_oxford3000
+conversation,A2,dataset_cambridge
+convert,B2,dataset_oxford3000
+convince,B1,dataset_oxford3000
+convinced,B2,dataset_oxford3000
+cook,A1,dataset_cambridge
+cooker,A2,dataset_cambridge
+cookie,A2,dataset_cambridge
+cooking,A1,dataset_oxford3000
+cool,Pre A1,dataset_cambridge
+copy,A2,dataset_oxford3000
+core,B2,dataset_oxford3000
+corner,A2,dataset_cambridge
+corporate,B2,dataset_oxford3000
+correct,Pre A1,dataset_cambridge
+correctly,A2,dataset_oxford3000
+cost,A1,dataset_oxford3000
+costume,A2,dataset_cambridge
+cottage,B1,dataset_oxford3000
+cotton,B1,dataset_oxford3000
+cough,A1,dataset_cambridge
+could,A2,dataset_cambridge
+council,B2,dataset_oxford3000
+count,Pre A1,dataset_cambridge
+country,A1,dataset_cambridge
+countryside,A1,dataset_cambridge
+county,B2,dataset_oxford3000
+couple,A2,dataset_oxford3000
+courage,B2,dataset_oxford3000
+course,A1,dataset_oxford3000
+court,B1,dataset_oxford3000
+cousin,Pre A1,dataset_cambridge
+cover,A2,dataset_oxford3000
+covered,B1,dataset_oxford3000
+cow,Pre A1,dataset_cambridge
+crash,B2,dataset_oxford3000
+crayon,Pre A1,dataset_cambridge
+crazy,A2,dataset_oxford3000
+cream,A1,dataset_oxford3000
+create,A1,dataset_oxford3000
+creation,B2,dataset_oxford3000
+creative,A2,dataset_oxford3000
+creature,A2,dataset_cambridge
+credit,A2,dataset_oxford3000
+crew,B2,dataset_oxford3000
+crime,A2,dataset_oxford3000
+criminal,A2,dataset_oxford3000
+crisis,B2,dataset_oxford3000
+criterion,B2,dataset_oxford3000
+critic,B2,dataset_oxford3000
+critical,B2,dataset_oxford3000
+criticism,B2,dataset_oxford3000
+criticize,B2,dataset_oxford3000
+crocodile,Pre A1,dataset_cambridge
+crop,B2,dataset_oxford3000
+cross,Pre A1,dataset_cambridge
+crowd,A2,dataset_oxford3000
+crowded,A2,dataset_oxford3000
+crown,A2,dataset_cambridge
+crucial,B2,dataset_oxford3000
+cruel,B1,dataset_oxford3000
+cry,A1,dataset_cambridge
+cultural,B1,dataset_oxford3000
+culture,A1,dataset_oxford3000
+cup,A1,dataset_cambridge
+cupboard,Pre A1,dataset_cambridge
+cure,B2,dataset_oxford3000
+curly,A1,dataset_cambridge
+currency,B1,dataset_oxford3000
+current,B1,dataset_oxford3000
+currently,B1,dataset_oxford3000
+curtain,B1,dataset_oxford3000
+curve,B2,dataset_oxford3000
+curved,B2,dataset_oxford3000
+cushion,A2,dataset_cambridge
+custom,B1,dataset_oxford3000
+customer,A1,dataset_oxford3000
+cut,A2,dataset_cambridge
+cycle,A2,dataset_cambridge
+dad,Pre A1,dataset_cambridge
+daily,A2,dataset_oxford3000
+damage,B1,dataset_oxford3000
+dance,A1,dataset_cambridge
+dancer,A1,dataset_oxford3000
+dancing,A1,dataset_oxford3000
+danger,A2,dataset_oxford3000
+dangerous,A1,dataset_cambridge
+dark,A2,dataset_cambridge
+data,A2,dataset_oxford3000
+date,A2,dataset_cambridge
+daughter,A1,dataset_cambridge
+david,A2,dataset_cambridge
+day,Pre A1,dataset_cambridge
+dead,A2,dataset_oxford3000
+deal,A2,dataset_oxford3000
+dear,A2,dataset_cambridge
+death,A2,dataset_oxford3000
+debate,B2,dataset_oxford3000
+debt,B2,dataset_oxford3000
+decade,B1,dataset_oxford3000
+december,A2,dataset_cambridge
+decent,B2,dataset_oxford3000
+decide,A2,dataset_cambridge
+decision,A2,dataset_oxford3000
+declare,B2,dataset_oxford3000
+decline,B2,dataset_oxford3000
+decorate,B1,dataset_oxford3000
+decoration,B2,dataset_oxford3000
+decrease,B2,dataset_oxford3000
+deep,A2,dataset_cambridge
+deeply,B2,dataset_oxford3000
+defeat,B2,dataset_oxford3000
+defence,B2,dataset_oxford3000
+defend,B2,dataset_oxford3000
+define,B1,dataset_oxford3000
+definite,B1,dataset_oxford3000
+definitely,A2,dataset_oxford3000
+definition,B1,dataset_oxford3000
+degree,A2,dataset_oxford3000
+delay,B2,dataset_oxford3000
+deliberate,B2,dataset_oxford3000
+deliberately,B2,dataset_oxford3000
+delicious,A2,dataset_cambridge
+delight,B2,dataset_oxford3000
+delighted,B2,dataset_oxford3000
+deliver,B1,dataset_oxford3000
+delivery,B2,dataset_oxford3000
+demand,B2,dataset_oxford3000
+demonstrate,B2,dataset_oxford3000
+dentist,A1,dataset_cambridge
+deny,B2,dataset_oxford3000
+department,A2,dataset_oxford3000
+departure,B1,dataset_oxford3000
+depend,A2,dataset_oxford3000
+depressed,B2,dataset_oxford3000
+depressing,B2,dataset_oxford3000
+depth,B2,dataset_oxford3000
+describe,A1,dataset_oxford3000
+description,A1,dataset_oxford3000
+desert,A2,dataset_cambridge
+deserve,B2,dataset_oxford3000
+design,A2,dataset_cambridge
+designer,A2,dataset_cambridge
+desire,B2,dataset_oxford3000
+desk,Pre A1,dataset_cambridge
+desperate,B2,dataset_oxford3000
+despite,B1,dataset_oxford3000
+destination,B1,dataset_oxford3000
+destroy,A2,dataset_oxford3000
+detail,A1,dataset_oxford3000
+detailed,B2,dataset_oxford3000
+detect,B2,dataset_oxford3000
+detective,A2,dataset_oxford3000
+determine,B1,dataset_oxford3000
+determined,B1,dataset_oxford3000
+develop,A2,dataset_oxford3000
+development,B1,dataset_oxford3000
+device,A2,dataset_oxford3000
+diagram,B1,dataset_oxford3000
+dialogue,A1,dataset_oxford3000
+diamond,B1,dataset_oxford3000
+diary,A2,dataset_cambridge
+dictionary,A2,dataset_cambridge
+die,A1,dataset_oxford3000
+diet,A1,dataset_oxford3000
+difference,A1,dataset_cambridge
+different,A1,dataset_cambridge
+differently,A2,dataset_oxford3000
+difficult,A1,dataset_cambridge
+difficulty,B1,dataset_oxford3000
+dig,B2,dataset_oxford3000
+digital,A2,dataset_oxford3000
+dining room,Pre A1,dataset_cambridge
+dinner,Pre A1,dataset_cambridge
+dinosaur,A2,dataset_cambridge
+direct,A2,dataset_oxford3000
+direction,A2,dataset_oxford3000
+directly,B1,dataset_oxford3000
+director,A2,dataset_oxford3000
+dirt,B1,dataset_oxford3000
+dirty,Pre A1,dataset_cambridge
+disadvantage,B1,dataset_oxford3000
+disagree,A2,dataset_oxford3000
+disappear,A2,dataset_cambridge
+disappointed,B1,dataset_oxford3000
+disappointing,B1,dataset_oxford3000
+disaster,A2,dataset_oxford3000
+disc,B2,dataset_oxford3000
+discipline,B2,dataset_oxford3000
+discount,B1,dataset_oxford3000
+discover,A2,dataset_oxford3000
+discovery,A2,dataset_oxford3000
+discuss,A1,dataset_oxford3000
+discussion,A2,dataset_oxford3000
+disease,A2,dataset_oxford3000
+dish,A1,dataset_oxford3000
+dishonest,B2,dataset_oxford3000
+dislike,B1,dataset_oxford3000
+dismiss,B2,dataset_oxford3000
+display,B2,dataset_oxford3000
+distance,A2,dataset_oxford3000
+distribute,B2,dataset_oxford3000
+distribution,B2,dataset_oxford3000
+district,B2,dataset_oxford3000
+divide,B1,dataset_oxford3000
+division,B2,dataset_oxford3000
+divorced,A2,dataset_oxford3000
+do,Pre A1,dataset_cambridge
+doctor,A1,dataset_cambridge
+document,A2,dataset_oxford3000
+documentary,B1,dataset_oxford3000
+dog,Pre A1,dataset_cambridge
+doll,Pre A1,dataset_cambridge
+dollar,A1,dataset_oxford3000
+dolphin,A1,dataset_cambridge
+domestic,B2,dataset_oxford3000
+dominate,B2,dataset_oxford3000
+don't worry,Pre A1,dataset_cambridge
+donate,B1,dataset_oxford3000
+donkey,Pre A1,dataset_cambridge
+door,Pre A1,dataset_cambridge
+double,Pre A1,dataset_cambridge
+doubt,B1,dataset_oxford3000
+down,A1,dataset_cambridge
+download,A2,dataset_oxford3000
+downstairs,A1,dataset_cambridge
+downwards,B2,dataset_oxford3000
+dozen,B2,dataset_oxford3000
+draft,B2,dataset_oxford3000
+drag,B2,dataset_oxford3000
+drama,A2,dataset_oxford3000
+dramatic,B2,dataset_oxford3000
+draw,Pre A1,dataset_cambridge
+drawing,Pre A1,dataset_cambridge
+dream,A1,dataset_cambridge
+dress,Pre A1,dataset_cambridge
+dress up,A1,dataset_cambridge
+dressed,B1,dataset_oxford3000
+drink,Pre A1,dataset_cambridge
+drive,A1,dataset_cambridge
+driver,A1,dataset_cambridge
+driving,A2,dataset_oxford3000
+drop,A1,dataset_cambridge
+drug,A2,dataset_oxford3000
+drum,A2,dataset_cambridge
+drunk,B1,dataset_oxford3000
+dry,A1,dataset_cambridge
+duck,Pre A1,dataset_cambridge
+due,B1,dataset_oxford3000
+during,A2,dataset_cambridge
+dust,B1,dataset_oxford3000
+duty,B1,dataset_oxford3000
+dvd,A1,dataset_cambridge
+e-book,A1,dataset_cambridge
+each,A2,dataset_cambridge
+eagle,A2,dataset_cambridge
+ear,Pre A1,dataset_cambridge
+earache,A1,dataset_cambridge
+early,A2,dataset_cambridge
+earn,A2,dataset_oxford3000
+earth,A2,dataset_cambridge
+earthquake,B1,dataset_oxford3000
+easily,A2,dataset_oxford3000
+east,A2,dataset_cambridge
+eastern,B1,dataset_oxford3000
+easy,A1,dataset_cambridge
+eat,Pre A1,dataset_cambridge
+economic,B1,dataset_oxford3000
+economy,B1,dataset_oxford3000
+edge,B1,dataset_oxford3000
+edit,B2,dataset_oxford3000
+edition,B2,dataset_oxford3000
+editor,B1,dataset_oxford3000
+educate,B1,dataset_oxford3000
+educated,B1,dataset_oxford3000
+education,A2,dataset_oxford3000
+educational,B1,dataset_oxford3000
+effect,A2,dataset_oxford3000
+effective,B1,dataset_oxford3000
+effectively,B1,dataset_oxford3000
+efficient,B2,dataset_oxford3000
+effort,B1,dataset_oxford3000
+egg,Pre A1,dataset_cambridge
+eight,A1,dataset_oxford3000
+eighteen,A1,dataset_oxford3000
+eighty,A1,dataset_oxford3000
+either,A2,dataset_oxford3000
+elbow,A2,dataset_cambridge
+elderly,B2,dataset_oxford3000
+elect,B2,dataset_oxford3000
+election,B1,dataset_oxford3000
+electric,A2,dataset_oxford3000
+electrical,A2,dataset_oxford3000
+electricity,A2,dataset_oxford3000
+electronic,A2,dataset_oxford3000
+element,B1,dataset_oxford3000
+elephant,Pre A1,dataset_cambridge
+elevator,A1,dataset_cambridge
+eleven,A1,dataset_oxford3000
+else,A2,dataset_cambridge
+elsewhere,B2,dataset_oxford3000
+email,A1,dataset_cambridge
+embarrassed,B1,dataset_oxford3000
+embarrassing,B1,dataset_oxford3000
+emerge,B2,dataset_oxford3000
+emergency,B1,dataset_oxford3000
+emotion,B1,dataset_oxford3000
+emotional,B2,dataset_oxford3000
+emphasis,B2,dataset_oxford3000
+emphasize,B2,dataset_oxford3000
+employ,A2,dataset_oxford3000
+employee,A2,dataset_oxford3000
+employer,A2,dataset_oxford3000
+employment,B1,dataset_oxford3000
+empty,A2,dataset_cambridge
+enable,B2,dataset_oxford3000
+encounter,B2,dataset_oxford3000
+encourage,B1,dataset_oxford3000
+end,Pre A1,dataset_cambridge
+ending,A2,dataset_oxford3000
+enemy,B1,dataset_oxford3000
+energy,A2,dataset_oxford3000
+engage,B2,dataset_oxford3000
+engaged,B1,dataset_oxford3000
+engine,A2,dataset_cambridge
+engineer,A2,dataset_cambridge
+engineering,B1,dataset_oxford3000
+english,Pre A1,dataset_cambridge
+enhance,B2,dataset_oxford3000
+enjoy,Pre A1,dataset_cambridge
+enormous,A2,dataset_cambridge
+enough,A2,dataset_cambridge
+enquiry,B2,dataset_oxford3000
+ensure,B2,dataset_oxford3000
+enter,A2,dataset_cambridge
+entertain,B1,dataset_oxford3000
+entertainment,B1,dataset_oxford3000
+enthusiasm,B2,dataset_oxford3000
+enthusiastic,B2,dataset_oxford3000
+entire,B2,dataset_oxford3000
+entirely,B2,dataset_oxford3000
+entrance,A2,dataset_cambridge
+entry,B1,dataset_oxford3000
+envelope,A2,dataset_cambridge
+environment,A2,dataset_cambridge
+environmental,B1,dataset_oxford3000
+episode,B1,dataset_oxford3000
+equal,B1,dataset_oxford3000
+equally,B1,dataset_oxford3000
+equipment,Pre A1,dataset_cambridge
+eraser,Pre A1,dataset_cambridge
+error,A2,dataset_oxford3000
+escape,B1,dataset_oxford3000
+especially,A2,dataset_oxford3000
+essay,A2,dataset_oxford3000
+essential,B1,dataset_oxford3000
+establish,B2,dataset_oxford3000
+estate,B2,dataset_oxford3000
+estimate,B2,dataset_oxford3000
+ethical,B2,dataset_oxford3000
+euro,A1,dataset_oxford3000
+evaluate,B2,dataset_oxford3000
+even,A1,dataset_oxford3000
+evening,Pre A1,dataset_cambridge
+event,A1,dataset_oxford3000
+eventually,B1,dataset_oxford3000
+ever,A2,dataset_cambridge
+every,A1,dataset_cambridge
+everybody,A1,dataset_oxford3000
+everyday,A2,dataset_oxford3000
+everyone,A1,dataset_cambridge
+everything,A1,dataset_cambridge
+everywhere,A2,dataset_cambridge
+evidence,A2,dataset_oxford3000
+evil,B2,dataset_oxford3000
+exact,A2,dataset_oxford3000
+exactly,A2,dataset_oxford3000
+exam,A1,dataset_oxford3000
+examination,B2,dataset_oxford3000
+examine,B1,dataset_oxford3000
+example,Pre A1,dataset_cambridge
+excellent,A2,dataset_cambridge
+except,A2,dataset_oxford3000
+exchange,B1,dataset_oxford3000
+excited,A2,dataset_cambridge
+excitement,B1,dataset_oxford3000
+exciting,A1,dataset_cambridge
+excuse,B2,dataset_oxford3000
+excuse me,A1,dataset_cambridge
+executive,B2,dataset_oxford3000
+exercise,A1,dataset_oxford3000
+exhibition,B1,dataset_oxford3000
+exist,A2,dataset_oxford3000
+existence,B2,dataset_oxford3000
+exit,A2,dataset_cambridge
+expand,B1,dataset_oxford3000
+expect,A2,dataset_oxford3000
+expectation,B2,dataset_oxford3000
+expected,B1,dataset_oxford3000
+expedition,B1,dataset_oxford3000
+expense,B2,dataset_oxford3000
+expensive,A2,dataset_cambridge
+experience,A2,dataset_oxford3000
+experienced,B1,dataset_oxford3000
+experiment,A2,dataset_oxford3000
+expert,A2,dataset_oxford3000
+explain,A2,dataset_cambridge
+explanation,A2,dataset_oxford3000
+explode,B1,dataset_oxford3000
+exploration,B2,dataset_oxford3000
+explore,A2,dataset_cambridge
+explosion,B1,dataset_oxford3000
+export,B1,dataset_oxford3000
+expose,B2,dataset_oxford3000
+express,A2,dataset_oxford3000
+expression,A2,dataset_oxford3000
+extend,B2,dataset_oxford3000
+extent,B2,dataset_oxford3000
+external,B2,dataset_oxford3000
+extinct,A2,dataset_cambridge
+extra,A1,dataset_oxford3000
+extraordinary,B2,dataset_oxford3000
+extreme,A2,dataset_oxford3000
+extremely,A2,dataset_oxford3000
+eye,Pre A1,dataset_cambridge
+face,Pre A1,dataset_cambridge
+facility,B2,dataset_oxford3000
+fact,A1,dataset_oxford3000
+factor,A2,dataset_oxford3000
+factory,A2,dataset_cambridge
+fail,A2,dataset_oxford3000
+failure,B2,dataset_oxford3000
+fair,A1,dataset_cambridge
+fairly,B1,dataset_oxford3000
+faith,B2,dataset_oxford3000
+fall,A2,dataset_cambridge
+fall over,A2,dataset_cambridge
+FALSE,A1,dataset_oxford3000
+familiar,B1,dataset_oxford3000
+family,Pre A1,dataset_cambridge
+famous,A1,dataset_cambridge
+fan,A2,dataset_oxford3000
+fancy,B1,dataset_oxford3000
+fantastic,Pre A1,dataset_cambridge
+far,A2,dataset_cambridge
+farm,A1,dataset_cambridge
+farmer,A1,dataset_cambridge
+farming,A2,dataset_oxford3000
+fascinating,B1,dataset_oxford3000
+fashion,A2,dataset_oxford3000
+fashionable,B1,dataset_oxford3000
+fast,A2,dataset_cambridge
+fasten,B1,dataset_oxford3000
+fat,A1,dataset_cambridge
+father,Pre A1,dataset_cambridge
+fault,B2,dataset_oxford3000
+favour,B1,dataset_oxford3000
+favourite,Pre A1,dataset_cambridge
+fear,A2,dataset_oxford3000
+feather,B2,dataset_oxford3000
+feature,A2,dataset_oxford3000
+february,A2,dataset_cambridge
+fee,B2,dataset_oxford3000
+feed,A1,dataset_cambridge
+feedback,B2,dataset_oxford3000
+feel,A2,dataset_cambridge
+feeling,A1,dataset_oxford3000
+feet,Pre A1,dataset_cambridge
+fellow,B2,dataset_oxford3000
+female,A2,dataset_oxford3000
+fence,B1,dataset_oxford3000
+festival,A2,dataset_cambridge
+fetch,A2,dataset_cambridge
+few,A1,dataset_oxford3000
+fiction,A2,dataset_oxford3000
+field,A1,dataset_cambridge
+fifteen,A1,dataset_oxford3000
+fifth,A1,dataset_oxford3000
+fifty,A1,dataset_oxford3000
+fight,A2,dataset_oxford3000
+fighting,B1,dataset_oxford3000
+figure,A2,dataset_oxford3000
+file,A2,dataset_cambridge
+fill,A1,dataset_oxford3000
+film,A1,dataset_cambridge
+film star,A1,dataset_cambridge
+final,A1,dataset_oxford3000
+finally,A2,dataset_oxford3000
+finance,B2,dataset_oxford3000
+financial,B1,dataset_oxford3000
+find,Pre A1,dataset_cambridge
+find out,A2,dataset_cambridge
+finding,B2,dataset_oxford3000
+fine,A1,dataset_cambridge
+finger,A2,dataset_cambridge
+finish,A2,dataset_cambridge
+fire,A2,dataset_cambridge
+fire engine,A2,dataset_cambridge
+fire fighter,A2,dataset_cambridge
+fire station,A2,dataset_cambridge
+firm,B2,dataset_oxford3000
+first,A1,dataset_cambridge
+firstly,A2,dataset_oxford3000
+fish,Pre A1,dataset_cambridge
+fishing,Pre A1,dataset_cambridge
+fit,A2,dataset_oxford3000
+fitness,B1,dataset_oxford3000
+five,A1,dataset_oxford3000
+fix,A1,dataset_cambridge
+fixed,B1,dataset_oxford3000
+flag,A2,dataset_cambridge
+flame,B2,dataset_oxford3000
+flash,B2,dataset_oxford3000
+flashlight,A2,dataset_cambridge
+flat,Pre A1,dataset_cambridge
+flexible,B2,dataset_oxford3000
+flight,A1,dataset_oxford3000
+float,B2,dataset_oxford3000
+flood,B1,dataset_oxford3000
+floor,Pre A1,dataset_cambridge
+flour,A2,dataset_cambridge
+flow,B1,dataset_oxford3000
+flower,Pre A1,dataset_cambridge
+flu,A2,dataset_oxford3000
+fly,A1,dataset_cambridge
+flying,A2,dataset_oxford3000
+focus,A2,dataset_oxford3000
+fog,A2,dataset_cambridge
+foggy,A2,dataset_cambridge
+fold,B1,dataset_oxford3000
+folding,B2,dataset_oxford3000
+folk,B1,dataset_oxford3000
+follow,A2,dataset_cambridge
+following,A2,dataset_oxford3000
+food,Pre A1,dataset_cambridge
+foot,Pre A1,dataset_cambridge
+football,Pre A1,dataset_cambridge
+for,A2,dataset_cambridge
+for ability,A1,dataset_cambridge
+force,B1,dataset_oxford3000
+foreign,A2,dataset_oxford3000
+forest,A1,dataset_cambridge
+forever,B1,dataset_oxford3000
+forget,A2,dataset_cambridge
+forgive,B2,dataset_oxford3000
+fork,A2,dataset_cambridge
+form,A1,dataset_oxford3000
+formal,A2,dataset_oxford3000
+former,B2,dataset_oxford3000
+fortunately,A2,dataset_oxford3000
+fortune,B2,dataset_oxford3000
+forty,A1,dataset_oxford3000
+forward,A2,dataset_oxford3000
+found,B2,dataset_oxford3000
+four,A1,dataset_oxford3000
+fourteen,A1,dataset_oxford3000
+fourth,A1,dataset_oxford3000
+frame,B1,dataset_oxford3000
+free,A1,dataset_oxford3000
+freedom,B2,dataset_oxford3000
+freeze,B1,dataset_oxford3000
+frequency,B2,dataset_oxford3000
+frequently,B1,dataset_oxford3000
+fresh,A2,dataset_oxford3000
+friday,A1,dataset_cambridge
+fridge,A2,dataset_cambridge
+friend,Pre A1,dataset_cambridge
+friendly,A2,dataset_cambridge
+friendship,B1,dataset_oxford3000
+fries,Pre A1,dataset_cambridge
+frighten,B1,dataset_oxford3000
+frightened,A1,dataset_cambridge
+frightening,A2,dataset_cambridge
+frog,Pre A1,dataset_cambridge
+from,Pre A1,dataset_cambridge
+front,A2,dataset_cambridge
+frozen,B1,dataset_oxford3000
+fruit,Pre A1,dataset_cambridge
+fry,B1,dataset_oxford3000
+fuel,B1,dataset_oxford3000
+full,A2,dataset_cambridge
+fully,B2,dataset_oxford3000
+fun,Pre A1,dataset_cambridge
+function,B1,dataset_oxford3000
+fund,B2,dataset_oxford3000
+fundamental,B2,dataset_oxford3000
+funding,B2,dataset_oxford3000
+funfair,A1,dataset_cambridge
+funny,Pre A1,dataset_cambridge
+fur,A2,dataset_cambridge
+furniture,A2,dataset_oxford3000
+furry,A2,dataset_cambridge
+further,A2,dataset_oxford3000
+furthermore,B2,dataset_oxford3000
+future,A2,dataset_cambridge
+gain,B2,dataset_oxford3000
+gallery,A2,dataset_oxford3000
+game,Pre A1,dataset_cambridge
+gang,B2,dataset_oxford3000
+gap,A2,dataset_oxford3000
+garage,B1,dataset_oxford3000
+garden,Pre A1,dataset_cambridge
+gas,A2,dataset_oxford3000
+gate,A2,dataset_cambridge
+gather,B1,dataset_oxford3000
+general,A2,dataset_oxford3000
+generally,B1,dataset_oxford3000
+generate,B2,dataset_oxford3000
+generation,B1,dataset_oxford3000
+generous,B1,dataset_oxford3000
+genre,B2,dataset_oxford3000
+gentle,B1,dataset_oxford3000
+gentleman,B1,dataset_oxford3000
+geography,A2,dataset_cambridge
+get,Pre A1,dataset_cambridge
+get dressed,A1,dataset_cambridge
+get off,A1,dataset_cambridge
+get on,A1,dataset_cambridge
+get to,A2,dataset_cambridge
+get undressed,A1,dataset_cambridge
+get up,A1,dataset_cambridge
+ghost,B1,dataset_oxford3000
+giant,B1,dataset_oxford3000
+gift,A2,dataset_oxford3000
+giraffe,Pre A1,dataset_cambridge
+girl,Pre A1,dataset_cambridge
+girlfriend,A1,dataset_oxford3000
+give,Pre A1,dataset_cambridge
+glad,B1,dataset_oxford3000
+glass,A2,dataset_cambridge
+glasses,Pre A1,dataset_cambridge
+global,B1,dataset_oxford3000
+glove,A2,dataset_cambridge
+glue,A2,dataset_cambridge
+go,Pre A1,dataset_cambridge
+go away,A2,dataset_cambridge
+go out,A2,dataset_cambridge
+go shopping,A1,dataset_cambridge
+go to bed,Pre A1,dataset_cambridge
+go to sleep,Pre A1,dataset_cambridge
+goal,A1,dataset_cambridge
+goat,Pre A1,dataset_cambridge
+god,A2,dataset_oxford3000
+gold,A2,dataset_cambridge
+golf,A2,dataset_cambridge
+good,Pre A1,dataset_cambridge
+goodbye,Pre A1,dataset_cambridge
+goods,B1,dataset_oxford3000
+govern,B2,dataset_oxford3000
+government,A2,dataset_oxford3000
+grab,B2,dataset_oxford3000
+grade,B1,dataset_oxford3000
+gradually,B2,dataset_oxford3000
+graduate,B1,dataset_oxford3000
+grain,B1,dataset_oxford3000
+grand,B2,dataset_oxford3000
+granddaughter,A1,dataset_cambridge
+grandfather,Pre A1,dataset_cambridge
+grandma,Pre A1,dataset_cambridge
+grandmother,Pre A1,dataset_cambridge
+grandpa,Pre A1,dataset_cambridge
+grandparent,A1,dataset_cambridge
+grandson,A1,dataset_cambridge
+grant,B2,dataset_oxford3000
+grape,Pre A1,dataset_cambridge
+grass,A1,dataset_cambridge
+grateful,B1,dataset_oxford3000
+gray,Pre A1,dataset_cambridge
+great,Pre A1,dataset_cambridge
+green,Pre A1,dataset_cambridge
+greet,A2,dataset_oxford3000
+grey,Pre A1,dataset_cambridge
+ground,A1,dataset_cambridge
+group,A2,dataset_cambridge
+grow,A1,dataset_cambridge
+grown-up,A1,dataset_cambridge
+growth,B1,dataset_oxford3000
+guarantee,B2,dataset_oxford3000
+guard,B1,dataset_oxford3000
+guess,A2,dataset_cambridge
+guest,A2,dataset_oxford3000
+guide,A2,dataset_oxford3000
+guilty,B1,dataset_oxford3000
+guitar,Pre A1,dataset_cambridge
+gun,A2,dataset_oxford3000
+guy,A2,dataset_oxford3000
+gym,A2,dataset_cambridge
+habit,A2,dataset_oxford3000
+hair,Pre A1,dataset_cambridge
+half,A2,dataset_cambridge
+hall,Pre A1,dataset_cambridge
+hand,Pre A1,dataset_cambridge
+handbag,Pre A1,dataset_cambridge
+handle,B2,dataset_oxford3000
+hang,B1,dataset_oxford3000
+happen,A2,dataset_cambridge
+happily,A2,dataset_oxford3000
+happiness,B1,dataset_oxford3000
+happy,Pre A1,dataset_cambridge
+hard,A2,dataset_cambridge
+hardly,B1,dataset_oxford3000
+harm,B2,dataset_oxford3000
+harmful,B2,dataset_oxford3000
+hat,Pre A1,dataset_cambridge
+hate,A2,dataset_cambridge
+have,Pre A1,dataset_cambridge
+have got,Pre A1,dataset_cambridge
+have to,A1,dataset_cambridge
+he,Pre A1,dataset_cambridge
+head,Pre A1,dataset_cambridge
+headache,A1,dataset_cambridge
+headline,B1,dataset_oxford3000
+health,A1,dataset_oxford3000
+healthy,A1,dataset_oxford3000
+hear,A2,dataset_cambridge
+hearing,B2,dataset_oxford3000
+heart,A2,dataset_oxford3000
+heat,A2,dataset_oxford3000
+heating,B1,dataset_oxford3000
+heaven,B2,dataset_oxford3000
+heavily,B1,dataset_oxford3000
+heavy,A2,dataset_cambridge
+heel,B2,dataset_oxford3000
+height,A2,dataset_oxford3000
+helicopter,Pre A1,dataset_cambridge
+hell,B2,dataset_oxford3000
+hello,Pre A1,dataset_cambridge
+helmet,A1,dataset_cambridge
+help,A1,dataset_cambridge
+helpful,A2,dataset_oxford3000
+her,Pre A1,dataset_cambridge
+here,Pre A1,dataset_cambridge
+hero,A2,dataset_oxford3000
+hers,Pre A1,dataset_cambridge
+herself,A2,dataset_oxford3000
+hesitate,B2,dataset_oxford3000
+hey,A1,dataset_oxford3000
+hi,Pre A1,dataset_cambridge
+hide,A1,dataset_cambridge
+high,A2,dataset_cambridge
+highlight,B1,dataset_oxford3000
+highly,B1,dataset_oxford3000
+hill,A2,dataset_cambridge
+him,Pre A1,dataset_cambridge
+himself,A2,dataset_oxford3000
+hippo,Pre A1,dataset_cambridge
+hire,B1,dataset_oxford3000
+his,Pre A1,dataset_cambridge
+historic,B1,dataset_oxford3000
+historical,B1,dataset_oxford3000
+history,A2,dataset_cambridge
+hit,Pre A1,dataset_cambridge
+hobby,Pre A1,dataset_cambridge
+hockey,Pre A1,dataset_cambridge
+hold,Pre A1,dataset_cambridge
+hole,A2,dataset_cambridge
+holiday,A1,dataset_cambridge
+hollow,B2,dataset_oxford3000
+holy,B2,dataset_oxford3000
+home,Pre A1,dataset_cambridge
+homework,A1,dataset_cambridge
+honest,B1,dataset_oxford3000
+honey,A2,dataset_cambridge
+honour,B2,dataset_oxford3000
+hooray,Pre A1,dataset_cambridge
+hop,A1,dataset_cambridge
+hope,A2,dataset_cambridge
+horrible,A2,dataset_cambridge
+horror,B1,dataset_oxford3000
+horse,Pre A1,dataset_cambridge
+hospital,A1,dataset_cambridge
+host,B1,dataset_oxford3000
+hot,A1,dataset_cambridge
+hotel,A2,dataset_cambridge
+hour,A2,dataset_cambridge
+house,Pre A1,dataset_cambridge
+household,B2,dataset_oxford3000
+housing,B2,dataset_oxford3000
+how,A1,dataset_cambridge
+how long,A2,dataset_cambridge
+how many,Pre A1,dataset_cambridge
+how much,A1,dataset_cambridge
+how often,A1,dataset_cambridge
+how old,Pre A1,dataset_cambridge
+however,A1,dataset_oxford3000
+huge,A1,dataset_cambridge
+human,A2,dataset_oxford3000
+humorous,B2,dataset_oxford3000
+humour,B2,dataset_oxford3000
+hundred,A1,dataset_cambridge
+hungry,A1,dataset_cambridge
+hunt,B1,dataset_oxford3000
+hunting,B2,dataset_oxford3000
+hurricane,B1,dataset_oxford3000
+hurry,A2,dataset_cambridge
+hurt,A1,dataset_cambridge
+husband,A2,dataset_cambridge
+I,A1,dataset_oxford3000
+ice,A1,dataset_cambridge
+ice cream,Pre A1,dataset_cambridge
+ice skates,A1,dataset_cambridge
+ice skating,A1,dataset_cambridge
+idea,A1,dataset_cambridge
+ideal,A2,dataset_oxford3000
+identify,A2,dataset_oxford3000
+identity,B1,dataset_oxford3000
+if,A2,dataset_cambridge
+if you want,A2,dataset_cambridge
+ignore,B1,dataset_oxford3000
+ill,A1,dataset_cambridge
+illegal,B1,dataset_oxford3000
+illness,A2,dataset_oxford3000
+illustrate,B2,dataset_oxford3000
+illustration,B2,dataset_oxford3000
+image,A2,dataset_oxford3000
+imaginary,B1,dataset_oxford3000
+imagination,B2,dataset_oxford3000
+imagine,A1,dataset_oxford3000
+immediate,B1,dataset_oxford3000
+immediately,A2,dataset_oxford3000
+immigrant,B1,dataset_oxford3000
+impact,B1,dataset_oxford3000
+impatient,B2,dataset_oxford3000
+imply,B2,dataset_oxford3000
+import,B1,dataset_oxford3000
+importance,B1,dataset_oxford3000
+important,A2,dataset_cambridge
+impose,B2,dataset_oxford3000
+impossible,A2,dataset_oxford3000
+impress,B2,dataset_oxford3000
+impressed,B2,dataset_oxford3000
+impression,B1,dataset_oxford3000
+impressive,B1,dataset_oxford3000
+improve,A2,dataset_cambridge
+improvement,B1,dataset_oxford3000
+in,Pre A1,dataset_cambridge
+in a minute,A2,dataset_cambridge
+in front of,Pre A1,dataset_cambridge
+inch,B2,dataset_oxford3000
+incident,B2,dataset_oxford3000
+include,A1,dataset_oxford3000
+included,A2,dataset_oxford3000
+including,A2,dataset_oxford3000
+income,B2,dataset_oxford3000
+increase,A2,dataset_oxford3000
+increasingly,B2,dataset_oxford3000
+incredible,A2,dataset_oxford3000
+incredibly,B1,dataset_oxford3000
+indeed,B1,dataset_oxford3000
+independent,A2,dataset_oxford3000
+indicate,B1,dataset_oxford3000
+indirect,B1,dataset_oxford3000
+individual,A2,dataset_oxford3000
+indoor,B1,dataset_oxford3000
+indoors,B1,dataset_oxford3000
+industrial,B2,dataset_oxford3000
+industry,A2,dataset_oxford3000
+infection,B2,dataset_oxford3000
+influence,B1,dataset_oxford3000
+inform,B2,dataset_oxford3000
+informal,A2,dataset_oxford3000
+information,A2,dataset_cambridge
+ingredient,B1,dataset_oxford3000
+initial,B2,dataset_oxford3000
+initially,B2,dataset_oxford3000
+initiative,B2,dataset_oxford3000
+injure,B1,dataset_oxford3000
+injured,B1,dataset_oxford3000
+injury,A2,dataset_oxford3000
+inner,B2,dataset_oxford3000
+innocent,B1,dataset_oxford3000
+insect,A2,dataset_cambridge
+inside,A1,dataset_cambridge
+insight,B2,dataset_oxford3000
+insist,B2,dataset_oxford3000
+inspire,B2,dataset_oxford3000
+install,B2,dataset_oxford3000
+instance,B2,dataset_oxford3000
+instead,A2,dataset_cambridge
+institute,B2,dataset_oxford3000
+institution,B2,dataset_oxford3000
+instruction,A2,dataset_oxford3000
+instructor,A2,dataset_oxford3000
+instrument,A2,dataset_cambridge
+insurance,B2,dataset_oxford3000
+intelligence,B1,dataset_oxford3000
+intelligent,A2,dataset_oxford3000
+intend,B1,dataset_oxford3000
+intended,B2,dataset_oxford3000
+intense,B2,dataset_oxford3000
+intention,B1,dataset_oxford3000
+interest,A1,dataset_oxford3000
+interested,A2,dataset_cambridge
+interesting,A2,dataset_cambridge
+internal,B2,dataset_oxford3000
+international,A2,dataset_oxford3000
+internet,A1,dataset_cambridge
+interpret,B2,dataset_oxford3000
+interrupt,B2,dataset_oxford3000
+interview,A1,dataset_oxford3000
+into,A1,dataset_cambridge
+introduce,A1,dataset_oxford3000
+introduction,A2,dataset_oxford3000
+invent,A2,dataset_cambridge
+invention,A2,dataset_oxford3000
+invest,B1,dataset_oxford3000
+investigate,B1,dataset_oxford3000
+investigation,B2,dataset_oxford3000
+investment,B2,dataset_oxford3000
+invitation,A2,dataset_cambridge
+invite,A1,dataset_cambridge
+involve,A2,dataset_oxford3000
+involved,B1,dataset_oxford3000
+iron,B1,dataset_oxford3000
+island,A1,dataset_cambridge
+issue,B1,dataset_oxford3000
+it,Pre A1,dataset_cambridge
+item,A2,dataset_oxford3000
+its,Pre A1,dataset_cambridge
+itself,A2,dataset_oxford3000
+jacket,Pre A1,dataset_cambridge
+jam,A2,dataset_cambridge
+january,A2,dataset_cambridge
+jazz,A2,dataset_oxford3000
+jeans,Pre A1,dataset_cambridge
+jellyfish,Pre A1,dataset_cambridge
+jewellery,A2,dataset_oxford3000
+job,A2,dataset_cambridge
+join,A2,dataset_cambridge
+joke,A2,dataset_oxford3000
+journal,B1,dataset_oxford3000
+journalist,A2,dataset_cambridge
+journey,A2,dataset_cambridge
+joy,B2,dataset_oxford3000
+judge,B1,dataset_oxford3000
+judgement,B2,dataset_oxford3000
+juice,Pre A1,dataset_cambridge
+july,A2,dataset_cambridge
+jump,Pre A1,dataset_cambridge
+june,A2,dataset_cambridge
+jungle,A1,dataset_cambridge
+junior,B2,dataset_oxford3000
+just,A2,dataset_cambridge
+justice,B2,dataset_oxford3000
+justify,B2,dataset_oxford3000
+kangaroo,A1,dataset_cambridge
+keen,B1,dataset_oxford3000
+keep,A2,dataset_cambridge
+key,A2,dataset_cambridge
+keyboard,Pre A1,dataset_cambridge
+kick,A1,dataset_cambridge
+kid,Pre A1,dataset_cambridge
+kill,A2,dataset_oxford3000
+killing,B1,dataset_oxford3000
+kilometre,A2,dataset_cambridge
+kind,A2,dataset_cambridge
+king,A2,dataset_cambridge
+kiss,B1,dataset_oxford3000
+kitchen,Pre A1,dataset_cambridge
+kite,Pre A1,dataset_cambridge
+kitten,A1,dataset_cambridge
+kiwi,Pre A1,dataset_cambridge
+knee,A2,dataset_cambridge
+knife,A2,dataset_cambridge
+knock,A2,dataset_oxford3000
+know,Pre A1,dataset_cambridge
+knowledge,A2,dataset_oxford3000
+lab,A2,dataset_oxford3000
+label,B1,dataset_oxford3000
+laboratory,B1,dataset_oxford3000
+labour,B2,dataset_oxford3000
+lack,B1,dataset_oxford3000
+lady,A2,dataset_oxford3000
+lake,A1,dataset_cambridge
+lamp,Pre A1,dataset_cambridge
+land,A2,dataset_cambridge
+landscape,B2,dataset_oxford3000
+language,A2,dataset_cambridge
+laptop,A1,dataset_cambridge
+large,A2,dataset_cambridge
+largely,B2,dataset_oxford3000
+last,A1,dataset_cambridge
+late,A2,dataset_cambridge
+later,A2,dataset_cambridge
+latest,B1,dataset_oxford3000
+laugh,A1,dataset_cambridge
+laughter,A2,dataset_oxford3000
+launch,B2,dataset_oxford3000
+law,A2,dataset_oxford3000
+lawyer,A2,dataset_oxford3000
+lay,B1,dataset_oxford3000
+layer,B1,dataset_oxford3000
+lazy,A2,dataset_cambridge
+lead,A2,dataset_oxford3000
+leader,A2,dataset_oxford3000
+leadership,B2,dataset_oxford3000
+leading,B1,dataset_oxford3000
+leaf,A1,dataset_cambridge
+league,B2,dataset_oxford3000
+lean,B2,dataset_oxford3000
+learn,Pre A1,dataset_cambridge
+learning,A2,dataset_oxford3000
+least,A2,dataset_oxford3000
+leather,B1,dataset_oxford3000
+leave,A2,dataset_cambridge
+leaves,A1,dataset_cambridge
+lecture,A2,dataset_oxford3000
+left,A2,dataset_cambridge
+leg,Pre A1,dataset_cambridge
+legal,B1,dataset_oxford3000
+leisure,B1,dataset_oxford3000
+lemon,Pre A1,dataset_cambridge
+lemonade,Pre A1,dataset_cambridge
+lend,A2,dataset_oxford3000
+length,B1,dataset_oxford3000
+less,A2,dataset_oxford3000
+lesson,Pre A1,dataset_cambridge
+let,A2,dataset_cambridge
+let's,Pre A1,dataset_cambridge
+letter,A2,dataset_cambridge
+level,A2,dataset_oxford3000
+library,A1,dataset_cambridge
+licence,B2,dataset_oxford3000
+lie,A2,dataset_cambridge
+life,A1,dataset_oxford3000
+lifestyle,A2,dataset_oxford3000
+lift,A1,dataset_cambridge
+light,A2,dataset_cambridge
+like,Pre A1,dataset_cambridge
+likely,A2,dataset_oxford3000
+lime,Pre A1,dataset_cambridge
+limit,B1,dataset_oxford3000
+limited,B2,dataset_oxford3000
+line,Pre A1,dataset_cambridge
+link,A2,dataset_oxford3000
+lion,A1,dataset_cambridge
+lip,B1,dataset_oxford3000
+liquid,B1,dataset_oxford3000
+list,A1,dataset_oxford3000
+listen,Pre A1,dataset_cambridge
+listener,A2,dataset_oxford3000
+literature,B1,dataset_oxford3000
+little,A1,dataset_cambridge
+live,Pre A1,dataset_cambridge
+lively,B2,dataset_oxford3000
+living,B1,dataset_oxford3000
+living room,Pre A1,dataset_cambridge
+lizard,Pre A1,dataset_cambridge
+load,B2,dataset_oxford3000
+loan,B2,dataset_oxford3000
+local,A1,dataset_oxford3000
+locate,B1,dataset_oxford3000
+located,B1,dataset_oxford3000
+location,B1,dataset_oxford3000
+lock,A2,dataset_oxford3000
+logical,B2,dataset_oxford3000
+london,A2,dataset_cambridge
+lonely,B1,dataset_oxford3000
+long,Pre A1,dataset_cambridge
+long-term,B2,dataset_oxford3000
+look,Pre A1,dataset_cambridge
+look after,A2,dataset_cambridge
+look at,Pre A1,dataset_cambridge
+look for,A1,dataset_cambridge
+look like,A2,dataset_cambridge
+loose,B2,dataset_oxford3000
+lord,B2,dataset_oxford3000
+lorry,Pre A1,dataset_cambridge
+lose,A1,dataset_cambridge
+loss,B1,dataset_oxford3000
+lost,A2,dataset_oxford3000
+lot,A1,dataset_oxford3000
+lots,Pre A1,dataset_cambridge
+lots of,Pre A1,dataset_cambridge
+loud,A1,dataset_cambridge
+loudly,A1,dataset_cambridge
+love,Pre A1,dataset_cambridge
+lovely,A2,dataset_cambridge
+low,A2,dataset_cambridge
+lower,B2,dataset_oxford3000
+luck,A2,dataset_oxford3000
+lucky,A2,dataset_cambridge
+lunch,Pre A1,dataset_cambridge
+lung,B2,dataset_oxford3000
+luxury,B1,dataset_oxford3000
+machine,A1,dataset_cambridge
+mad,B1,dataset_oxford3000
+magazine,A2,dataset_cambridge
+magic,B1,dataset_oxford3000
+mail,A2,dataset_oxford3000
+main,A1,dataset_oxford3000
+mainly,B1,dataset_oxford3000
+maintain,B2,dataset_oxford3000
+major,A2,dataset_oxford3000
+majority,B2,dataset_oxford3000
+make,Pre A1,dataset_cambridge
+make sure,A2,dataset_cambridge
+male,A2,dataset_oxford3000
+mall,B1,dataset_oxford3000
+man,Pre A1,dataset_cambridge
+manage,A2,dataset_oxford3000
+management,B1,dataset_oxford3000
+manager,A2,dataset_cambridge
+mango,Pre A1,dataset_cambridge
+manner,A2,dataset_oxford3000
+many,Pre A1,dataset_cambridge
+map,A1,dataset_cambridge
+march,A2,dataset_cambridge
+mark,A2,dataset_oxford3000
+market,A1,dataset_cambridge
+marketing,B1,dataset_oxford3000
+marriage,B1,dataset_oxford3000
+married,A2,dataset_cambridge
+marry,A2,dataset_oxford3000
+mass,B2,dataset_oxford3000
+massive,B2,dataset_oxford3000
+master,B2,dataset_oxford3000
+mat,Pre A1,dataset_cambridge
+match,A2,dataset_cambridge
+matching,B2,dataset_oxford3000
+material,A2,dataset_oxford3000
+mathematics,A2,dataset_oxford3000
+maths,A2,dataset_cambridge
+matter,A1,dataset_cambridge
+maximum,B2,dataset_oxford3000
+May,A1,dataset_oxford3000
+maybe,A1,dataset_oxford3000
+me,Pre A1,dataset_cambridge
+me too,Pre A1,dataset_cambridge
+meal,A2,dataset_cambridge
+mean,A1,dataset_cambridge
+meaning,A1,dataset_oxford3000
+means,B2,dataset_oxford3000
+meanwhile,B1,dataset_oxford3000
+measure,B1,dataset_oxford3000
+measurement,B2,dataset_oxford3000
+meat,Pre A1,dataset_cambridge
+meatballs,Pre A1,dataset_cambridge
+mechanic,A2,dataset_cambridge
+media,A2,dataset_oxford3000
+medical,A2,dataset_oxford3000
+medicine,A2,dataset_cambridge
+medium,B1,dataset_oxford3000
+meet,A2,dataset_cambridge
+meeting,A2,dataset_cambridge
+melt,B2,dataset_oxford3000
+member,A2,dataset_cambridge
+memory,A2,dataset_oxford3000
+men,Pre A1,dataset_cambridge
+mental,B1,dataset_oxford3000
+mention,A2,dataset_oxford3000
+menu,A1,dataset_oxford3000
+mess,B1,dataset_oxford3000
+message,A1,dataset_cambridge
+metal,A2,dataset_cambridge
+method,A2,dataset_oxford3000
+metre,A1,dataset_oxford3000
+mice,Pre A1,dataset_cambridge
+midday,A2,dataset_cambridge
+middle,A2,dataset_cambridge
+midnight,A2,dataset_cambridge
+might,A2,dataset_cambridge
+mild,B1,dataset_oxford3000
+mile,A1,dataset_oxford3000
+military,B2,dataset_oxford3000
+milk,Pre A1,dataset_cambridge
+milkshake,A1,dataset_cambridge
+million,A2,dataset_cambridge
+mind,A2,dataset_cambridge
+mine,Pre A1,dataset_cambridge
+mineral,B2,dataset_oxford3000
+minimum,B2,dataset_oxford3000
+minister,B2,dataset_oxford3000
+minor,B2,dataset_oxford3000
+minority,B2,dataset_oxford3000
+minute,A2,dataset_cambridge
+mirror,Pre A1,dataset_cambridge
+miss,Pre A1,dataset_cambridge
+missing,A2,dataset_cambridge
+mission,B2,dataset_oxford3000
+mistake,A1,dataset_cambridge
+mix,A2,dataset_cambridge
+mixed,B2,dataset_oxford3000
+mixture,B1,dataset_oxford3000
+mobile,A2,dataset_oxford3000
+model,A1,dataset_cambridge
+modern,A1,dataset_oxford3000
+modify,B2,dataset_oxford3000
+moment,A1,dataset_oxford3000
+monday,A1,dataset_cambridge
+money,A2,dataset_cambridge
+monitor,B2,dataset_oxford3000
+monkey,Pre A1,dataset_cambridge
+monster,Pre A1,dataset_cambridge
+month,A2,dataset_cambridge
+mood,B1,dataset_oxford3000
+moon,A1,dataset_cambridge
+moral,B2,dataset_oxford3000
+more,A1,dataset_cambridge
+morning,Pre A1,dataset_cambridge
+most,A1,dataset_cambridge
+mostly,A2,dataset_oxford3000
+mother,Pre A1,dataset_cambridge
+motor,B2,dataset_oxford3000
+motorbike,Pre A1,dataset_cambridge
+motorcycle,A2,dataset_oxford3000
+motorway,A2,dataset_cambridge
+mount,B2,dataset_oxford3000
+mountain,A1,dataset_cambridge
+mouse,Pre A1,dataset_cambridge
+moustache,A1,dataset_cambridge
+mouth,Pre A1,dataset_cambridge
+move,A1,dataset_cambridge
+movement,A2,dataset_oxford3000
+movie,A1,dataset_cambridge
+mr,Pre A1,dataset_cambridge
+mrs,Pre A1,dataset_cambridge
+much,A2,dataset_cambridge
+mud,B1,dataset_oxford3000
+multiple,B2,dataset_oxford3000
+multiply,B2,dataset_oxford3000
+mum,Pre A1,dataset_cambridge
+murder,B1,dataset_oxford3000
+muscle,B1,dataset_oxford3000
+museum,A2,dataset_cambridge
+music,Pre A1,dataset_cambridge
+musical,A2,dataset_oxford3000
+musician,A2,dataset_oxford3000
+must,A1,dataset_cambridge
+my,Pre A1,dataset_cambridge
+myself,A2,dataset_oxford3000
+mysterious,B2,dataset_oxford3000
+mystery,B1,dataset_oxford3000
+nail,B1,dataset_oxford3000
+name,Pre A1,dataset_cambridge
+narrative,B1,dataset_oxford3000
+narrow,A2,dataset_oxford3000
+nation,B1,dataset_oxford3000
+national,A2,dataset_oxford3000
+native,B1,dataset_oxford3000
+natural,A1,dataset_oxford3000
+naturally,B1,dataset_oxford3000
+nature,A2,dataset_oxford3000
+naughty,A1,dataset_cambridge
+near,A1,dataset_cambridge
+nearly,A2,dataset_oxford3000
+neat,B2,dataset_oxford3000
+necessarily,B1,dataset_oxford3000
+necessary,A2,dataset_oxford3000
+neck,A1,dataset_cambridge
+necklace,A2,dataset_cambridge
+need,A1,dataset_cambridge
+needle,B1,dataset_oxford3000
+negative,A1,dataset_oxford3000
+neighbour,A1,dataset_oxford3000
+neighbourhood,B1,dataset_oxford3000
+neither,A2,dataset_oxford3000
+nerve,B2,dataset_oxford3000
+nervous,A2,dataset_oxford3000
+nest,A2,dataset_cambridge
+net,A1,dataset_cambridge
+network,A2,dataset_oxford3000
+never,A1,dataset_cambridge
+nevertheless,B2,dataset_oxford3000
+new,Pre A1,dataset_cambridge
+news,A2,dataset_cambridge
+newspaper,A2,dataset_cambridge
+next,A2,dataset_cambridge
+next to,Pre A1,dataset_cambridge
+nice,Pre A1,dataset_cambridge
+night,Pre A1,dataset_cambridge
+nightmare,B2,dataset_oxford3000
+nine,A1,dataset_oxford3000
+nineteen,A1,dataset_oxford3000
+ninety,A1,dataset_oxford3000
+no,Pre A1,dataset_cambridge
+no one,A1,dataset_oxford3000
+no problem,A2,dataset_cambridge
+no-one,A2,dataset_cambridge
+nobody,A1,dataset_oxford3000
+noise,A1,dataset_cambridge
+noisy,A2,dataset_cambridge
+none,A2,dataset_oxford3000
+noodles,A1,dataset_cambridge
+nor,B1,dataset_oxford3000
+normal,A2,dataset_oxford3000
+normally,A2,dataset_oxford3000
+north,A2,dataset_cambridge
+northern,B1,dataset_oxford3000
+nose,Pre A1,dataset_cambridge
+not,Pre A1,dataset_cambridge
+note,A1,dataset_oxford3000
+nothing,A1,dataset_cambridge
+notice,A2,dataset_oxford3000
+notion,B2,dataset_oxford3000
+novel,A2,dataset_oxford3000
+november,A2,dataset_cambridge
+now,Pre A1,dataset_cambridge
+nowhere,A2,dataset_cambridge
+nuclear,B1,dataset_oxford3000
+number,Pre A1,dataset_cambridge
+numerous,B2,dataset_oxford3000
+nurse,A1,dataset_cambridge
+nut,A2,dataset_oxford3000
+o'clock,A1,dataset_oxford3000
+obey,B2,dataset_oxford3000
+object,A1,dataset_oxford3000
+objective,B2,dataset_oxford3000
+obligation,B2,dataset_oxford3000
+observation,B2,dataset_oxford3000
+observe,B2,dataset_oxford3000
+obtain,B2,dataset_oxford3000
+obvious,B1,dataset_oxford3000
+obviously,B1,dataset_oxford3000
+occasion,B1,dataset_oxford3000
+occasionally,B2,dataset_oxford3000
+occur,B1,dataset_oxford3000
+ocean,A2,dataset_cambridge
+oclock,A1,dataset_cambridge
+october,A2,dataset_cambridge
+octopus,A2,dataset_cambridge
+odd,B1,dataset_oxford3000
+of,Pre A1,dataset_cambridge
+of course,A2,dataset_cambridge
+off,A1,dataset_cambridge
+offence,B2,dataset_oxford3000
+offend,B2,dataset_oxford3000
+offensive,B2,dataset_oxford3000
+offer,A2,dataset_oxford3000
+office,A2,dataset_cambridge
+officer,A2,dataset_oxford3000
+official,B1,dataset_oxford3000
+often,A1,dataset_cambridge
+oh,Pre A1,dataset_cambridge
+oh dear,Pre A1,dataset_cambridge
+oil,A2,dataset_oxford3000
+ok,Pre A1,dataset_cambridge
+old,Pre A1,dataset_cambridge
+old-fashioned,B1,dataset_oxford3000
+olives,A2,dataset_cambridge
+on,A1,dataset_cambridge
+once,A2,dataset_cambridge
+one,Pre A1,dataset_cambridge
+onion,Pre A1,dataset_cambridge
+online,A2,dataset_cambridge
+only,A1,dataset_cambridge
+onto,A2,dataset_oxford3000
+open,Pre A1,dataset_cambridge
+opening,B2,dataset_oxford3000
+operate,B2,dataset_oxford3000
+operation,B1,dataset_oxford3000
+opinion,A1,dataset_oxford3000
+opponent,B2,dataset_oxford3000
+opportunity,A2,dataset_oxford3000
+oppose,B2,dataset_oxford3000
+opposed,B2,dataset_oxford3000
+opposite,A1,dataset_cambridge
+opposition,B2,dataset_oxford3000
+option,A2,dataset_oxford3000
+or,Pre A1,dataset_cambridge
+orange,Pre A1,dataset_cambridge
+order,A1,dataset_oxford3000
+ordinary,A2,dataset_oxford3000
+organ,B2,dataset_oxford3000
+organization,A2,dataset_oxford3000
+organize,A2,dataset_oxford3000
+organized,B1,dataset_oxford3000
+organizer,B1,dataset_oxford3000
+origin,B2,dataset_oxford3000
+original,A2,dataset_oxford3000
+originally,B1,dataset_oxford3000
+other,A2,dataset_cambridge
+otherwise,B2,dataset_oxford3000
+ought,B1,dataset_oxford3000
+our,Pre A1,dataset_cambridge
+ours,Pre A1,dataset_cambridge
+ourselves,A2,dataset_oxford3000
+out,A1,dataset_cambridge
+out of,A1,dataset_cambridge
+outcome,B2,dataset_oxford3000
+outdoor,B1,dataset_oxford3000
+outdoors,B1,dataset_oxford3000
+outer,B2,dataset_oxford3000
+outline,B2,dataset_oxford3000
+outside,A1,dataset_cambridge
+oven,A2,dataset_cambridge
+over,A2,dataset_cambridge
+overall,B2,dataset_oxford3000
+owe,B2,dataset_oxford3000
+own,A1,dataset_oxford3000
+owner,A2,dataset_oxford3000
+p.m.,A2,dataset_cambridge
+pace,B2,dataset_oxford3000
+pack,A2,dataset_oxford3000
+package,B1,dataset_oxford3000
+page,Pre A1,dataset_cambridge
+pain,A2,dataset_oxford3000
+painful,B1,dataset_oxford3000
+paint,Pre A1,dataset_cambridge
+painter,A2,dataset_oxford3000
+painting,Pre A1,dataset_cambridge
+pair,A1,dataset_cambridge
+pajamas,A2,dataset_cambridge
+palace,A2,dataset_oxford3000
+pale,B1,dataset_oxford3000
+pan,B1,dataset_oxford3000
+pancake,A1,dataset_cambridge
+panda,A1,dataset_cambridge
+panel,B2,dataset_oxford3000
+pants,A2,dataset_oxford3000
+paper,Pre A1,dataset_cambridge
+paragraph,A1,dataset_oxford3000
+pardon,Pre A1,dataset_cambridge
+parent,A1,dataset_cambridge
+park,Pre A1,dataset_cambridge
+parking,A2,dataset_oxford3000
+parliament,B2,dataset_oxford3000
+parrot,A1,dataset_cambridge
+part,Pre A1,dataset_cambridge
+participant,B2,dataset_oxford3000
+participate,B1,dataset_oxford3000
+particular,A2,dataset_oxford3000
+particularly,B1,dataset_oxford3000
+partly,B2,dataset_oxford3000
+partner,A1,dataset_oxford3000
+party,A1,dataset_cambridge
+pass,A2,dataset_oxford3000
+passage,B2,dataset_oxford3000
+passenger,A2,dataset_cambridge
+passion,B1,dataset_oxford3000
+passport,A1,dataset_oxford3000
+past,A2,dataset_cambridge
+pasta,A1,dataset_cambridge
+path,A2,dataset_cambridge
+patient,A2,dataset_oxford3000
+pattern,A2,dataset_oxford3000
+pay,A1,dataset_oxford3000
+payment,B1,dataset_oxford3000
+pea,Pre A1,dataset_cambridge
+peace,A2,dataset_oxford3000
+peaceful,B1,dataset_oxford3000
+pear,Pre A1,dataset_cambridge
+pen,Pre A1,dataset_cambridge
+pencil,Pre A1,dataset_cambridge
+penguin,A1,dataset_cambridge
+penny,A2,dataset_oxford3000
+pension,B2,dataset_oxford3000
+people,Pre A1,dataset_cambridge
+pepper,A2,dataset_cambridge
+per,A2,dataset_oxford3000
+per cent,A2,dataset_oxford3000
+percentage,B1,dataset_oxford3000
+perfect,A1,dataset_oxford3000
+perfectly,B1,dataset_oxford3000
+perform,A2,dataset_oxford3000
+performance,B1,dataset_oxford3000
+perhaps,A2,dataset_cambridge
+period,A1,dataset_oxford3000
+permanent,B2,dataset_oxford3000
+permission,A2,dataset_oxford3000
+permit,B2,dataset_oxford3000
+person,Pre A1,dataset_cambridge
+personal,A1,dataset_oxford3000
+personality,A2,dataset_oxford3000
+personally,B1,dataset_oxford3000
+perspective,B2,dataset_oxford3000
+persuade,B1,dataset_oxford3000
+pet,Pre A1,dataset_cambridge
+petrol,A2,dataset_oxford3000
+phase,B2,dataset_oxford3000
+phenomenon,B2,dataset_oxford3000
+philosophy,B2,dataset_oxford3000
+phone,Pre A1,dataset_cambridge
+photo,Pre A1,dataset_cambridge
+photograph,A1,dataset_oxford3000
+photographer,A2,dataset_cambridge
+photography,B1,dataset_oxford3000
+phrase,A1,dataset_oxford3000
+physical,A2,dataset_oxford3000
+physics,A2,dataset_oxford3000
+piano,Pre A1,dataset_cambridge
+pick,A2,dataset_oxford3000
+pick up,Pre A1,dataset_cambridge
+picnic,A1,dataset_cambridge
+picture,Pre A1,dataset_cambridge
+pie,Pre A1,dataset_cambridge
+piece,A2,dataset_cambridge
+pig,A1,dataset_oxford3000
+pile,B2,dataset_oxford3000
+pilot,A2,dataset_cambridge
+pin,B1,dataset_oxford3000
+pineapple,Pre A1,dataset_cambridge
+pink,Pre A1,dataset_cambridge
+pipe,B1,dataset_oxford3000
+pirate,A1,dataset_cambridge
+pitch,B2,dataset_oxford3000
+pizza,A2,dataset_cambridge
+place,A1,dataset_cambridge
+plain,B2,dataset_oxford3000
+plan,A1,dataset_oxford3000
+plane,Pre A1,dataset_cambridge
+planet,A2,dataset_cambridge
+planning,B1,dataset_oxford3000
+plant,A1,dataset_cambridge
+plastic,A2,dataset_cambridge
+plate,A1,dataset_cambridge
+platform,A2,dataset_cambridge
+play,Pre A1,dataset_cambridge
+player,A1,dataset_cambridge
+playground,Pre A1,dataset_cambridge
+pleasant,B1,dataset_oxford3000
+please,Pre A1,dataset_cambridge
+pleased,A2,dataset_cambridge
+pleasure,B1,dataset_oxford3000
+plenty,B1,dataset_oxford3000
+plot,B1,dataset_oxford3000
+plus,B1,dataset_oxford3000
+pocket,A2,dataset_cambridge
+poem,B1,dataset_oxford3000
+poet,B1,dataset_oxford3000
+poetry,B1,dataset_oxford3000
+point,Pre A1,dataset_cambridge
+pointed,B2,dataset_oxford3000
+poison,B1,dataset_oxford3000
+poisonous,B1,dataset_oxford3000
+polar bear,Pre A1,dataset_cambridge
+police,A1,dataset_oxford3000
+police officer,A2,dataset_cambridge
+police station,A2,dataset_cambridge
+policeman,A1,dataset_oxford3000
+policy,B1,dataset_oxford3000
+polite,A2,dataset_oxford3000
+political,B1,dataset_oxford3000
+politician,B1,dataset_oxford3000
+politics,B1,dataset_oxford3000
+pollution,A2,dataset_oxford3000
+pond,A2,dataset_cambridge
+pool,A1,dataset_cambridge
+poor,A2,dataset_cambridge
+pop,A2,dataset_cambridge
+pop music,A2,dataset_cambridge
+pop star,A1,dataset_cambridge
+popular,A2,dataset_cambridge
+popularity,B2,dataset_oxford3000
+population,A2,dataset_oxford3000
+port,B1,dataset_oxford3000
+portrait,B1,dataset_oxford3000
+pose,B2,dataset_oxford3000
+position,A2,dataset_oxford3000
+positive,A1,dataset_oxford3000
+possess,B2,dataset_oxford3000
+possession,A2,dataset_oxford3000
+possibility,A2,dataset_oxford3000
+possible,A1,dataset_oxford3000
+possibly,B1,dataset_oxford3000
+post,A2,dataset_cambridge
+post office,A2,dataset_cambridge
+postcard,A2,dataset_cambridge
+poster,Pre A1,dataset_cambridge
+pot,B1,dataset_oxford3000
+potato,Pre A1,dataset_cambridge
+potential,B2,dataset_oxford3000
+pound,A1,dataset_oxford3000
+pour,B1,dataset_oxford3000
+poverty,B1,dataset_oxford3000
+powder,B1,dataset_oxford3000
+power,A2,dataset_oxford3000
+powerful,B1,dataset_oxford3000
+practical,B1,dataset_oxford3000
+practice,A1,dataset_cambridge
+practise,A1,dataset_cambridge
+praise,B2,dataset_oxford3000
+pray,B1,dataset_oxford3000
+prayer,B1,dataset_oxford3000
+predict,A2,dataset_oxford3000
+prediction,B1,dataset_oxford3000
+prefer,A2,dataset_cambridge
+pregnant,B2,dataset_oxford3000
+preparation,B2,dataset_oxford3000
+prepare,A2,dataset_cambridge
+prepared,B1,dataset_oxford3000
+presence,B2,dataset_oxford3000
+present,A1,dataset_cambridge
+presentation,B1,dataset_oxford3000
+preserve,B2,dataset_oxford3000
+president,A2,dataset_oxford3000
+press,B1,dataset_oxford3000
+pressure,B1,dataset_oxford3000
+pretend,B1,dataset_oxford3000
+pretty,A1,dataset_cambridge
+prevent,A2,dataset_oxford3000
+previous,B1,dataset_oxford3000
+previously,B1,dataset_oxford3000
+price,A1,dataset_oxford3000
+priest,B1,dataset_oxford3000
+primary,B1,dataset_oxford3000
+prime,B2,dataset_oxford3000
+prince,B1,dataset_oxford3000
+princess,B1,dataset_oxford3000
+principle,B2,dataset_oxford3000
+print,A2,dataset_oxford3000
+printer,A2,dataset_oxford3000
+printing,B1,dataset_oxford3000
+priority,B2,dataset_oxford3000
+prison,A2,dataset_oxford3000
+prisoner,B1,dataset_oxford3000
+privacy,B2,dataset_oxford3000
+private,B1,dataset_oxford3000
+prize,A2,dataset_cambridge
+probably,A1,dataset_oxford3000
+problem,A2,dataset_cambridge
+procedure,B2,dataset_oxford3000
+process,A2,dataset_oxford3000
+produce,A2,dataset_oxford3000
+producer,B1,dataset_oxford3000
+product,A1,dataset_oxford3000
+production,B1,dataset_oxford3000
+profession,B1,dataset_oxford3000
+professional,A2,dataset_oxford3000
+professor,A2,dataset_oxford3000
+profile,A2,dataset_oxford3000
+profit,B1,dataset_oxford3000
+program,A2,dataset_oxford3000
+programme,A2,dataset_cambridge
+progress,A2,dataset_oxford3000
+project,A2,dataset_cambridge
+promise,A2,dataset_oxford3000
+promote,B1,dataset_oxford3000
+pronounce,A2,dataset_oxford3000
+proof,B2,dataset_oxford3000
+proper,B1,dataset_oxford3000
+properly,B1,dataset_oxford3000
+property,B1,dataset_oxford3000
+proposal,B2,dataset_oxford3000
+propose,B2,dataset_oxford3000
+prospect,B2,dataset_oxford3000
+protect,A2,dataset_oxford3000
+protection,B2,dataset_oxford3000
+protest,B1,dataset_oxford3000
+proud,B1,dataset_oxford3000
+prove,B1,dataset_oxford3000
+provide,A2,dataset_oxford3000
+psychologist,B2,dataset_oxford3000
+psychology,B2,dataset_oxford3000
+pub,A2,dataset_oxford3000
+public,A2,dataset_oxford3000
+publication,B2,dataset_oxford3000
+publish,A2,dataset_oxford3000
+pull,A2,dataset_cambridge
+punish,B1,dataset_oxford3000
+punishment,B1,dataset_oxford3000
+pupil,B2,dataset_oxford3000
+puppy,A1,dataset_cambridge
+purchase,B2,dataset_oxford3000
+pure,B2,dataset_oxford3000
+purple,Pre A1,dataset_cambridge
+purpose,A2,dataset_oxford3000
+pursue,B2,dataset_oxford3000
+push,A2,dataset_cambridge
+put,Pre A1,dataset_cambridge
+put on,A1,dataset_cambridge
+puzzle,A2,dataset_cambridge
+pyjamas,A2,dataset_cambridge
+pyramid,A2,dataset_cambridge
+qualification,B1,dataset_oxford3000
+qualified,B1,dataset_oxford3000
+qualify,B1,dataset_oxford3000
+quality,A2,dataset_oxford3000
+quantity,A2,dataset_oxford3000
+quarter,A2,dataset_cambridge
+queen,A2,dataset_cambridge
+question,Pre A1,dataset_cambridge
+queue,B1,dataset_oxford3000
+quick,A1,dataset_cambridge
+quickly,A1,dataset_cambridge
+quiet,A1,dataset_cambridge
+quietly,A1,dataset_cambridge
+quit,B1,dataset_oxford3000
+quite,A2,dataset_cambridge
+quiz,A2,dataset_cambridge
+quotation,B1,dataset_oxford3000
+quote,B1,dataset_oxford3000
+rabbit,A1,dataset_cambridge
+race,A2,dataset_cambridge
+racing,A2,dataset_cambridge
+radio,Pre A1,dataset_cambridge
+railway,A2,dataset_cambridge
+rain,A1,dataset_cambridge
+rainbow,A1,dataset_cambridge
+raise,A2,dataset_oxford3000
+range,B1,dataset_oxford3000
+rank,B2,dataset_oxford3000
+rapid,B2,dataset_oxford3000
+rapidly,B2,dataset_oxford3000
+rare,B1,dataset_oxford3000
+rarely,B1,dataset_oxford3000
+rate,A2,dataset_oxford3000
+rather,A2,dataset_oxford3000
+raw,B2,dataset_oxford3000
+reach,A2,dataset_oxford3000
+react,A2,dataset_oxford3000
+reaction,B1,dataset_oxford3000
+read,Pre A1,dataset_cambridge
+reader,A1,dataset_oxford3000
+reading,A1,dataset_oxford3000
+ready,A2,dataset_cambridge
+real,A1,dataset_oxford3000
+realistic,B2,dataset_oxford3000
+reality,B1,dataset_oxford3000
+realize,A2,dataset_oxford3000
+really,Pre A1,dataset_cambridge
+reason,A1,dataset_oxford3000
+reasonable,B2,dataset_oxford3000
+recall,B2,dataset_oxford3000
+receipt,B1,dataset_oxford3000
+receive,A2,dataset_oxford3000
+recent,A2,dataset_oxford3000
+recently,A2,dataset_oxford3000
+reception,A2,dataset_oxford3000
+recipe,A2,dataset_oxford3000
+recognize,A2,dataset_oxford3000
+recommend,A2,dataset_oxford3000
+recommendation,B1,dataset_oxford3000
+record,A2,dataset_oxford3000
+recording,A2,dataset_oxford3000
+recover,B2,dataset_oxford3000
+recycle,A2,dataset_oxford3000
+red,Pre A1,dataset_cambridge
+reduce,A2,dataset_oxford3000
+reduction,B2,dataset_oxford3000
+refer,A2,dataset_oxford3000
+reference,B1,dataset_oxford3000
+reflect,B1,dataset_oxford3000
+refuse,A2,dataset_oxford3000
+regard,B2,dataset_oxford3000
+region,A2,dataset_oxford3000
+regional,B2,dataset_oxford3000
+register,B2,dataset_oxford3000
+regret,B2,dataset_oxford3000
+regular,A2,dataset_oxford3000
+regularly,B1,dataset_oxford3000
+regulation,B2,dataset_oxford3000
+reject,B1,dataset_oxford3000
+relate,B1,dataset_oxford3000
+related,B1,dataset_oxford3000
+relation,B1,dataset_oxford3000
+relationship,A2,dataset_oxford3000
+relative,B1,dataset_oxford3000
+relatively,B2,dataset_oxford3000
+relax,A1,dataset_oxford3000
+relaxed,B1,dataset_oxford3000
+relaxing,B1,dataset_oxford3000
+release,B1,dataset_oxford3000
+relevant,B2,dataset_oxford3000
+reliable,B1,dataset_oxford3000
+relief,B2,dataset_oxford3000
+religion,B1,dataset_oxford3000
+religious,B1,dataset_oxford3000
+rely,B2,dataset_oxford3000
+remain,B1,dataset_oxford3000
+remark,B2,dataset_oxford3000
+remember,A2,dataset_cambridge
+remind,B1,dataset_oxford3000
+remote,B1,dataset_oxford3000
+remove,A2,dataset_oxford3000
+rent,B1,dataset_oxford3000
+repair,A2,dataset_cambridge
+repeat,A2,dataset_cambridge
+repeated,B1,dataset_oxford3000
+replace,A2,dataset_oxford3000
+reply,A2,dataset_oxford3000
+report,A1,dataset_oxford3000
+reporter,A2,dataset_oxford3000
+represent,B1,dataset_oxford3000
+representative,B2,dataset_oxford3000
+reputation,B2,dataset_oxford3000
+request,A2,dataset_oxford3000
+require,B1,dataset_oxford3000
+requirement,B2,dataset_oxford3000
+rescue,B2,dataset_oxford3000
+research,A2,dataset_oxford3000
+researcher,A2,dataset_oxford3000
+reservation,B1,dataset_oxford3000
+reserve,B2,dataset_oxford3000
+resident,B2,dataset_oxford3000
+resist,B2,dataset_oxford3000
+resolve,B2,dataset_oxford3000
+resort,B2,dataset_oxford3000
+resource,B1,dataset_oxford3000
+respect,B1,dataset_oxford3000
+respond,A2,dataset_oxford3000
+response,A2,dataset_oxford3000
+responsibility,B1,dataset_oxford3000
+responsible,B1,dataset_oxford3000
+rest,A2,dataset_oxford3000
+restaurant,A2,dataset_cambridge
+result,A1,dataset_oxford3000
+retain,B2,dataset_oxford3000
+retire,B1,dataset_oxford3000
+retired,B1,dataset_oxford3000
+return,A1,dataset_oxford3000
+reveal,B2,dataset_oxford3000
+review,A2,dataset_oxford3000
+revise,B1,dataset_oxford3000
+revolution,B2,dataset_oxford3000
+reward,B2,dataset_oxford3000
+rhythm,B2,dataset_oxford3000
+rice,Pre A1,dataset_cambridge
+rich,A2,dataset_cambridge
+rid,B2,dataset_oxford3000
+ride,A1,dataset_cambridge
+right,A2,dataset_cambridge
+ring,A2,dataset_cambridge
+rise,A2,dataset_oxford3000
+risk,B1,dataset_oxford3000
+river,A1,dataset_cambridge
+road,A1,dataset_cambridge
+robot,Pre A1,dataset_cambridge
+rock,A1,dataset_cambridge
+rock music,A2,dataset_cambridge
+rocket,A2,dataset_cambridge
+role,A2,dataset_oxford3000
+roll,B1,dataset_oxford3000
+roller skates,A1,dataset_cambridge
+roller skating,A1,dataset_cambridge
+romantic,B1,dataset_oxford3000
+roof,A1,dataset_cambridge
+room,Pre A1,dataset_cambridge
+root,B2,dataset_oxford3000
+rope,B1,dataset_oxford3000
+rough,B1,dataset_oxford3000
+round,A1,dataset_cambridge
+route,A2,dataset_oxford3000
+routine,A1,dataset_oxford3000
+row,B1,dataset_oxford3000
+royal,B1,dataset_oxford3000
+rub,B2,dataset_oxford3000
+rubber,Pre A1,dataset_cambridge
+rubbish,A2,dataset_oxford3000
+rucksack,A2,dataset_cambridge
+rude,A2,dataset_oxford3000
+rug,Pre A1,dataset_cambridge
+rugby,B1,dataset_oxford3000
+rule,A1,dataset_oxford3000
+ruler,Pre A1,dataset_cambridge
+run,Pre A1,dataset_cambridge
+runner,A2,dataset_oxford3000
+running,A2,dataset_oxford3000
+rural,B2,dataset_oxford3000
+rush,B2,dataset_oxford3000
+sad,Pre A1,dataset_cambridge
+sadly,A2,dataset_oxford3000
+safe,A1,dataset_cambridge
+safety,B1,dataset_oxford3000
+sail,A1,dataset_cambridge
+sailing,A2,dataset_oxford3000
+sailor,B1,dataset_oxford3000
+salad,A1,dataset_cambridge
+salary,A2,dataset_oxford3000
+sale,A2,dataset_oxford3000
+salt,A2,dataset_cambridge
+same,A2,dataset_cambridge
+sample,B1,dataset_oxford3000
+sand,Pre A1,dataset_cambridge
+sandwich,A1,dataset_cambridge
+satellite,B2,dataset_oxford3000
+satisfied,B2,dataset_oxford3000
+satisfy,B2,dataset_oxford3000
+saturday,A1,dataset_cambridge
+sauce,A1,dataset_cambridge
+sausage,Pre A1,dataset_cambridge
+save,A2,dataset_cambridge
+saving,B2,dataset_oxford3000
+say,Pre A1,dataset_cambridge
+scale,B2,dataset_oxford3000
+scan,B1,dataset_oxford3000
+scared,A2,dataset_oxford3000
+scarf,A1,dataset_cambridge
+scary,Pre A1,dataset_cambridge
+scene,A2,dataset_oxford3000
+schedule,A2,dataset_oxford3000
+scheme,B2,dataset_oxford3000
+school,Pre A1,dataset_cambridge
+science,A2,dataset_cambridge
+scientific,B1,dataset_oxford3000
+scientist,A1,dataset_oxford3000
+scissors,A2,dataset_cambridge
+score,A2,dataset_cambridge
+scream,B2,dataset_oxford3000
+screen,A2,dataset_cambridge
+script,B1,dataset_oxford3000
+sculpture,B1,dataset_oxford3000
+sea,Pre A1,dataset_cambridge
+search,A2,dataset_cambridge
+season,A2,dataset_oxford3000
+seat,A1,dataset_cambridge
+second,A1,dataset_cambridge
+secondary,B1,dataset_oxford3000
+secondly,A2,dataset_oxford3000
+secret,A2,dataset_cambridge
+secretary,A2,dataset_oxford3000
+section,A1,dataset_oxford3000
+sector,B2,dataset_oxford3000
+secure,B2,dataset_oxford3000
+security,B1,dataset_oxford3000
+see,Pre A1,dataset_cambridge
+see you,Pre A1,dataset_cambridge
+seed,B1,dataset_oxford3000
+seek,B2,dataset_oxford3000
+seem,A2,dataset_oxford3000
+select,B2,dataset_oxford3000
+selection,B2,dataset_oxford3000
+self,B2,dataset_oxford3000
+sell,A2,dataset_cambridge
+send,A1,dataset_cambridge
+senior,B2,dataset_oxford3000
+sense,A2,dataset_oxford3000
+sensible,B1,dataset_oxford3000
+sensitive,B2,dataset_oxford3000
+sentence,Pre A1,dataset_cambridge
+separate,A2,dataset_oxford3000
+september,A2,dataset_cambridge
+sequence,B2,dataset_oxford3000
+series,A2,dataset_oxford3000
+serious,A2,dataset_oxford3000
+seriously,B1,dataset_oxford3000
+servant,B1,dataset_oxford3000
+serve,A2,dataset_oxford3000
+service,A2,dataset_oxford3000
+session,B2,dataset_oxford3000
+set,B1,dataset_oxford3000
+setting,B1,dataset_oxford3000
+settle,B2,dataset_oxford3000
+seven,A1,dataset_oxford3000
+seventeen,A1,dataset_oxford3000
+seventy,A1,dataset_oxford3000
+several,A2,dataset_cambridge
+severe,B2,dataset_oxford3000
+sex,B1,dataset_oxford3000
+sexual,B1,dataset_oxford3000
+shade,B2,dataset_oxford3000
+shadow,B2,dataset_oxford3000
+shake,A2,dataset_oxford3000
+shall,A1,dataset_cambridge
+shallow,B2,dataset_oxford3000
+shame,B2,dataset_oxford3000
+shampoo,A2,dataset_cambridge
+shape,A1,dataset_cambridge
+share,A1,dataset_oxford3000
+shark,A1,dataset_cambridge
+sharp,B1,dataset_oxford3000
+she,Pre A1,dataset_cambridge
+sheep,Pre A1,dataset_cambridge
+sheet,A2,dataset_oxford3000
+shelf,A2,dataset_cambridge
+shell,Pre A1,dataset_cambridge
+shelter,B2,dataset_oxford3000
+shift,B1,dataset_oxford3000
+shine,B1,dataset_oxford3000
+shiny,B1,dataset_oxford3000
+ship,Pre A1,dataset_cambridge
+shirt,Pre A1,dataset_cambridge
+shock,B2,dataset_oxford3000
+shocked,B2,dataset_oxford3000
+shoe,Pre A1,dataset_cambridge
+shoot,B1,dataset_oxford3000
+shooting,B2,dataset_oxford3000
+shop,Pre A1,dataset_cambridge
+shopping,A1,dataset_cambridge
+shopping centre,A1,dataset_cambridge
+short,Pre A1,dataset_cambridge
+shorts,Pre A1,dataset_cambridge
+shot,B2,dataset_oxford3000
+should,A2,dataset_cambridge
+shoulder,A1,dataset_cambridge
+shout,A1,dataset_cambridge
+show,Pre A1,dataset_cambridge
+shower,A1,dataset_cambridge
+shut,A2,dataset_oxford3000
+shy,B1,dataset_oxford3000
+sick,A1,dataset_cambridge
+side,A2,dataset_oxford3000
+sight,B1,dataset_oxford3000
+sign,A2,dataset_oxford3000
+signal,B1,dataset_oxford3000
+significant,B2,dataset_oxford3000
+significantly,B2,dataset_oxford3000
+silence,B2,dataset_oxford3000
+silent,B1,dataset_oxford3000
+silk,B2,dataset_oxford3000
+silly,Pre A1,dataset_cambridge
+silver,A2,dataset_cambridge
+similar,A1,dataset_oxford3000
+similarity,B1,dataset_oxford3000
+similarly,B1,dataset_oxford3000
+simple,A2,dataset_oxford3000
+simply,B1,dataset_oxford3000
+since,A2,dataset_cambridge
+sincere,B2,dataset_oxford3000
+sing,Pre A1,dataset_cambridge
+singer,A2,dataset_cambridge
+singing,A2,dataset_oxford3000
+single,A2,dataset_oxford3000
+sink,B1,dataset_oxford3000
+sir,A2,dataset_oxford3000
+sister,Pre A1,dataset_cambridge
+sit,Pre A1,dataset_cambridge
+site,A2,dataset_oxford3000
+situation,A1,dataset_oxford3000
+six,A1,dataset_oxford3000
+sixteen,A1,dataset_oxford3000
+sixty,A1,dataset_oxford3000
+size,A2,dataset_oxford3000
+skate,A1,dataset_cambridge
+skateboard,Pre A1,dataset_cambridge
+skateboarding,Pre A1,dataset_cambridge
+ski,A2,dataset_cambridge
+skiing,A2,dataset_oxford3000
+skill,A1,dataset_oxford3000
+skin,A2,dataset_oxford3000
+skip,A1,dataset_cambridge
+skirt,Pre A1,dataset_cambridge
+sky,A1,dataset_cambridge
+skyscraper,A2,dataset_cambridge
+slave,B2,dataset_oxford3000
+sledge,A2,dataset_cambridge
+sleep,Pre A1,dataset_cambridge
+slice,B1,dataset_oxford3000
+slide,B2,dataset_oxford3000
+slight,B2,dataset_oxford3000
+slightly,B1,dataset_oxford3000
+slip,B2,dataset_oxford3000
+slope,B2,dataset_oxford3000
+slow,A1,dataset_cambridge
+slowly,A1,dataset_cambridge
+small,Pre A1,dataset_cambridge
+smart,B1,dataset_oxford3000
+smartphone,A2,dataset_oxford3000
+smell,A2,dataset_cambridge
+smile,Pre A1,dataset_cambridge
+smoke,A2,dataset_oxford3000
+smoking,A2,dataset_oxford3000
+smooth,B1,dataset_oxford3000
+snack,A2,dataset_cambridge
+snail,A1,dataset_cambridge
+snake,Pre A1,dataset_cambridge
+snow,A1,dataset_cambridge
+snowball,A2,dataset_cambridge
+snowboard,A2,dataset_cambridge
+snowboarding,A2,dataset_cambridge
+snowman,A2,dataset_cambridge
+so,A2,dataset_cambridge
+soap,A2,dataset_cambridge
+soccer,Pre A1,dataset_cambridge
+social,A2,dataset_oxford3000
+society,A2,dataset_oxford3000
+sock,Pre A1,dataset_cambridge
+sofa,Pre A1,dataset_cambridge
+soft,A2,dataset_cambridge
+software,B1,dataset_oxford3000
+soil,B1,dataset_oxford3000
+solar,B2,dataset_oxford3000
+soldier,A2,dataset_oxford3000
+solid,B1,dataset_oxford3000
+solution,A2,dataset_oxford3000
+solve,A2,dataset_oxford3000
+some,Pre A1,dataset_cambridge
+somebody,A1,dataset_oxford3000
+someone,A1,dataset_cambridge
+something,A1,dataset_cambridge
+sometimes,A1,dataset_cambridge
+somewhat,B2,dataset_oxford3000
+somewhere,A2,dataset_cambridge
+son,A1,dataset_cambridge
+song,Pre A1,dataset_cambridge
+soon,A2,dataset_cambridge
+sore,A2,dataset_cambridge
+sorry,Pre A1,dataset_cambridge
+sort,A2,dataset_oxford3000
+soul,B2,dataset_oxford3000
+sound,A2,dataset_cambridge
+soup,A1,dataset_cambridge
+source,A2,dataset_oxford3000
+south,A2,dataset_cambridge
+southern,B1,dataset_oxford3000
+space,A2,dataset_cambridge
+spaceship,A2,dataset_cambridge
+speak,A2,dataset_cambridge
+speaker,A2,dataset_oxford3000
+special,A2,dataset_cambridge
+specialist,B2,dataset_oxford3000
+species,B2,dataset_oxford3000
+specific,A2,dataset_oxford3000
+specifically,B1,dataset_oxford3000
+speech,A2,dataset_oxford3000
+speed,A2,dataset_oxford3000
+spell,Pre A1,dataset_cambridge
+spelling,A1,dataset_oxford3000
+spend,A2,dataset_cambridge
+spending,B1,dataset_oxford3000
+spicy,B1,dataset_oxford3000
+spider,Pre A1,dataset_cambridge
+spirit,B1,dataset_oxford3000
+spiritual,B2,dataset_oxford3000
+split,B2,dataset_oxford3000
+spoken,B1,dataset_oxford3000
+sponsor,B2,dataset_oxford3000
+spoon,A2,dataset_cambridge
+sport,Pre A1,dataset_cambridge
+sports centre,A1,dataset_cambridge
+spot,A2,dataset_cambridge
+spotted,A2,dataset_cambridge
+spread,B1,dataset_oxford3000
+spring,A2,dataset_cambridge
+square,A1,dataset_cambridge
+stable,B2,dataset_oxford3000
+stadium,A2,dataset_cambridge
+staff,B1,dataset_oxford3000
+stage,A2,dataset_cambridge
+stair,A1,dataset_cambridge
+stamp,A2,dataset_cambridge
+stand,Pre A1,dataset_cambridge
+standard,B1,dataset_oxford3000
+star,A1,dataset_cambridge
+stare,B2,dataset_oxford3000
+start,Pre A1,dataset_cambridge
+state,A2,dataset_oxford3000
+statement,A1,dataset_oxford3000
+station,A1,dataset_cambridge
+statistic,B1,dataset_oxford3000
+statue,B1,dataset_oxford3000
+status,B2,dataset_oxford3000
+stay,A2,dataset_cambridge
+steady,B2,dataset_oxford3000
+steal,A2,dataset_oxford3000
+steel,B2,dataset_oxford3000
+steep,B2,dataset_oxford3000
+step,A2,dataset_cambridge
+stick,B1,dataset_oxford3000
+sticky,B2,dataset_oxford3000
+stiff,B2,dataset_oxford3000
+still,A2,dataset_cambridge
+stock,B2,dataset_oxford3000
+stomach,A1,dataset_cambridge
+stomach-ache,A1,dataset_cambridge
+stone,A2,dataset_cambridge
+stop,Pre A1,dataset_cambridge
+store,Pre A1,dataset_cambridge
+storm,A2,dataset_cambridge
+story,Pre A1,dataset_cambridge
+straight,A1,dataset_cambridge
+straight on,A2,dataset_cambridge
+strange,A2,dataset_cambridge
+stranger,B1,dataset_oxford3000
+strategy,A2,dataset_oxford3000
+strawberry,A2,dataset_cambridge
+stream,A2,dataset_cambridge
+street,Pre A1,dataset_cambridge
+strength,B1,dataset_oxford3000
+stress,A2,dataset_oxford3000
+stretch,B2,dataset_oxford3000
+strict,B2,dataset_oxford3000
+strike,B2,dataset_oxford3000
+string,B1,dataset_oxford3000
+stripe,A2,dataset_cambridge
+striped,A2,dataset_cambridge
+strong,A1,dataset_cambridge
+strongly,B1,dataset_oxford3000
+structure,A2,dataset_oxford3000
+struggle,B2,dataset_oxford3000
+student,A2,dataset_cambridge
+studio,B1,dataset_oxford3000
+study,A2,dataset_cambridge
+stuff,B1,dataset_oxford3000
+stupid,A2,dataset_oxford3000
+style,A1,dataset_oxford3000
+subject,A2,dataset_cambridge
+submit,B2,dataset_oxford3000
+substance,B1,dataset_oxford3000
+succeed,A2,dataset_oxford3000
+success,A1,dataset_oxford3000
+successful,A2,dataset_oxford3000
+successfully,B1,dataset_oxford3000
+such,A2,dataset_cambridge
+sudden,B1,dataset_oxford3000
+suddenly,A2,dataset_cambridge
+suffer,B1,dataset_oxford3000
+sugar,A2,dataset_cambridge
+suggest,A2,dataset_oxford3000
+suggestion,A2,dataset_oxford3000
+suit,A2,dataset_oxford3000
+suitable,B1,dataset_oxford3000
+suitcase,A2,dataset_cambridge
+sum,B2,dataset_oxford3000
+summarize,B1,dataset_oxford3000
+summary,B1,dataset_oxford3000
+summer,A2,dataset_cambridge
+sun,Pre A1,dataset_cambridge
+sunday,A1,dataset_cambridge
+sunglasses,A2,dataset_cambridge
+sunny,A1,dataset_cambridge
+supermarket,A1,dataset_cambridge
+supply,B1,dataset_oxford3000
+support,A2,dataset_oxford3000
+supporter,B1,dataset_oxford3000
+suppose,A2,dataset_oxford3000
+sure,A2,dataset_cambridge
+surely,B1,dataset_oxford3000
+surface,B1,dataset_oxford3000
+surgery,B2,dataset_oxford3000
+surname,A2,dataset_cambridge
+surprise,A2,dataset_cambridge
+surprised,A1,dataset_cambridge
+surprising,A2,dataset_oxford3000
+surround,B2,dataset_oxford3000
+surrounding,B2,dataset_oxford3000
+survey,A2,dataset_oxford3000
+survive,B1,dataset_oxford3000
+suspect,B2,dataset_oxford3000
+swan,A2,dataset_cambridge
+swear,B2,dataset_oxford3000
+sweater,A1,dataset_cambridge
+sweep,B2,dataset_oxford3000
+sweet,A1,dataset_cambridge
+swim,A1,dataset_cambridge
+swimming,A1,dataset_oxford3000
+swimming pool,A1,dataset_cambridge
+swimsuit,A1,dataset_cambridge
+swing,A2,dataset_cambridge
+switch,B1,dataset_oxford3000
+symbol,A2,dataset_oxford3000
+sympathy,B2,dataset_oxford3000
+symptom,B1,dataset_oxford3000
+system,A2,dataset_oxford3000
+T-shirt,A1,dataset_oxford3000
+table,Pre A1,dataset_cambridge
+table tennis,Pre A1,dataset_cambridge
+tablet,Pre A1,dataset_cambridge
+tail,Pre A1,dataset_cambridge
+take,A1,dataset_cambridge
+take a photo,Pre A1,dataset_cambridge
+take a picture,Pre A1,dataset_cambridge
+tale,B2,dataset_oxford3000
+talent,B1,dataset_oxford3000
+talented,B1,dataset_oxford3000
+talk,Pre A1,dataset_cambridge
+tall,A1,dataset_cambridge
+tank,B2,dataset_oxford3000
+tape,B1,dataset_oxford3000
+target,A2,dataset_oxford3000
+task,A2,dataset_oxford3000
+taste,A2,dataset_cambridge
+tax,B1,dataset_oxford3000
+taxi,A2,dataset_cambridge
+tea,A1,dataset_cambridge
+teach,A1,dataset_cambridge
+teacher,Pre A1,dataset_cambridge
+teaching,A2,dataset_oxford3000
+team,A2,dataset_cambridge
+tear,B2,dataset_oxford3000
+technical,B1,dataset_oxford3000
+technique,B1,dataset_oxford3000
+technology,A2,dataset_oxford3000
+teddy,Pre A1,dataset_cambridge
+teenage,A2,dataset_oxford3000
+teenager,A1,dataset_oxford3000
+teeth,A1,dataset_cambridge
+telephone,A2,dataset_cambridge
+television,Pre A1,dataset_cambridge
+tell,Pre A1,dataset_cambridge
+temperature,A1,dataset_cambridge
+temporary,B2,dataset_oxford3000
+ten,A1,dataset_oxford3000
+tend,B1,dataset_oxford3000
+tennis,Pre A1,dataset_cambridge
+tennis racket,Pre A1,dataset_cambridge
+tent,A2,dataset_cambridge
+term,A2,dataset_oxford3000
+terrible,A1,dataset_cambridge
+test,A1,dataset_oxford3000
+text,A1,dataset_cambridge
+than,A1,dataset_cambridge
+thank,A2,dataset_cambridge
+thank you,Pre A1,dataset_cambridge
+thanks,Pre A1,dataset_cambridge
+that,Pre A1,dataset_cambridge
+the,Pre A1,dataset_cambridge
+theatre,A2,dataset_cambridge
+their,Pre A1,dataset_cambridge
+theirs,Pre A1,dataset_cambridge
+them,Pre A1,dataset_cambridge
+theme,B1,dataset_oxford3000
+themselves,A2,dataset_oxford3000
+then,A1,dataset_cambridge
+theory,B1,dataset_oxford3000
+therapy,B2,dataset_oxford3000
+there,Pre A1,dataset_cambridge
+therefore,B1,dataset_oxford3000
+these,Pre A1,dataset_cambridge
+they,Pre A1,dataset_cambridge
+thick,A2,dataset_oxford3000
+thief,A2,dataset_oxford3000
+thin,A1,dataset_cambridge
+thing,Pre A1,dataset_cambridge
+think,A1,dataset_cambridge
+thinking,A2,dataset_oxford3000
+third,A1,dataset_cambridge
+thirsty,A1,dataset_cambridge
+thirteen,A1,dataset_oxford3000
+thirty,A1,dataset_oxford3000
+this,Pre A1,dataset_cambridge
+those,Pre A1,dataset_cambridge
+though,B1,dataset_oxford3000
+thought,A2,dataset_oxford3000
+thousand,A2,dataset_cambridge
+threat,B2,dataset_oxford3000
+threaten,B2,dataset_oxford3000
+three,A1,dataset_oxford3000
+throat,B1,dataset_oxford3000
+through,A2,dataset_cambridge
+throughout,B1,dataset_oxford3000
+throw,Pre A1,dataset_cambridge
+thursday,A1,dataset_cambridge
+thus,B2,dataset_oxford3000
+tick,Pre A1,dataset_cambridge
+ticket,A1,dataset_cambridge
+tidy,A2,dataset_cambridge
+tie,A2,dataset_oxford3000
+tiger,Pre A1,dataset_cambridge
+tight,B1,dataset_oxford3000
+till,B1,dataset_oxford3000
+time,A2,dataset_cambridge
+timetable,A2,dataset_cambridge
+tin,B1,dataset_oxford3000
+tiny,B1,dataset_oxford3000
+tip,A2,dataset_oxford3000
+tired,A1,dataset_cambridge
+title,A1,dataset_oxford3000
+to,Pre A1,dataset_cambridge
+today,Pre A1,dataset_cambridge
+toe,A2,dataset_cambridge
+together,A2,dataset_cambridge
+toilet,A1,dataset_oxford3000
+tomato,Pre A1,dataset_cambridge
+tomorrow,A2,dataset_cambridge
+tone,B2,dataset_oxford3000
+tongue,B1,dataset_oxford3000
+tonight,A2,dataset_cambridge
+too,Pre A1,dataset_cambridge
+tool,A2,dataset_oxford3000
+tooth,A1,dataset_cambridge
+toothache,A1,dataset_cambridge
+toothbrush,A1,dataset_cambridge
+toothpaste,A1,dataset_cambridge
+top,A1,dataset_cambridge
+topic,A1,dataset_oxford3000
+torch,A2,dataset_cambridge
+tortoise,A2,dataset_cambridge
+total,B1,dataset_oxford3000
+totally,B1,dataset_oxford3000
+touch,A2,dataset_cambridge
+tough,B2,dataset_oxford3000
+tour,A2,dataset_cambridge
+tourism,A2,dataset_oxford3000
+tourist,A1,dataset_oxford3000
+towards,A2,dataset_oxford3000
+towel,A1,dataset_cambridge
+tower,A2,dataset_oxford3000
+town,A1,dataset_cambridge
+town centre,A1,dataset_cambridge
+toy,Pre A1,dataset_cambridge
+track,A2,dataset_oxford3000
+tractor,A1,dataset_cambridge
+trade,B1,dataset_oxford3000
+tradition,A2,dataset_oxford3000
+traditional,A2,dataset_oxford3000
+traffic,A2,dataset_cambridge
+train,Pre A1,dataset_cambridge
+trainer,A2,dataset_oxford3000
+trainers,A2,dataset_cambridge
+training,A2,dataset_oxford3000
+transfer,B2,dataset_oxford3000
+transform,B2,dataset_oxford3000
+transition,B2,dataset_oxford3000
+translate,B1,dataset_oxford3000
+translation,B1,dataset_oxford3000
+transport,A2,dataset_oxford3000
+travel,A1,dataset_cambridge
+traveller,A2,dataset_oxford3000
+treasure,A1,dataset_cambridge
+treat,B1,dataset_oxford3000
+treatment,B1,dataset_oxford3000
+tree,Pre A1,dataset_cambridge
+trend,B1,dataset_oxford3000
+trial,B2,dataset_oxford3000
+trick,B1,dataset_oxford3000
+trip,A1,dataset_cambridge
+tropical,B2,dataset_oxford3000
+trouble,A2,dataset_oxford3000
+trousers,Pre A1,dataset_cambridge
+truck,Pre A1,dataset_cambridge
+TRUE,A1,dataset_oxford3000
+truly,B2,dataset_oxford3000
+trust,B2,dataset_oxford3000
+truth,B1,dataset_oxford3000
+try,Pre A1,dataset_cambridge
+tube,B1,dataset_oxford3000
+tuesday,A1,dataset_cambridge
+tune,A2,dataset_cambridge
+tunnel,B2,dataset_oxford3000
+turn,A2,dataset_cambridge
+turn off,A2,dataset_cambridge
+turn on,A2,dataset_cambridge
+tv,Pre A1,dataset_cambridge
+twelve,A1,dataset_oxford3000
+twenty,A1,dataset_oxford3000
+twice,A2,dataset_cambridge
+twin,A2,dataset_oxford3000
+two,A1,dataset_oxford3000
+type,A1,dataset_oxford3000
+typical,A2,dataset_oxford3000
+typically,B1,dataset_oxford3000
+tyre,A2,dataset_cambridge
+ugly,Pre A1,dataset_cambridge
+ultimately,B2,dataset_oxford3000
+umbrella,A2,dataset_cambridge
+unable,B1,dataset_oxford3000
+uncle,A1,dataset_cambridge
+uncomfortable,B1,dataset_oxford3000
+unconscious,B2,dataset_oxford3000
+under,Pre A1,dataset_cambridge
+underground,A2,dataset_oxford3000
+understand,Pre A1,dataset_cambridge
+understanding,A2,dataset_oxford3000
+underwear,B1,dataset_oxford3000
+unemployed,B1,dataset_oxford3000
+unemployment,B1,dataset_oxford3000
+unexpected,B2,dataset_oxford3000
+unfair,B1,dataset_oxford3000
+unfortunately,A2,dataset_oxford3000
+unfriendly,A2,dataset_cambridge
+unhappy,A2,dataset_cambridge
+uniform,A2,dataset_cambridge
+union,B1,dataset_oxford3000
+unique,B2,dataset_oxford3000
+unit,A2,dataset_oxford3000
+united,A2,dataset_oxford3000
+universe,B2,dataset_oxford3000
+university,A2,dataset_cambridge
+unkind,A2,dataset_cambridge
+unknown,B2,dataset_oxford3000
+unless,B1,dataset_oxford3000
+unlike,B1,dataset_oxford3000
+unlikely,B1,dataset_oxford3000
+unnecessary,B1,dataset_oxford3000
+unpleasant,B1,dataset_oxford3000
+untidy,A2,dataset_cambridge
+until,A2,dataset_cambridge
+unusual,A2,dataset_cambridge
+up,A1,dataset_cambridge
+update,B1,dataset_oxford3000
+upon,B1,dataset_oxford3000
+upper,B2,dataset_oxford3000
+upset,B1,dataset_oxford3000
+upstairs,A1,dataset_cambridge
+upwards,B2,dataset_oxford3000
+urban,B2,dataset_oxford3000
+urge,B2,dataset_oxford3000
+us,Pre A1,dataset_cambridge
+use,A2,dataset_cambridge
+used,B1,dataset_oxford3000
+used to,A2,dataset_oxford3000
+useful,A1,dataset_oxford3000
+user,A2,dataset_oxford3000
+usual,A2,dataset_oxford3000
+usually,A2,dataset_cambridge
+vacation,A1,dataset_oxford3000
+valley,A2,dataset_oxford3000
+valuable,B1,dataset_oxford3000
+value,B1,dataset_oxford3000
+van,A2,dataset_oxford3000
+variety,A2,dataset_oxford3000
+various,B1,dataset_oxford3000
+vary,B2,dataset_oxford3000
+vast,B2,dataset_oxford3000
+vegetable,A1,dataset_cambridge
+vehicle,A2,dataset_oxford3000
+venue,B2,dataset_oxford3000
+version,B1,dataset_oxford3000
+very,Pre A1,dataset_cambridge
+via,B2,dataset_oxford3000
+victim,B1,dataset_oxford3000
+victory,B2,dataset_oxford3000
+video,A1,dataset_cambridge
+view,A2,dataset_cambridge
+viewer,B1,dataset_oxford3000
+village,A1,dataset_cambridge
+violence,B2,dataset_oxford3000
+violent,B1,dataset_oxford3000
+violin,A2,dataset_cambridge
+virtual,B2,dataset_oxford3000
+virus,A2,dataset_oxford3000
+vision,B2,dataset_oxford3000
+visit,A2,dataset_cambridge
+visitor,A1,dataset_oxford3000
+visual,B2,dataset_oxford3000
+vital,B2,dataset_oxford3000
+vitamin,B2,dataset_oxford3000
+voice,A2,dataset_oxford3000
+volleyball,A2,dataset_cambridge
+volume,B2,dataset_oxford3000
+volunteer,B1,dataset_oxford3000
+vote,B1,dataset_oxford3000
+wage,B2,dataset_oxford3000
+wait,A1,dataset_cambridge
+waiter,A2,dataset_cambridge
+wake,A1,dataset_cambridge
+walk,A1,dataset_cambridge
+wall,Pre A1,dataset_cambridge
+want,Pre A1,dataset_cambridge
+war,A2,dataset_oxford3000
+warm,A2,dataset_cambridge
+warn,B1,dataset_oxford3000
+warning,B1,dataset_oxford3000
+wash,A1,dataset_cambridge
+washing,A2,dataset_oxford3000
+waste,B1,dataset_oxford3000
+watch,Pre A1,dataset_cambridge
+water,Pre A1,dataset_cambridge
+waterfall,A1,dataset_cambridge
+watermelon,Pre A1,dataset_cambridge
+wave,A1,dataset_cambridge
+way,A2,dataset_cambridge
+we,Pre A1,dataset_cambridge
+weak,A1,dataset_cambridge
+weakness,B2,dataset_oxford3000
+wealth,B2,dataset_oxford3000
+wealthy,B2,dataset_oxford3000
+weapon,B1,dataset_oxford3000
+wear,Pre A1,dataset_cambridge
+weather,A1,dataset_cambridge
+web,A2,dataset_oxford3000
+website,A1,dataset_cambridge
+wedding,A2,dataset_oxford3000
+wednesday,A1,dataset_cambridge
+week,A1,dataset_cambridge
+weekend,A1,dataset_cambridge
+weigh,B1,dataset_oxford3000
+weight,A2,dataset_oxford3000
+welcome,A1,dataset_oxford3000
+well,A1,dataset_cambridge
+well done,Pre A1,dataset_cambridge
+west,A2,dataset_cambridge
+western,B1,dataset_oxford3000
+wet,A1,dataset_cambridge
+whale,A1,dataset_cambridge
+what,Pre A1,dataset_cambridge
+whatever,B1,dataset_oxford3000
+wheel,A2,dataset_cambridge
+when,A1,dataset_cambridge
+whenever,B1,dataset_oxford3000
+where,Pre A1,dataset_cambridge
+whereas,B2,dataset_oxford3000
+wherever,B2,dataset_oxford3000
+whether,B1,dataset_oxford3000
+which,Pre A1,dataset_cambridge
+while,A2,dataset_cambridge
+whisper,A2,dataset_cambridge
+whistle,A2,dataset_cambridge
+white,Pre A1,dataset_cambridge
+who,Pre A1,dataset_cambridge
+whole,A2,dataset_oxford3000
+whom,B2,dataset_oxford3000
+whose,Pre A1,dataset_cambridge
+why,A1,dataset_cambridge
+wide,A2,dataset_oxford3000
+widely,B2,dataset_oxford3000
+wife,A2,dataset_cambridge
+wifi,A2,dataset_cambridge
+wild,A2,dataset_cambridge
+wildlife,B2,dataset_oxford3000
+will,A1,dataset_oxford3000
+willing,B2,dataset_oxford3000
+win,A2,dataset_cambridge
+wind,A1,dataset_cambridge
+window,Pre A1,dataset_cambridge
+windy,A1,dataset_cambridge
+wine,A1,dataset_oxford3000
+wing,A2,dataset_cambridge
+winner,A2,dataset_cambridge
+winter,A2,dataset_cambridge
+wire,B2,dataset_oxford3000
+wise,B2,dataset_oxford3000
+wish,A2,dataset_cambridge
+with,Pre A1,dataset_cambridge
+within,B1,dataset_oxford3000
+without,A2,dataset_cambridge
+witness,B2,dataset_oxford3000
+woman,Pre A1,dataset_cambridge
+women,Pre A1,dataset_cambridge
+wonder,B1,dataset_oxford3000
+wonderful,A2,dataset_cambridge
+wood,A2,dataset_cambridge
+wooden,A2,dataset_oxford3000
+wool,A2,dataset_cambridge
+word,Pre A1,dataset_cambridge
+work,A1,dataset_cambridge
+worker,A1,dataset_oxford3000
+working,A2,dataset_oxford3000
+world,A1,dataset_cambridge
+worldwide,B1,dataset_oxford3000
+worried,A2,dataset_cambridge
+worry,A2,dataset_oxford3000
+worse,A1,dataset_cambridge
+worst,A1,dataset_cambridge
+worth,B1,dataset_oxford3000
+would,A1,dataset_cambridge
+would like,Pre A1,dataset_cambridge
+wound,B2,dataset_oxford3000
+wow,Pre A1,dataset_cambridge
+wrap,B2,dataset_oxford3000
+write,Pre A1,dataset_cambridge
+writer,A1,dataset_oxford3000
+writing,A1,dataset_oxford3000
+written,B1,dataset_oxford3000
+wrong,A1,dataset_cambridge
+x-ray,A2,dataset_cambridge
+yard,B1,dataset_oxford3000
+yeah,A1,dataset_oxford3000
+year,Pre A1,dataset_cambridge
+yellow,Pre A1,dataset_cambridge
+yes,Pre A1,dataset_cambridge
+yesterday,A1,dataset_cambridge
+yet,A2,dataset_cambridge
+yoghurt,A2,dataset_cambridge
+you,Pre A1,dataset_cambridge
+you're welcome,A2,dataset_cambridge
+young,Pre A1,dataset_cambridge
+your,Pre A1,dataset_cambridge
+yours,Pre A1,dataset_cambridge
+yourself,A1,dataset_oxford3000
+youth,B1,dataset_oxford3000
+zebra,Pre A1,dataset_cambridge
+zero,A2,dataset_cambridge
+zone,B2,dataset_oxford3000
+zoo,Pre A1,dataset_cambridge
