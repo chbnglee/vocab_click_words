@@ -202,13 +202,6 @@ def checkpoint_to_bytes(results: list[dict]) -> bytes:
 
 
 def guide_tab():
-    st.subheader("가이드")
-
-    st.info(
-        "가이드와 CEFR 단어 리스트 검색은 Gemini API 키가 필요하지 않습니다. "
-        "API 키는 어휘 추출을 실행할 때만 사용합니다."
-    )
-
     st.markdown("#### 어휘 추출 기준")
     rules = pd.DataFrame(
         [
@@ -290,7 +283,28 @@ def guide_tab():
         f"{filtered['cefr_level'].nunique() if 'cefr_level' in filtered else 0}",
     )
 
-    st.dataframe(filtered, use_container_width=True, height=420, hide_index=True)
+    display_columns = [
+        column
+        for column in [
+            "word",
+            "cefr_level",
+            "source",
+            "all_references",
+            "additional_references",
+        ]
+        if column in filtered.columns
+    ]
+    display_df = filtered[display_columns].rename(
+        columns={
+            "word": "단어",
+            "cefr_level": "주 CEFR",
+            "source": "주 출처",
+            "all_references": "전체 참고",
+            "additional_references": "추가 참고",
+        }
+    )
+
+    st.dataframe(display_df, use_container_width=True, height=420, hide_index=True)
     st.download_button(
         "필터 결과 CSV 다운로드",
         filtered.to_csv(index=False).encode("utf-8-sig"),

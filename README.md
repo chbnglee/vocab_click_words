@@ -1,4 +1,4 @@
-# Vocab&Click Streamlit App
+# Vocab & Click Words Streamlit App
 
 `02_Vocab`의 어휘 분석 스크립트를 공동 작업자가 웹 UI로 사용할 수 있게 정리한 앱입니다.
 
@@ -6,18 +6,34 @@
 
 - `streamlit_app.py`: 가이드와 어휘 추출 UI
 - `03_vocab&click.py`: 기존 CLI 분석 로직
-- `merged_cefr.csv`: CEFR 단어 리스트
-- `streamlit_app.py`: 웹앱 진입점
-- `merged_cefr.csv`: CEFR 단어 리스트
-- `03_vocab&click.py`: Gemini 분석 프롬프트/파서 로직
+- `merged_cefr.csv`: 병합된 CEFR 단어 데이터베이스
+- `scripts/build_cefr_database.py`: 로컬 PDF 기준 CEFR 데이터베이스 재생성 스크립트
 - `requirements.txt`: Streamlit 배포/실행 의존성
 
 ## 로컬 실행
 
 ```powershell
 cd "C:\Users\IM_1500\Desktop\스토리 텍스트\02_Vocab"
-.\.venv_vocab_click\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv_vocab_click\Scripts\streamlit.exe run streamlit_app.py
+.\.venv_vocab_click\Scripts\python.exe -m pip install -r .\vocab_click_app\requirements.txt
+.\.venv_vocab_click\Scripts\streamlit.exe run .\vocab_click_app\streamlit_app.py
+```
+
+## CEFR 데이터베이스
+
+`merged_cefr.csv`는 다음 PDF를 순서대로 읽어 만듭니다.
+
+1. `Cambridge-starters-movers-flyers-word-list-2025.pdf` -> `Cambridge_Starters`
+2. `Cambridge-b1-preliminary-vocabulary-list.pdf` -> `Cambridge_B1 Preliminary`
+3. `The_Oxford_3000_by_CEFR_level.pdf` -> `Oxford 3000`
+4. `The_Oxford_5000_by_CEFR_level.pdf` -> `Oxford 5000`
+
+동일 단어가 여러 자료에 나오면 가장 먼저 등장한 자료의 `cefr_level`과 `source`를 주 값으로 사용합니다. 이후 등장한 레벨과 출처는 `all_references`, `additional_references`, `reference_details`에 남깁니다.
+
+로컬에서 PDF를 다시 반영하려면 `02_Vocab\Reference_Vocab`에 PDF 4개를 둔 뒤 실행합니다.
+
+```powershell
+cd "C:\Users\IM_1500\Desktop\스토리 텍스트\02_Vocab\vocab_click_app"
+..\.venv_vocab_click\Scripts\python.exe .\scripts\build_cefr_database.py
 ```
 
 ## Streamlit 배포 메모
