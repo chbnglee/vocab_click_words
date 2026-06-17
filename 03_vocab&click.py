@@ -302,13 +302,12 @@ with exactly these fields:
     - Proper nouns (names of people, places)
     - Words whose meaning is fully and unambiguously recoverable from
       immediate context without any vocabulary knowledge
-    - Onomatopoeia: words used purely to represent a sound effect rather than
-      as a content word. Judge by the word's function in that specific sentence.
-        * Exclude when used as a sound effect: "Pop!", "Splash!", "Zoom!",
-          "Zap!", "CRACK!" (written as an exclamation or isolated interjection)
-        * Include when used as a genuine content word in the same or another
-          sentence: e.g. "He heard a crack in the wall" (noun) or
-          "The ice cracked" (verb) → include as "crack"
+  INCLUSION NOTE:
+    - Include onomatopoeia and mimetic words when they support story
+      comprehension, scene sequencing, emotion, action, or click activity.
+      Normalise them to lowercase unless the capitalisation changes meaning.
+      Examples: "Pop!", "Splash!", "Zoom!", "Zap!", "CRACK!", "Chomp!"
+      → include as "pop", "splash", "zoom", "zap", "crack", "chomp".
 
   FORM RULES (STRICTLY follow):
     1. Verbs: BASE FORM only (e.g. "fell" → "fall", "blew" → "blow")

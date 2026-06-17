@@ -5,5 +5,7 @@ __pycache__/
 ~$*.xlsx
 .streamlit/secrets.toml
 .env
+Story_Confirmed*.xlsx
 Story_Analysis_20*.xlsx
+analysis_checkpoint*.json
 *_before_easy_diff_fix_*
