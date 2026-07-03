@@ -201,6 +201,35 @@ def checkpoint_to_bytes(results: list[dict]) -> bytes:
     return json.dumps(merged, ensure_ascii=False, indent=2).encode("utf-8")
 
 
+def describe_gemini_error(message: str) -> str:
+    lower = message.lower()
+    if any(
+        keyword in lower
+        for keyword in [
+            "resource_exhausted",
+            "quota",
+            "rate limit",
+            "429",
+            "billing",
+            "insufficient",
+        ]
+    ):
+        return "Gemini API 쿼터, 사용량 제한, 결제 또는 잔액 문제일 가능성이 큽니다."
+    if any(
+        keyword in lower
+        for keyword in [
+            "api key not valid",
+            "invalid api key",
+            "permission_denied",
+            "unauthenticated",
+            "401",
+            "403",
+        ]
+    ):
+        return "Gemini API 키가 잘못되었거나 해당 키의 권한이 부족할 가능성이 큽니다."
+    return "Gemini API 호출 중 오류가 발생했습니다. 아래 원문 메시지를 확인해 주세요."
+
+
 def guide_tab():
     st.markdown("#### 어휘 추출 기준")
     rules = pd.DataFrame(
@@ -412,7 +441,12 @@ def extraction_tab():
             st.error("Gemini API Key가 필요합니다.")
             return
 
-        client = analyzer.genai.Client(api_key=api_key.strip())
+        try:
+            client = analyzer.genai.Client(api_key=api_key.strip())
+        except Exception as exc:
+            st.error(f"Gemini 클라이언트를 만들지 못했습니다: {type(exc).__name__}: {exc}")
+            return
+
         results_by_id: dict[str, dict] = dict(checkpoint)
         progress = st.progress(0)
         log_box = st.empty()
@@ -424,9 +458,26 @@ def extraction_tab():
                 progress.progress(idx / len(selected_df))
                 continue
 
-            result = analyzer.analyze(client, model_name.strip(), row)
+            try:
+                result = analyzer.analyze(client, model_name.strip(), row)
+            except Exception as exc:
+                error_message = f"{type(exc).__name__}: {exc}"
+                st.error(f"{sid} 분석 중 예상치 못한 오류가 발생했습니다.")
+                st.warning(describe_gemini_error(error_message))
+                st.code(error_message, language="text")
+                progress.progress(idx / len(selected_df))
+                continue
+
             if not result:
+                error_message = ""
+                if hasattr(analyzer, "get_last_api_error"):
+                    error_message = analyzer.get_last_api_error()
+
                 st.warning(f"{sid} 분석 실패")
+                if error_message:
+                    st.error(describe_gemini_error(error_message))
+                    with st.expander("Gemini API 오류 원문"):
+                        st.code(error_message, language="text")
                 progress.progress(idx / len(selected_df))
                 continue
             results_by_id[sid] = result

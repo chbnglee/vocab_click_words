@@ -364,7 +364,36 @@ STORY TITLE: {title}
 IMPORTANT: Return ONLY a valid JSON object. No markdown fences, no extra text."""
 
 
+LAST_API_ERROR = ""
+
+
+def get_last_api_error() -> str:
+    return LAST_API_ERROR
+
+
+def is_non_retryable_api_error(message: str) -> bool:
+    lower = message.lower()
+    return any(
+        keyword in lower
+        for keyword in [
+            "api key not valid",
+            "invalid api key",
+            "permission_denied",
+            "unauthenticated",
+            "resource_exhausted",
+            "quota",
+            "billing",
+            "401",
+            "403",
+            "429",
+        ]
+    )
+
+
 def call_gemini(client, model_name: str, prompt: str, max_retries: int = 3) -> dict | None:
+    global LAST_API_ERROR
+    LAST_API_ERROR = ""
+
     for attempt in range(1, max_retries + 1):
         try:
             cfg = genai_types.GenerateContentConfig(
@@ -387,9 +416,13 @@ def call_gemini(client, model_name: str, prompt: str, max_retries: int = 3) -> d
             return json.loads(text)
 
         except json.JSONDecodeError as e:
+            LAST_API_ERROR = f"JSONDecodeError: {e}"
             print(f"    JSON 파싱 오류 (시도 {attempt}/{max_retries}): {e}")
         except Exception as e:
+            LAST_API_ERROR = f"{type(e).__name__}: {e}"
             print(f"    API 오류 (시도 {attempt}/{max_retries}): {type(e).__name__}: {e}")
+            if is_non_retryable_api_error(LAST_API_ERROR):
+                break
 
         if attempt < max_retries:
             wait = 4 * attempt
