@@ -505,12 +505,33 @@ def write_table_sheet(
     return ws
 
 
-def build_output_workbook(source_df: pd.DataFrame, results_by_id: dict[str, Any]) -> bytes:
+def story_info_to_vocab_df(source_df: pd.DataFrame, story_info_by_id: dict[str, Any]) -> pd.DataFrame:
+    rows: list[dict[str, Any]] = []
+    for _, row in source_df.iterrows():
+        sid = str(row["ID"])
+        story = story_info_by_id.get(sid, {})
+        rows.append(
+            {
+                "ID": sid,
+                "Title": row["Title"],
+                "Normal Ver.": story.get("base_text", row.get("Base Text", "")),
+                "Easy Ver.": story.get("easy_version", ""),
+                "Difficult Ver.": story.get("difficult_version", ""),
+                "Detected CEFR": story.get("detected_level", ""),
+                "CEFR Rationale": story.get("detected_level_rationale", ""),
+                "Lexile": story.get("lexile", ""),
+                "Lexile Rationale": story.get("lexile_rationale", ""),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[str, Any]) -> bytes:
     wb = Workbook()
     default_sheet = wb.active
     wb.remove(default_sheet)
 
-    combined_headers = [
+    story_headers = [
         "ID",
         "Title",
         "Input Level",
@@ -528,22 +549,15 @@ def build_output_workbook(source_df: pd.DataFrame, results_by_id: dict[str, Any]
         "Intro Script",
         "Easy Version",
         "Difficult Version",
-        "Vocab",
-        "Normal Words",
-        "Easy Words",
-        "Difficult Words",
+        "Learning Focus 1",
+        "Learning Focus 2",
+        "Learning Focus 3",
     ]
-    combined_rows: list[list[Any]] = []
     story_rows: list[list[Any]] = []
-    vocab_rows: list[list[Any]] = []
-
     for _, row in source_df.iterrows():
         sid = str(row["ID"])
-        item = results_by_id.get(sid, {})
-        story = item.get("story_info", {})
-        vocab = item.get("vocab", {})
-        keywords = ", ".join(story.get("keywords", []))
-        combined_rows.append(
+        story = story_info_by_id.get(sid, {})
+        story_rows.append(
             [
                 sid,
                 row["Title"],
@@ -558,23 +572,76 @@ def build_output_workbook(source_df: pd.DataFrame, results_by_id: dict[str, Any]
                 story.get("category", ""),
                 story.get("book_mood", ""),
                 story.get("book_info", ""),
-                keywords,
+                ", ".join(story.get("keywords", [])),
                 story.get("intro", ""),
                 story.get("easy_version", ""),
                 story.get("difficult_version", ""),
-                vocab_to_cell(vocab.get("vocab", [])),
-                vocab_to_cell(vocab.get("normal_vocab", [])),
-                vocab_to_cell(vocab.get("easy_vocab", [])),
-                vocab_to_cell(vocab.get("difficult_vocab", [])),
+                story.get("learning_focus_1", ""),
+                story.get("learning_focus_2", ""),
+                story.get("learning_focus_3", ""),
             ]
         )
-        story_rows.append(combined_rows[-1][:17])
-        vocab_rows.append(
+
+    write_table_sheet(
+        wb,
+        "Story_Info",
+        story_headers,
+        story_rows,
+        [12, 26, 13, 58, 13, 42, 12, 42, 12, 12, 18, 16, 46, 36, 48, 58, 58, 42, 42, 42],
+        "385723",
+    )
+
+    vocab_df = story_info_to_vocab_df(source_df, story_info_by_id)
+    write_table_sheet(
+        wb,
+        "Vocab_Input",
+        list(vocab_df.columns),
+        vocab_df.fillna("").values.tolist(),
+        [12, 28, 58, 58, 58, 14, 42, 12, 42],
+        "1F3864",
+    )
+
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    return output.getvalue()
+
+
+def build_vocab_output_workbook(vocab_df: pd.DataFrame, vocab_results_by_id: dict[str, Any]) -> bytes:
+    wb = Workbook()
+    default_sheet = wb.active
+    wb.remove(default_sheet)
+
+    headers = [
+        "ID",
+        "Title",
+        "Normal Ver.",
+        "Easy Ver.",
+        "Difficult Ver.",
+        "CEFR",
+        "CEFR Rationale",
+        "Lexile",
+        "Lexile Rationale",
+        "Vocab",
+        "Normal Words",
+        "Easy Words",
+        "Difficult Words",
+    ]
+    rows: list[list[Any]] = []
+    for _, row in vocab_df.iterrows():
+        sid = str(row["ID"])
+        vocab = vocab_results_by_id.get(sid, {})
+        rows.append(
             [
                 sid,
                 row["Title"],
-                story.get("detected_level", ""),
-                story.get("lexile", ""),
+                row.get("Normal Ver.", ""),
+                row.get("Easy Ver.", ""),
+                row.get("Difficult Ver.", ""),
+                vocab.get("cefr", row.get("Detected CEFR", "")),
+                vocab.get("cefr_rationale", row.get("CEFR Rationale", "")),
+                vocab.get("lexile", row.get("Lexile", "")),
+                vocab.get("lexile_rationale", row.get("Lexile Rationale", "")),
                 vocab_to_cell(vocab.get("vocab", [])),
                 vocab_to_cell(vocab.get("normal_vocab", [])),
                 vocab_to_cell(vocab.get("easy_vocab", [])),
@@ -584,26 +651,10 @@ def build_output_workbook(source_df: pd.DataFrame, results_by_id: dict[str, Any]
 
     write_table_sheet(
         wb,
-        "Combined",
-        combined_headers,
-        combined_rows,
-        [12, 26, 13, 58, 13, 42, 12, 42, 12, 12, 18, 16, 46, 36, 48, 58, 58, 32, 46, 46, 46],
-        "1F3864",
-    )
-    write_table_sheet(
-        wb,
-        "Story_Info",
-        combined_headers[:17],
-        story_rows,
-        [12, 26, 13, 58, 13, 42, 12, 42, 12, 12, 18, 16, 46, 36, 48, 58, 58],
-        "385723",
-    )
-    write_table_sheet(
-        wb,
         "Vocab_Click_Words",
-        ["ID", "Title", "Detected CEFR", "Lexile", "Vocab", "Normal Words", "Easy Words", "Difficult Words"],
-        vocab_rows,
-        [12, 28, 14, 12, 36, 54, 54, 54],
+        headers,
+        rows,
+        [12, 28, 55, 55, 55, 12, 42, 12, 42, 35, 50, 50, 50],
         "7030A0",
     )
 
@@ -611,6 +662,70 @@ def build_output_workbook(source_df: pd.DataFrame, results_by_id: dict[str, Any]
     wb.save(output)
     output.seek(0)
     return output.getvalue()
+
+
+def normalize_vocab_input_df(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.fillna("").copy()
+    rename_map = {}
+    if "Base Text" in df.columns and "Normal Ver." not in df.columns:
+        rename_map["Base Text"] = "Normal Ver."
+    if "Easy Version" in df.columns and "Easy Ver." not in df.columns:
+        rename_map["Easy Version"] = "Easy Ver."
+    if "Difficult Version" in df.columns and "Difficult Ver." not in df.columns:
+        rename_map["Difficult Version"] = "Difficult Ver."
+    if rename_map:
+        df = df.rename(columns=rename_map)
+    return df
+
+
+def read_vocab_input(uploaded_file) -> pd.DataFrame:
+    if uploaded_file.name.lower().endswith(".csv"):
+        return normalize_vocab_input_df(pd.read_csv(uploaded_file, dtype=str).fillna(""))
+
+    xls = pd.ExcelFile(uploaded_file)
+    if "Vocab_Input" in xls.sheet_names:
+        sheet_name = "Vocab_Input"
+    elif "Story_Info" in xls.sheet_names:
+        sheet_name = "Story_Info"
+    else:
+        sheet_name = xls.sheet_names[0]
+    return normalize_vocab_input_df(pd.read_excel(xls, sheet_name=sheet_name, dtype=str).fillna(""))
+
+
+def validate_vocab_df(df: pd.DataFrame) -> list[str]:
+    required = ["ID", "Title", "Normal Ver.", "Easy Ver.", "Difficult Ver."]
+    missing = [col for col in required if col not in df.columns]
+    if missing:
+        return [f"필수 컬럼 없음: {', '.join(missing)}"]
+
+    errors: list[str] = []
+    for _, row in df.iterrows():
+        blanks = [
+            col
+            for col in ["Normal Ver.", "Easy Ver.", "Difficult Ver."]
+            if not str(row.get(col, "")).strip()
+        ]
+        if blanks:
+            errors.append(f"{row.get('ID', '')} / {row.get('Title', '')}: {', '.join(blanks)} 비어 있음")
+    return errors
+
+
+def call_vocab_for_row(client, model_name: str, row: pd.Series) -> dict[str, Any] | None:
+    detected_level = normalize_level(row.get("Detected CEFR", ""))
+    if detected_level in CEFR_ORDER:
+        story_info = {
+            "id": str(row["ID"]),
+            "title": str(row["Title"]),
+            "base_text": str(row["Normal Ver."]),
+            "easy_version": str(row["Easy Ver."]),
+            "difficult_version": str(row["Difficult Ver."]),
+            "detected_level": detected_level,
+            "detected_level_rationale": str(row.get("CEFR Rationale", "")),
+            "lexile": str(row.get("Lexile", "")),
+            "lexile_rationale": str(row.get("Lexile Rationale", "")),
+        }
+        return call_vocab_analysis(client, model_name, story_info)
+    return vocab_analyzer.analyze(client, model_name, row)
 
 
 @st.cache_data
@@ -624,14 +739,56 @@ def load_cefr_wordlist(path: str, mtime: float) -> pd.DataFrame:
     return df
 
 
+def model_settings(prefix: str, api_key: str) -> str:
+    with st.expander("고급 설정"):
+        check_models_clicked = st.button(
+            "API 키로 사용 가능한 모델 확인",
+            disabled=not api_key.strip(),
+            use_container_width=True,
+            key=f"{prefix}_check_models",
+        )
+        if check_models_clicked:
+            try:
+                available_models = list_available_text_models(api_key)
+            except Exception as exc:
+                message = f"{type(exc).__name__}: {exc}"
+                st.error(describe_gemini_error(message))
+                st.code(message, language="text")
+            else:
+                st.session_state[f"{prefix}_{MODEL_SESSION_KEY}"] = available_models
+                st.success(f"사용 가능한 텍스트 모델 {len(available_models):,}개를 확인했습니다.")
+
+        model_options = st.session_state.get(f"{prefix}_{MODEL_SESSION_KEY}") or PREFERRED_MODELS
+        default_index = model_options.index(DEFAULT_MODEL) if DEFAULT_MODEL in model_options else 0
+        selected_model = st.selectbox(
+            "모델",
+            options=model_options,
+            index=default_index,
+            key=f"{prefix}_model",
+        )
+        custom_model = st.text_input(
+            "직접 입력할 모델명",
+            placeholder="예: gemini-2.5-flash",
+            key=f"{prefix}_custom_model",
+        )
+        model_name = normalize_model_name(custom_model) or selected_model
+        st.caption(f"현재 실행 모델: {model_name}")
+        return model_name
+
+
 def guide_tab():
-    st.subheader("작업 흐름")
+    st.subheader("2단계 작업 흐름")
     st.markdown(
         """
-        1. `Story_Confirmed_Template.xlsx`를 내려받아 `ID`, `Title`, `Level`, `Base Text`를 입력합니다.
-        2. `Level`은 Easy/Difficult 버전 생성 기준으로만 사용합니다.
-        3. `Detected CEFR`와 `Lexile`은 Base Text를 API가 별도로 추정합니다.
-        4. Vocab & Click Words는 추정 CEFR을 기준으로 LCMS CEFR DB를 먼저 적용하고, API는 핵심/클릭 어휘 보완 판단에만 사용합니다.
+        **1단계 Story Info**
+
+        `ID`, `Title`, `Level`, `Base Text`만 입력합니다. 이 단계에서 추정 CEFR, Lexile, 단어 수, 장면 수, 카테고리, 북 무드, 요약, 인트로 스크립트, Easy Version, Difficult Version을 생성합니다.
+
+        **2단계 Vocab & Click Words**
+
+        `Normal Ver.`, `Easy Ver.`, `Difficult Ver.`가 모두 준비된 파일을 입력합니다. 1단계 결과 엑셀의 `Vocab_Input` 시트를 그대로 사용해도 되고, 기존 Vocab 앱 템플릿 형식의 파일을 업로드해도 됩니다.
+
+        `Level`은 1단계의 Easy/Difficult 생성 기준이고, Vocab 필터링 기준은 API가 추정한 `Detected CEFR`입니다.
         """
     )
     st.divider()
@@ -661,8 +818,9 @@ def guide_tab():
     )
 
 
-def extraction_tab():
-    st.subheader("Story Info + Vocab 분석")
+def story_info_tab():
+    st.subheader("1단계. Story Info 생성")
+    st.caption("입력: ID / Title / Level / Base Text")
     st.download_button(
         "Story_Confirmed_Template.xlsx 다운로드",
         create_template_workbook(),
@@ -672,18 +830,20 @@ def extraction_tab():
     )
 
     uploaded_story = st.file_uploader(
-        "분석할 story_confirmed 파일 업로드",
+        "story_confirmed 파일 업로드",
         type=["xlsx", "csv"],
         accept_multiple_files=False,
+        key="story_info_upload",
     )
     if uploaded_story is None:
-        st.info("템플릿을 내려받아 작성한 뒤 업로드해 주세요.")
+        st.info("템플릿을 내려받아 Base Text까지 작성한 뒤 업로드해 주세요.")
         return
 
     checkpoint_file = st.file_uploader(
-        "이전 checkpoint JSON 업로드 (선택)",
+        "이전 Story Info checkpoint JSON 업로드 (선택)",
         type=["json"],
         accept_multiple_files=False,
+        key="story_info_checkpoint_upload",
     )
 
     try:
@@ -698,7 +858,7 @@ def extraction_tab():
     metric_cols[0].metric("스토리", f"{len(story_df):,}")
     metric_cols[1].metric("필수 컬럼", f"{len(preview_cols)}/{len(INPUT_COLUMNS)}")
     metric_cols[2].metric("입력 오류", f"{len(errors):,}")
-    metric_cols[3].metric("LCMS DB", "있음" if CEFR_PATH.exists() else "없음")
+    metric_cols[3].metric("다음 단계 출력", "Vocab_Input")
 
     with st.expander("입력 미리보기", expanded=True):
         st.dataframe(story_df[preview_cols].head(20), use_container_width=True, hide_index=True)
@@ -709,12 +869,19 @@ def extraction_tab():
         return
 
     checkpoint = load_checkpoint(checkpoint_file)
-    completed_ids = {sid for sid, item in checkpoint.items() if result_is_complete(item)}
+    story_info_checkpoint = {
+        sid: item.get("story_info", item)
+        for sid, item in checkpoint.items()
+        if isinstance(item, dict)
+    }
+    completed_ids = {sid for sid, item in story_info_checkpoint.items() if item.get("easy_version")}
+
     labels = [f"{row['ID']} | {row['Title']}" for _, row in story_df.iterrows()]
     selected_labels = st.multiselect(
-        "분석 대상",
+        "Story Info 생성 대상",
         labels,
         default=[label for label in labels if label.split(" | ", 1)[0] not in completed_ids] or labels,
+        key="story_info_selection",
     )
     selected_ids = {label.split(" | ", 1)[0] for label in selected_labels}
     selected_df = story_df[story_df["ID"].astype(str).isin(selected_ids)].copy()
@@ -722,64 +889,40 @@ def extraction_tab():
     api_key = st.text_input(
         "Gemini API Key",
         type="password",
-        placeholder="분석 실행 시에만 사용하며 앱에 저장하지 않습니다.",
+        placeholder="Story Info 생성 시에만 사용하며 앱에 저장하지 않습니다.",
+        key="story_info_api_key",
     )
-    with st.expander("고급 설정"):
-        check_models_clicked = st.button(
-            "API 키로 사용 가능한 모델 확인",
-            disabled=not api_key.strip(),
-            use_container_width=True,
-        )
-        if check_models_clicked:
-            try:
-                available_models = list_available_text_models(api_key)
-            except Exception as exc:
-                message = f"{type(exc).__name__}: {exc}"
-                st.error(describe_gemini_error(message))
-                st.code(message, language="text")
-            else:
-                st.session_state[MODEL_SESSION_KEY] = available_models
-                st.success(f"사용 가능한 텍스트 모델 {len(available_models):,}개를 확인했습니다.")
-
-        model_options = st.session_state.get(MODEL_SESSION_KEY) or PREFERRED_MODELS
-        default_index = model_options.index(DEFAULT_MODEL) if DEFAULT_MODEL in model_options else 0
-        selected_model = st.selectbox("모델", options=model_options, index=default_index)
-        custom_model = st.text_input("직접 입력할 모델명", placeholder="예: gemini-2.5-flash")
-        model_name = normalize_model_name(custom_model) or selected_model
-        st.caption(f"현재 실행 모델: {model_name}")
+    model_name = model_settings("story_info", api_key)
 
     st.caption(
         f"checkpoint 재사용 가능: {len(completed_ids):,}개 / 현재 선택: {len(selected_df):,}개"
     )
     run_clicked = st.button(
-        "Story Info + Vocab 분석 실행",
+        "Story Info 생성 실행",
         type="primary",
         disabled=selected_df.empty,
         use_container_width=True,
+        key="story_info_run",
     )
 
     if run_clicked:
         if not api_key.strip():
             st.error("Gemini API Key가 필요합니다.")
             return
-        if not model_name.strip():
-            st.error("Gemini 모델명이 필요합니다.")
-            return
-
         try:
             client = genai.Client(api_key=api_key.strip())
         except Exception as exc:
             st.error(f"Gemini 클라이언트를 만들지 못했습니다: {type(exc).__name__}: {exc}")
             return
 
-        results_by_id: dict[str, Any] = dict(checkpoint)
+        story_info_by_id: dict[str, Any] = dict(story_info_checkpoint)
         progress = st.progress(0)
         log_box = st.empty()
 
         for idx, (_, row) in enumerate(selected_df.iterrows(), 1):
             sid = str(row["ID"])
             title = str(row["Title"])
-            if result_is_complete(results_by_id.get(sid)):
+            if story_info_by_id.get(sid, {}).get("easy_version"):
                 progress.progress(idx / len(selected_df))
                 continue
 
@@ -794,53 +937,183 @@ def extraction_tab():
                 progress.progress(idx / len(selected_df))
                 continue
 
-            log_box.info(f"{idx}/{len(selected_df)} Vocab & Click Words 분석 중: {sid} / {title}")
-            try:
-                vocab_result = call_vocab_analysis(client, model_name, story_info)
-            except Exception as exc:
-                message = f"{type(exc).__name__}: {exc}"
-                st.warning(f"{sid} Vocab 분석 중 오류가 발생했습니다. Story Info 결과는 유지합니다.")
-                st.error(describe_gemini_error(message))
-                st.code(message, language="text")
-                vocab_result = {"id": sid, "title": title}
-
-            results_by_id[sid] = {"story_info": story_info, "vocab": vocab_result}
+            story_info_by_id[sid] = story_info
             progress.progress(idx / len(selected_df))
 
-        output_bytes = build_output_workbook(story_df, results_by_id)
-        checkpoint_bytes = checkpoint_to_bytes(results_by_id)
-        st.session_state["story_vocab_output_bytes"] = output_bytes
-        st.session_state["story_vocab_checkpoint_bytes"] = checkpoint_bytes
-        st.session_state["story_vocab_result_count"] = sum(
-            1 for item in results_by_id.values() if result_is_complete(item)
+        output_bytes = build_story_info_workbook(story_df, story_info_by_id)
+        checkpoint_bytes = checkpoint_to_bytes(story_info_by_id)
+        st.session_state["story_info_source_df"] = story_df
+        st.session_state["story_info_by_id"] = story_info_by_id
+        st.session_state["story_info_output_bytes"] = output_bytes
+        st.session_state["story_info_checkpoint_bytes"] = checkpoint_bytes
+        st.session_state["story_info_result_count"] = sum(
+            1 for item in story_info_by_id.values() if item.get("easy_version")
         )
-        log_box.success(f"완료: {st.session_state['story_vocab_result_count']:,}개 결과")
+        log_box.success(f"완료: {st.session_state['story_info_result_count']:,}개 Story Info")
 
-    if "story_vocab_output_bytes" in st.session_state:
+    if "story_info_output_bytes" in st.session_state:
+        st.success("1단계 결과가 준비되었습니다. 2단계 탭에서 현재 세션 결과를 바로 사용할 수 있습니다.")
         download_cols = st.columns(2)
         with download_cols[0]:
             st.download_button(
-                "Story_Info_Vocab_Analysis.xlsx 다운로드",
-                st.session_state["story_vocab_output_bytes"],
-                file_name="Story_Info_Vocab_Analysis.xlsx",
+                "Story_Info_Result.xlsx 다운로드",
+                st.session_state["story_info_output_bytes"],
+                file_name="Story_Info_Result.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 use_container_width=True,
             )
         with download_cols[1]:
             st.download_button(
-                "checkpoint JSON 다운로드",
-                st.session_state["story_vocab_checkpoint_bytes"],
-                file_name="story_info_vocab_checkpoint.json",
+                "Story Info checkpoint JSON 다운로드",
+                st.session_state["story_info_checkpoint_bytes"],
+                file_name="story_info_checkpoint.json",
+                mime="application/json",
+                use_container_width=True,
+            )
+
+
+def vocab_tab():
+    st.subheader("2단계. Vocab & Click Words 분석")
+    st.caption("입력: ID / Title / Normal Ver. / Easy Ver. / Difficult Ver.")
+
+    source_mode = "파일 업로드"
+    if "story_info_source_df" in st.session_state and "story_info_by_id" in st.session_state:
+        source_mode = st.radio(
+            "Vocab 입력 방식",
+            ["현재 세션의 1단계 결과 사용", "파일 업로드"],
+            horizontal=True,
+            key="vocab_source_mode",
+        )
+
+    vocab_df: pd.DataFrame | None = None
+    if source_mode == "현재 세션의 1단계 결과 사용":
+        vocab_df = story_info_to_vocab_df(
+            st.session_state["story_info_source_df"],
+            st.session_state["story_info_by_id"],
+        )
+    else:
+        uploaded_vocab = st.file_uploader(
+            "Vocab 입력 파일 업로드",
+            type=["xlsx", "csv"],
+            accept_multiple_files=False,
+            help="1단계 결과 엑셀의 Vocab_Input 시트 또는 기존 Vocab 템플릿 형식을 사용할 수 있습니다.",
+            key="vocab_upload",
+        )
+        if uploaded_vocab is None:
+            st.info("1단계에서 생성한 Story_Info_Result.xlsx 또는 Normal/Easy/Difficult가 있는 파일을 업로드해 주세요.")
+            return
+        try:
+            vocab_df = read_vocab_input(uploaded_vocab)
+        except Exception as exc:
+            st.error(f"Vocab 입력 파일을 읽지 못했습니다: {exc}")
+            return
+
+    errors = validate_vocab_df(vocab_df)
+    preview_cols = [col for col in ["ID", "Title", "Normal Ver.", "Easy Ver.", "Difficult Ver.", "Detected CEFR", "Lexile"] if col in vocab_df.columns]
+    metric_cols = st.columns(4)
+    metric_cols[0].metric("스토리", f"{len(vocab_df):,}")
+    metric_cols[1].metric("필수 컬럼", f"{min(5, len([c for c in ['ID','Title','Normal Ver.','Easy Ver.','Difficult Ver.'] if c in vocab_df.columns]))}/5")
+    metric_cols[2].metric("입력 오류", f"{len(errors):,}")
+    metric_cols[3].metric("LCMS DB", "있음" if CEFR_PATH.exists() else "없음")
+
+    with st.expander("Vocab 입력 미리보기", expanded=True):
+        st.dataframe(vocab_df[preview_cols].head(20), use_container_width=True, hide_index=True)
+
+    if errors:
+        st.error("Vocab 입력 파일을 먼저 수정해야 합니다.")
+        st.code("\n".join(errors[:30]), language="text")
+        return
+
+    labels = [f"{row['ID']} | {row['Title']}" for _, row in vocab_df.iterrows()]
+    selected_labels = st.multiselect(
+        "Vocab 분석 대상",
+        labels,
+        default=labels,
+        key="vocab_selection",
+    )
+    selected_ids = {label.split(" | ", 1)[0] for label in selected_labels}
+    selected_df = vocab_df[vocab_df["ID"].astype(str).isin(selected_ids)].copy()
+
+    api_key = st.text_input(
+        "Gemini API Key",
+        type="password",
+        placeholder="Vocab 분석 시에만 사용하며 앱에 저장하지 않습니다.",
+        key="vocab_api_key",
+    )
+    model_name = model_settings("vocab", api_key)
+
+    run_clicked = st.button(
+        "Vocab & Click Words 분석 실행",
+        type="primary",
+        disabled=selected_df.empty,
+        use_container_width=True,
+        key="vocab_run",
+    )
+
+    if run_clicked:
+        if not api_key.strip():
+            st.error("Gemini API Key가 필요합니다.")
+            return
+        try:
+            client = genai.Client(api_key=api_key.strip())
+        except Exception as exc:
+            st.error(f"Gemini 클라이언트를 만들지 못했습니다: {type(exc).__name__}: {exc}")
+            return
+
+        vocab_results_by_id: dict[str, Any] = {}
+        progress = st.progress(0)
+        log_box = st.empty()
+
+        for idx, (_, row) in enumerate(selected_df.iterrows(), 1):
+            sid = str(row["ID"])
+            log_box.info(f"{idx}/{len(selected_df)} Vocab 분석 중: {sid} / {row['Title']}")
+            try:
+                result = call_vocab_for_row(client, model_name, row)
+            except Exception as exc:
+                message = f"{type(exc).__name__}: {exc}"
+                st.warning(f"{sid} Vocab 분석 중 오류가 발생했습니다.")
+                st.error(describe_gemini_error(message))
+                st.code(message, language="text")
+                result = None
+            if result:
+                vocab_results_by_id[sid] = result
+            progress.progress(idx / len(selected_df))
+
+        output_bytes = build_vocab_output_workbook(vocab_df, vocab_results_by_id)
+        checkpoint_bytes = checkpoint_to_bytes(vocab_results_by_id)
+        st.session_state["vocab_output_bytes"] = output_bytes
+        st.session_state["vocab_checkpoint_bytes"] = checkpoint_bytes
+        st.session_state["vocab_result_count"] = len(vocab_results_by_id)
+        log_box.success(f"완료: {len(vocab_results_by_id):,}개 Vocab 결과")
+
+    if "vocab_output_bytes" in st.session_state:
+        download_cols = st.columns(2)
+        with download_cols[0]:
+            st.download_button(
+                "Vocab_Click_Words_Analysis.xlsx 다운로드",
+                st.session_state["vocab_output_bytes"],
+                file_name="Vocab_Click_Words_Analysis.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                use_container_width=True,
+            )
+        with download_cols[1]:
+            st.download_button(
+                "Vocab checkpoint JSON 다운로드",
+                st.session_state["vocab_checkpoint_bytes"],
+                file_name="vocab_checkpoint.json",
                 mime="application/json",
                 use_container_width=True,
             )
 
 
 st.title("Story Info + Vocab & Click Words")
-tab_guide, tab_extract = st.tabs(["가이드", "통합 분석"])
+tab_guide, tab_story_info, tab_vocab = st.tabs(["가이드", "1단계 Story Info", "2단계 Vocab & Click Words"])
 
 with tab_guide:
     guide_tab()
 
-with tab_extract:
-    extraction_tab()
+with tab_story_info:
+    story_info_tab()
+
+with tab_vocab:
+    vocab_tab()
