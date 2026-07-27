@@ -21,7 +21,10 @@ APP_DIR = Path(__file__).resolve().parent
 CEFR_PATH = APP_DIR / "lcms_cefr.csv"
 ANALYZER_PATH = APP_DIR / "vocab_analyzer.py"
 
-INPUT_COLUMNS = ["ID", "Title", "Level", "Base Text"]
+PLATFORM_LEVEL_COLUMN = "Platform Level"
+LEGACY_LEVEL_COLUMN = "Level"
+INPUT_COLUMNS = ["ID", "Title", PLATFORM_LEVEL_COLUMN, "Base Text"]
+REQUIRED_STORY_COLUMNS = ["ID", "Title", "Base Text"]
 CEFR_ORDER = ["Pre A1", "A1", "A2", "B1", "B2", "C1", "C2"]
 LEVEL_MAP = {
     "1": "Pre A1",
@@ -40,31 +43,53 @@ LEVEL_MAP = {
     "c2": "C2",
 }
 BOOK_MOODS = [
-    "Warm",
+    "Exciting",
     "Playful",
-    "Adventurous",
-    "Mysterious",
-    "Emotional",
+    "Warm",
+    "Loving",
+    "Proud",
+    "Successful",
+    "Inspired",
+    "Fierce",
+    "Competitive",
+    "Brave",
+    "Strict",
+    "Touching",
+    "Healing",
+    "Lonely",
+    "Longing",
+    "Serious",
+    "Sensitive",
     "Calm",
-    "Humorous",
-    "Dramatic",
-    "Inspirational",
+    "Peaceful",
+    "Thoughtful",
+    "Curious",
+    "Adventurous",
+    "Righteous",
 ]
 STORY_CATEGORIES = [
-    "Classic",
+    "Classics",
     "Emotion",
-    "Growth & Self",
+    "Growth",
+    "Self",
     "Family",
-    "Friends & School",
-    "Hobbies & Sports",
-    "Career & Dreams",
-    "History & Heroes",
+    "Friends",
+    "School",
+    "Hobbies",
+    "Sports",
+    "Dreams",
+    "History",
+    "Heroes",
     "World",
-    "Nature & Animals",
-    "Body",
-    "Science & Space",
+    "Nature",
+    "Animals",
+    "Science",
+    "Space",
     "Technology",
-    "Arts & Music",
+    "Arts",
+    "Music",
+    "Fantasy",
+    "Body",
 ]
 PREFERRED_MODELS = [
     "gemini-3.5-flash",
@@ -168,6 +193,19 @@ def normalize_level(raw: Any) -> str:
     return value
 
 
+def get_platform_level(row: pd.Series) -> str:
+    for column in (PLATFORM_LEVEL_COLUMN, LEGACY_LEVEL_COLUMN):
+        if column in row:
+            value = str(row.get(column, "")).strip()
+            if value:
+                return value
+    return ""
+
+
+def get_rewrite_level(row: pd.Series) -> str:
+    return normalize_level(get_platform_level(row))
+
+
 def adjacent_level(level: str, delta: int) -> str:
     normalized = normalize_level(level)
     if normalized not in CEFR_ORDER:
@@ -213,7 +251,7 @@ def create_template_workbook() -> bytes:
         [
             "OG0001",
             "Sample Title",
-            "A2",
+            "2",
             "#SC01\nA small turtle finds a shiny seed.\n#SC02\nThe seed begins to glow.",
         ]
     )
@@ -238,12 +276,18 @@ def create_template_workbook() -> bytes:
 
 def read_story_input(uploaded_file) -> pd.DataFrame:
     if uploaded_file.name.lower().endswith(".csv"):
-        return pd.read_csv(uploaded_file, dtype=str).fillna("")
-    return pd.read_excel(uploaded_file, dtype=str).fillna("")
+        df = pd.read_csv(uploaded_file, dtype=str).fillna("")
+    else:
+        df = pd.read_excel(uploaded_file, dtype=str).fillna("")
+    if PLATFORM_LEVEL_COLUMN not in df.columns and LEGACY_LEVEL_COLUMN in df.columns:
+        df[PLATFORM_LEVEL_COLUMN] = df[LEGACY_LEVEL_COLUMN]
+    return df
 
 
 def validate_story_df(df: pd.DataFrame) -> list[str]:
-    missing = [col for col in INPUT_COLUMNS if col not in df.columns]
+    missing = [col for col in REQUIRED_STORY_COLUMNS if col not in df.columns]
+    if PLATFORM_LEVEL_COLUMN not in df.columns and LEGACY_LEVEL_COLUMN not in df.columns:
+        missing.append(PLATFORM_LEVEL_COLUMN)
     if missing:
         return [f"필수 컬럼 없음: {', '.join(missing)}"]
     errors: list[str] = []
@@ -252,8 +296,10 @@ def validate_story_df(df: pd.DataFrame) -> list[str]:
         title = str(row.get("Title", "")).strip()
         if not str(row.get("Base Text", "")).strip():
             errors.append(f"{sid} / {title}: Base Text가 비어 있음")
-        if normalize_level(row.get("Level", "")) not in CEFR_ORDER:
-            errors.append(f"{sid} / {title}: Level은 1-4 또는 Pre A1/A1/A2/B1/B2/C1/C2 중 하나여야 함")
+        if get_rewrite_level(row) not in CEFR_ORDER:
+            errors.append(
+                f"{sid} / {title}: Platform Level은 1-4 또는 기존 호환용 Pre A1/A1/A2/B1/B2/C1/C2 중 하나여야 함"
+            )
     return errors
 
 
@@ -282,16 +328,13 @@ Required JSON keys:
   "detected_level_rationale": "1-2 concise sentences with textual evidence",
   "lexile": "estimated Lexile as a number with L, e.g. 520L",
   "lexile_rationale": "1 concise sentence based on sentence length and vocabulary difficulty",
-  "category": "one category exactly from the list",
-  "book_mood": "one mood exactly from the list",
-  "book_info": "1-2 short declarative summary sentences for young learners, no spoilers, end with a period",
+  "category": "exactly 3 categories from the list, comma-separated, best match first",
+  "book_mood": "exactly 3 moods from the list, comma-separated, best match first",
+  "book_info": "Korean pre-reading story introduction, 1-3 very short sentences, 35 words maximum",
   "keywords": ["6-12 lowercase content words, no proper nouns"],
-  "intro": "4-6 sentence spoken intro script in the main character's voice",
+  "intro": "Korean spoken intro script for elementary/middle school video, preferably in the main character's voice, very easy, 35 words maximum",
   "easy_version": "rewritten story preserving every #SC marker",
-  "difficult_version": "rewritten story preserving every #SC marker",
-  "learning_focus_1": "Type/Focus/Items/Prompt 1-3 block",
-  "learning_focus_2": "Type/Focus/Items/Prompt 1-3 block",
-  "learning_focus_3": "Type/Focus/Items/Prompt 1-3 block"
+  "difficult_version": "rewritten story preserving every #SC marker"
 }}
 
 Story ID: {story_id}
@@ -309,6 +352,12 @@ Important separation of level logic:
 - Preserve all #SC markers exactly. Do not remove, merge, or invent scenes.
 - Easy version should be clearly simpler than the input production level.
 - Difficult version should be richer than the input production level but keep the same plot.
+- The category field must contain exactly 3 items from Category choices, ordered by relevance.
+- The book_mood field must contain exactly 3 items from Book mood choices, ordered by relevance.
+- Write book_info and intro in Korean for Korean elementary/middle school learners.
+- book_info is not a full spoiler summary. It should introduce the setup before reading, using simple words and only story events or characters that appear in the Base Story.
+- intro is for video narration, so keep it shorter and easier than ordinary reading text.
+- Keep both book_info and intro within 35 words each.
 
 Category choices:
 {categories}
@@ -332,7 +381,7 @@ def call_story_info(
     story_id = str(row["ID"]).strip()
     title = str(row["Title"]).strip()
     base_story = str(row["Base Text"]).strip()
-    input_level = normalize_level(row.get("Level", ""))
+    input_level = get_rewrite_level(row)
     word_count = count_story_words(base_story)
     scene_count = count_story_scenes(base_story)
     prompt = build_story_prompt(
@@ -374,9 +423,32 @@ def call_story_info(
     return None
 
 
+def normalize_ordered_choices(raw: Any, valid_choices: list[str], limit: int = 3) -> str:
+    if isinstance(raw, list):
+        candidates = [str(item).strip() for item in raw]
+    else:
+        candidates = [
+            item.strip()
+            for item in re.split(r"[,/|;\n]", str(raw or ""))
+            if item.strip()
+        ]
+
+    canonical = {choice.lower(): choice for choice in valid_choices}
+    selected: list[str] = []
+    for candidate in candidates:
+        normalized = re.sub(r"\s+", " ", candidate).strip()
+        choice = canonical.get(normalized.lower())
+        if choice and choice not in selected:
+            selected.append(choice)
+        if len(selected) >= limit:
+            break
+    return ", ".join(selected)
+
+
 def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, Any]:
     base_story = str(row["Base Text"]).strip()
-    input_level = normalize_level(row.get("Level", ""))
+    platform_level = get_platform_level(row)
+    input_level = normalize_level(platform_level)
     keywords = parsed.get("keywords", [])
     if isinstance(keywords, str):
         keywords = [item.strip() for item in keywords.split(",") if item.strip()]
@@ -387,17 +459,13 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
     if detected_level not in CEFR_ORDER:
         detected_level = ""
 
-    mood = str(parsed.get("book_mood", "")).strip()
-    if mood not in BOOK_MOODS:
-        mood = mood.title() if mood else ""
-
-    category = str(parsed.get("category", "")).strip()
-    if category not in STORY_CATEGORIES:
-        category = ""
+    mood = normalize_ordered_choices(parsed.get("book_mood", ""), BOOK_MOODS)
+    category = normalize_ordered_choices(parsed.get("category", ""), STORY_CATEGORIES)
 
     return {
         "id": str(row["ID"]).strip(),
         "title": str(row["Title"]).strip(),
+        "platform_level": platform_level,
         "input_level": input_level,
         "base_text": base_story,
         "detected_level": detected_level,
@@ -413,9 +481,6 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
         "intro": str(parsed.get("intro", "")).strip(),
         "easy_version": str(parsed.get("easy_version", "")).strip(),
         "difficult_version": str(parsed.get("difficult_version", "")).strip(),
-        "learning_focus_1": str(parsed.get("learning_focus_1", "")).strip(),
-        "learning_focus_2": str(parsed.get("learning_focus_2", "")).strip(),
-        "learning_focus_3": str(parsed.get("learning_focus_3", "")).strip(),
     }
 
 
@@ -488,15 +553,26 @@ def write_table_sheet(
         cell.border = border
         ws.column_dimensions[get_column_letter(col_idx)].width = widths[col_idx - 1]
     fills = [PatternFill("solid", start_color="FFFFFF"), PatternFill("solid", start_color="F7F9FC")]
+    centered_headers = {
+        "ID",
+        "Platform Level",
+        "Input Level",
+        "Detected CEFR",
+        "CEFR",
+        "Lexile",
+        "Word Count",
+        "Scene Count",
+    }
     for row_idx, values in enumerate(rows, 2):
         fill = fills[row_idx % 2]
         for col_idx, value in enumerate(values, 1):
+            header = headers[col_idx - 1]
             cell = ws.cell(row_idx, col_idx, "" if pd.isna(value) else value)
             cell.fill = fill
             cell.font = Font(name="Arial", size=10)
             cell.border = border
             cell.alignment = Alignment(
-                horizontal="center" if col_idx in {1, 3, 5, 7, 8, 9} else "left",
+                horizontal="center" if header in centered_headers else "left",
                 vertical="top",
                 wrap_text=True,
             )
@@ -534,7 +610,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
     story_headers = [
         "ID",
         "Title",
-        "Input Level",
+        "Platform Level",
         "Base Text",
         "Detected CEFR",
         "CEFR Rationale",
@@ -549,9 +625,6 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Intro Script",
         "Easy Version",
         "Difficult Version",
-        "Learning Focus 1",
-        "Learning Focus 2",
-        "Learning Focus 3",
     ]
     story_rows: list[list[Any]] = []
     for _, row in source_df.iterrows():
@@ -561,7 +634,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
             [
                 sid,
                 row["Title"],
-                story.get("input_level", row.get("Level", "")),
+                story.get("platform_level", get_platform_level(row)),
                 story.get("base_text", row.get("Base Text", "")),
                 story.get("detected_level", ""),
                 story.get("detected_level_rationale", ""),
@@ -576,9 +649,6 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
                 story.get("intro", ""),
                 story.get("easy_version", ""),
                 story.get("difficult_version", ""),
-                story.get("learning_focus_1", ""),
-                story.get("learning_focus_2", ""),
-                story.get("learning_focus_3", ""),
             ]
         )
 
@@ -587,7 +657,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Story_Info",
         story_headers,
         story_rows,
-        [12, 26, 13, 58, 13, 42, 12, 42, 12, 12, 18, 16, 46, 36, 48, 58, 58, 42, 42, 42],
+        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 80, 80],
         "385723",
     )
 
@@ -597,7 +667,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Vocab_Input",
         list(vocab_df.columns),
         vocab_df.fillna("").values.tolist(),
-        [12, 28, 58, 58, 58, 14, 42, 12, 42],
+        [12, 30, 80, 80, 80, 14, 42, 12, 42],
         "1F3864",
     )
 
@@ -777,33 +847,87 @@ def model_settings(prefix: str, api_key: str) -> str:
 
 
 def guide_tab():
-    st.subheader("2단계 작업 흐름")
+    st.subheader("작업 흐름")
     st.markdown(
         """
-        **1단계 Story Info**
+        **1단계 | Story Info**
 
-        `ID`, `Title`, `Level`, `Base Text`만 입력합니다. 이 단계에서 추정 CEFR, Lexile, 단어 수, 장면 수, 카테고리, 북 무드, 요약, 인트로 스크립트, Easy Version, Difficult Version을 생성합니다.
+        `ID`, `Title`, `Platform Level`, `Base Text`만 입력합니다.
 
-        **2단계 Vocab & Click Words**
+        - 중점: Base Text만으로 Story Info를 먼저 생성합니다.
+        - 생성: 추정 CEFR, Lexile, 단어 수, 장면 수
+        - 생성: Category, Book Mood, Summary, Intro Script
+        - 생성: Easy Version, Difficult Version
 
-        `Normal Ver.`, `Easy Ver.`, `Difficult Ver.`가 모두 준비된 파일을 입력합니다. 1단계 결과 엑셀의 `Vocab_Input` 시트를 그대로 사용해도 되고, 기존 Vocab 앱 템플릿 형식의 파일을 업로드해도 됩니다.
+        **2단계 | Vocab & Click Words**
 
-        `Level`은 1단계의 Easy/Difficult 생성 기준이고, Vocab 필터링 기준은 API가 추정한 `Detected CEFR`입니다.
+        `Normal Ver.`, `Easy Ver.`, `Difficult Ver.`가 모두 준비된 파일을 입력합니다.
+
+        - 중점: 세 수준의 텍스트에서 각각 클릭 단어를 추출합니다.
+        - 기준: 1단계에서 API가 추정한 `Detected CEFR`와 LCMS CEFR DB를 우선 적용합니다.
+        - 보완: 레벨은 낮아도 주제 배경지식이 필요하거나 스토리 핵심 어휘인 단어를 API 판단으로 추가합니다.
+        - 입력: 1단계 결과 엑셀의 `Vocab_Input` 시트 또는 기존 Vocab 템플릿 형식 파일을 사용할 수 있습니다.
+
+        `Platform Level`은 Easy/Difficult 생성 기준이고, Vocab 필터링 기준은 별도로 추정한 `Detected CEFR`입니다.
         """
     )
+    st.markdown("**클릭 단어 추출 기준**")
+    click_rules = pd.DataFrame(
+        [
+            {
+                "분류": "레벨 초과 어휘",
+                "설명": "EVP/LCMS 기준에서 텍스트 CEFR 밴드보다 같거나 높게 분류된 어휘",
+                "예시": "A2 텍스트의 age(A2), blossomed(B2)는 허용 / all(A1)은 불가",
+            },
+            {
+                "분류": "콘텐츠 특화 어휘",
+                "설명": "레벨은 낮아도 해당 주제 배경지식 없으면 모르거나 해당 스토리의 핵심 어휘",
+                "예시": "pea-shooter, pod, moss",
+            },
+            {
+                "분류": "의미 확장 어휘",
+                "설명": "문자적 의미만으로 파악하기 어려운 비유, 관용 표현, 뜻이 다양하게 쓰이는 동사",
+                "예시": "have, take",
+            },
+            {
+                "분류": "제외 대상",
+                "설명": "고유명사, 맥락만으로 100% 추론 가능한 어휘",
+                "예시": "Hans, Christmas Eve",
+            },
+        ]
+    )
+    st.dataframe(click_rules, use_container_width=True, hide_index=True)
     st.divider()
     st.subheader("LCMS CEFR 단어 리스트")
     if not CEFR_PATH.exists():
         st.warning("lcms_cefr.csv 파일을 찾을 수 없습니다.")
         return
     cefr_df = load_cefr_wordlist(str(CEFR_PATH), CEFR_PATH.stat().st_mtime)
-    cols = st.columns(3)
-    cols[0].metric("전체 단어", f"{len(cefr_df):,}")
-    cols[1].metric("CEFR 단계", f"{cefr_df['cefr_level'].nunique() if 'cefr_level' in cefr_df else 0}")
-    cols[2].metric("출처", "LCMS_0727 단어메타")
+    search_col, meta_col = st.columns([2, 3])
+    with search_col:
+        search_word = st.text_input("단어 검색", placeholder="예: false", key="cefr_word_search")
+    with meta_col:
+        st.markdown(
+            (
+                "<div style='text-align:right; color:#5f6368; font-size:0.85rem; padding-top:2rem;'>"
+                f"전체 단어 {len(cefr_df):,} · "
+                f"CEFR 단계 {cefr_df['cefr_level'].nunique() if 'cefr_level' in cefr_df else 0} · "
+                "출처 LCMS_0727 단어메타"
+                "</div>"
+            ),
+            unsafe_allow_html=True,
+        )
     display_columns = [col for col in ["word", "cefr_level", "source", "pos", "category"] if col in cefr_df.columns]
+    display_df = cefr_df
+    query = search_word.strip().lower()
+    if query and "word" in cefr_df.columns:
+        word_series = cefr_df["word"].astype(str).str.lower()
+        exact_mask = word_series == query
+        contains_mask = word_series.str.contains(query, regex=False, na=False)
+        display_df = pd.concat([cefr_df[exact_mask], cefr_df[contains_mask & ~exact_mask]])
+        st.caption(f"검색 결과 {len(display_df):,}개")
     st.dataframe(
-        cefr_df[display_columns].rename(
+        display_df[display_columns].rename(
             columns={
                 "word": "단어",
                 "cefr_level": "CEFR",
@@ -820,7 +944,7 @@ def guide_tab():
 
 def story_info_tab():
     st.subheader("1단계. Story Info 생성")
-    st.caption("입력: ID / Title / Level / Base Text")
+    st.caption("입력: ID / Title / Platform Level / Base Text")
     st.download_button(
         "Story_Confirmed_Template.xlsx 다운로드",
         create_template_workbook(),
@@ -845,6 +969,17 @@ def story_info_tab():
         accept_multiple_files=False,
         key="story_info_checkpoint_upload",
     )
+    with st.expander("checkpoint JSON은 무엇인가요?"):
+        st.markdown(
+            """
+            긴 파일을 처리하다가 중간에 멈추거나 일부 행만 실패했을 때 이어서 작업하기 위한 임시 저장 파일입니다.
+
+            - 입력: 이전에 다운로드한 checkpoint JSON을 올리면 이미 완료된 ID는 다시 처리하지 않습니다.
+            - 출력: 이번 실행에서 성공한 Story Info 결과를 JSON으로 저장합니다.
+            - 용도: API 오류, 쿼터 제한, 브라우저 새로고침이 있어도 완료된 결과를 재사용합니다.
+            - 엑셀 최종 결과만 필요하다면 사용하지 않아도 됩니다.
+            """
+        )
 
     try:
         story_df = read_story_input(uploaded_story)
