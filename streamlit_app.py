@@ -14,11 +14,20 @@ from openpyxl.utils import get_column_letter
 
 APP_DIR = Path(__file__).resolve().parent
 ANALYZER_PATH = APP_DIR / "03_vocab&click.py"
-CEFR_PATH = APP_DIR / "merged_cefr.csv"
+CEFR_PATH = APP_DIR / "lcms_cefr.csv"
 
 REQUIRED_COLUMNS = ["ID", "Title", "Normal Ver.", "Easy Ver.", "Difficult Ver."]
 VOCAB_KEYS = ["vocab", "normal_vocab", "easy_vocab", "difficult_vocab"]
 CEFR_ORDER = ["Pre A1", "A1", "A2", "B1", "B2", "C1", "C2"]
+PREFERRED_MODELS = [
+    "gemini-3.5-flash",
+    "gemini-3.1-flash-lite",
+    "gemini-flash-latest",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+]
+DEFAULT_MODEL = PREFERRED_MODELS[0]
+MODEL_SESSION_KEY = "gemini_available_models"
 
 
 st.set_page_config(
@@ -206,6 +215,21 @@ def describe_gemini_error(message: str) -> str:
     if any(
         keyword in lower
         for keyword in [
+            "not_found",
+            "not found",
+            "model not",
+            "404",
+            "not supported for generatecontent",
+            "not supported for generate_content",
+        ]
+    ):
+        return (
+            "선택한 Gemini 모델을 이 API 키에서 사용할 수 없거나 모델명이 현재 API와 맞지 않을 가능성이 큽니다. "
+            "고급 설정의 'API 키로 사용 가능한 모델 확인'을 눌러 목록에서 선택해 보세요."
+        )
+    if any(
+        keyword in lower
+        for keyword in [
             "resource_exhausted",
             "quota",
             "rate limit",
@@ -228,6 +252,62 @@ def describe_gemini_error(message: str) -> str:
     ):
         return "Gemini API 키가 잘못되었거나 해당 키의 권한이 부족할 가능성이 큽니다."
     return "Gemini API 호출 중 오류가 발생했습니다. 아래 원문 메시지를 확인해 주세요."
+
+
+def normalize_model_name(model_name: str) -> str:
+    normalized = model_name.strip()
+    if normalized.startswith("models/"):
+        normalized = normalized.removeprefix("models/")
+    return normalized
+
+
+def sort_model_names(models: list[str]) -> list[str]:
+    preferred_order = {model: idx for idx, model in enumerate(PREFERRED_MODELS)}
+    normalized_models = []
+    for model in models:
+        normalized = normalize_model_name(model)
+        if normalized and normalized not in normalized_models:
+            normalized_models.append(normalized)
+    return sorted(
+        normalized_models,
+        key=lambda model: (preferred_order.get(model, len(PREFERRED_MODELS)), model),
+    )
+
+
+def list_available_text_models(analyzer, api_key: str) -> list[str]:
+    client = analyzer.genai.Client(api_key=api_key.strip())
+    models = []
+    excluded_fragments = [
+        "aqa",
+        "audio",
+        "embedding",
+        "imagen",
+        "live",
+        "tts",
+        "veo",
+    ]
+
+    for model in client.models.list():
+        name = normalize_model_name(getattr(model, "name", ""))
+        if not name or "gemini" not in name.lower():
+            continue
+
+        lower_name = name.lower()
+        if any(fragment in lower_name for fragment in excluded_fragments):
+            continue
+
+        supported_actions = getattr(model, "supported_actions", None)
+        if supported_actions is None:
+            supported_actions = getattr(model, "supported_generation_methods", [])
+        if supported_actions and not any(
+            str(action).lower() in {"generatecontent", "generate_content"}
+            for action in supported_actions
+        ):
+            continue
+
+        models.append(name)
+
+    return sort_model_names(models)
 
 
 def guide_tab():
@@ -424,7 +504,46 @@ def extraction_tab():
         placeholder="분석 실행 시에만 사용됩니다. 앱에 저장되지 않습니다.",
     )
     with st.expander("고급 설정"):
-        model_name = st.text_input("모델", value="gemini-2.5-flash")
+        st.caption(
+            "기본 추천 모델은 gemini-3.5-flash입니다. 오류가 계속되면 API 키로 사용 가능한 모델을 먼저 확인하세요."
+        )
+        check_models_clicked = st.button(
+            "API 키로 사용 가능한 모델 확인",
+            disabled=not api_key.strip(),
+            use_container_width=True,
+        )
+        if check_models_clicked:
+            try:
+                available_models = list_available_text_models(analyzer, api_key)
+            except Exception as exc:
+                error_message = f"{type(exc).__name__}: {exc}"
+                st.error(describe_gemini_error(error_message))
+                with st.expander("모델 확인 오류 원문"):
+                    st.code(error_message, language="text")
+            else:
+                if available_models:
+                    st.session_state[MODEL_SESSION_KEY] = available_models
+                    st.success(f"사용 가능한 Gemini 텍스트 모델 {len(available_models):,}개를 확인했습니다.")
+                else:
+                    st.warning(
+                        "이 API 키에서 사용 가능한 Gemini 텍스트 모델을 찾지 못했습니다. "
+                        "키 권한, 프로젝트 설정, 결제 또는 사용량 제한을 확인해 주세요."
+                    )
+
+        model_options = st.session_state.get(MODEL_SESSION_KEY) or PREFERRED_MODELS
+        default_index = model_options.index(DEFAULT_MODEL) if DEFAULT_MODEL in model_options else 0
+        selected_model = st.selectbox(
+            "모델",
+            options=model_options,
+            index=default_index,
+        )
+        custom_model = st.text_input(
+            "직접 입력할 모델명",
+            placeholder="예: gemini-3.5-flash",
+            help="비워두면 위에서 선택한 모델을 사용합니다.",
+        )
+        model_name = normalize_model_name(custom_model) or selected_model
+        st.caption(f"현재 실행 모델: {model_name}")
 
     st.caption(
         f"checkpoint 재사용 가능 항목: {len(completed_ids):,}개 / 현재 선택: {len(selected_df):,}개"
@@ -439,6 +558,9 @@ def extraction_tab():
     if run_clicked:
         if not api_key.strip():
             st.error("Gemini API Key가 필요합니다.")
+            return
+        if not model_name.strip():
+            st.error("Gemini 모델명이 필요합니다.")
             return
 
         try:

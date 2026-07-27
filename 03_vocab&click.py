@@ -22,6 +22,8 @@ def pause_and_exit(code: int = 1):
 import json
 import time
 import re
+import csv
+from itertools import product
 try:
     import pandas as pd
 except ImportError:
@@ -55,6 +57,74 @@ except ImportError:
 INPUT_FILE      = "Story_Confirmed.xlsx"
 OUTPUT_FILE     = "Story_Analysis.xlsx"
 CHECKPOINT_FILE = "analysis_checkpoint.json"
+CEFR_DB_FILE    = "lcms_cefr.csv"
+
+CEFR_ORDER = ["Pre A1", "A1", "A2", "B1", "B2", "C1", "C2"]
+CEFR_RANK = {level: idx for idx, level in enumerate(CEFR_ORDER)}
+TOKEN_PATTERN = re.compile(r"[a-z]+(?:[-'][a-z]+)?")
+MAX_PHRASE_WORDS = 4
+EXCLUDED_DB_CATEGORIES = {"grammar & function words"}
+EXCLUDED_DB_POS = {"article", "conjunction", "determiner", "preposition", "pronoun"}
+PHRASAL_PARTICLES = {
+    "around",
+    "away",
+    "back",
+    "down",
+    "into",
+    "off",
+    "out",
+    "over",
+    "through",
+    "up",
+}
+
+IRREGULAR_LEMMAS = {
+    "ate": "eat",
+    "began": "begin",
+    "blew": "blow",
+    "brought": "bring",
+    "built": "build",
+    "came": "come",
+    "caught": "catch",
+    "chose": "choose",
+    "did": "do",
+    "dug": "dig",
+    "fell": "fall",
+    "felt": "feel",
+    "flew": "fly",
+    "found": "find",
+    "gave": "give",
+    "gone": "go",
+    "grew": "grow",
+    "held": "hold",
+    "hid": "hide",
+    "kept": "keep",
+    "knew": "know",
+    "laid": "lay",
+    "left": "leave",
+    "lost": "lose",
+    "made": "make",
+    "met": "meet",
+    "put": "put",
+    "ran": "run",
+    "said": "say",
+    "sang": "sing",
+    "sat": "sit",
+    "saw": "see",
+    "sent": "send",
+    "slept": "sleep",
+    "spoke": "speak",
+    "stood": "stand",
+    "swam": "swim",
+    "took": "take",
+    "told": "tell",
+    "went": "go",
+    "woke": "wake",
+    "worn": "wear",
+    "wrote": "write",
+}
+
+CEFR_INDEX_CACHE = None
 
 # 모델 선택 우선순위 키워드 (이름에 포함된 순서대로 선호)
 PREFERRED_KEYWORDS = ["flash", "pro"]
@@ -240,6 +310,231 @@ def clean_text(raw) -> str:
     if pd.isna(raw):
         return ""
     return re.sub(r"#SC\d+\s*\n?", "", str(raw)).strip()
+
+
+def normalize_vocab_item(value) -> str:
+    text = "" if value is None else str(value)
+    text = text.lower()
+    text = text.replace("’", "'").replace("‘", "'")
+    text = text.replace("“", '"').replace("”", '"')
+    text = text.replace("–", "-").replace("—", "-")
+    text = re.sub(r"\s+", " ", text)
+    return text.strip(" \t\r\n\"'.,!?;:()[]{}")
+
+
+def level_rank(level: str) -> int:
+    return CEFR_RANK.get(str(level).strip(), -1)
+
+
+def lemma_candidates(token: str) -> list[str]:
+    token = normalize_vocab_item(token)
+    if len(token) < 2:
+        return []
+    candidates = []
+
+    def add(value: str):
+        value = normalize_vocab_item(value)
+        if value and value not in candidates:
+            candidates.append(value)
+
+    add(token)
+    add(IRREGULAR_LEMMAS.get(token, ""))
+
+    if token.endswith("'s"):
+        add(token[:-2])
+    if token.endswith("ies") and len(token) > 4:
+        add(token[:-3] + "y")
+    if token.endswith("ves") and len(token) > 4:
+        add(token[:-3] + "f")
+        add(token[:-3] + "fe")
+    if token.endswith("es") and len(token) > 3:
+        add(token[:-2])
+        add(token[:-1])
+    if token.endswith("s") and len(token) > 3 and not token.endswith("ss"):
+        add(token[:-1])
+    if token.endswith("ing") and len(token) > 5:
+        base = token[:-3]
+        add(base)
+        add(base + "e")
+        if len(base) > 2 and base[-1] == base[-2]:
+            add(base[:-1])
+    if token.endswith("ed") and len(token) > 4:
+        base = token[:-2]
+        add(base)
+        add(base + "e")
+        if len(base) > 2 and base[-1] == base[-2]:
+            add(base[:-1])
+
+    return candidates
+
+
+def load_cefr_index():
+    global CEFR_INDEX_CACHE
+    if CEFR_INDEX_CACHE is not None:
+        return CEFR_INDEX_CACHE
+
+    path = BASE_DIR / CEFR_DB_FILE
+    entries: dict[str, dict] = {}
+    form_to_word: dict[str, str] = {}
+
+    if not path.exists():
+        CEFR_INDEX_CACHE = entries, form_to_word
+        return CEFR_INDEX_CACHE
+
+    with open(path, "r", encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            word = normalize_vocab_item(row.get("word"))
+            level = str(row.get("cefr_level", "")).strip()
+            category = str(row.get("category", "")).strip().lower()
+            pos = str(row.get("pos", "")).strip().lower()
+            if category in EXCLUDED_DB_CATEGORIES or pos in EXCLUDED_DB_POS:
+                continue
+            if not word or level_rank(level) < 0:
+                continue
+
+            entry = entries.setdefault(
+                word,
+                {
+                    "level": level,
+                    "forms": set(),
+                },
+            )
+            if level_rank(level) < level_rank(entry["level"]):
+                entry["level"] = level
+
+            entry["forms"].add(word)
+            for form in re.split(r"[,;]", str(row.get("forms", ""))):
+                normalized_form = normalize_vocab_item(form)
+                if normalized_form:
+                    entry["forms"].add(normalized_form)
+
+    for word, entry in entries.items():
+        for form in entry["forms"]:
+            previous = form_to_word.get(form)
+            if previous is None or level_rank(entry["level"]) < level_rank(entries[previous]["level"]):
+                form_to_word[form] = word
+
+    CEFR_INDEX_CACHE = entries, form_to_word
+    return CEFR_INDEX_CACHE
+
+
+def token_candidates(tokens: list[str], start: int, length: int) -> set[str]:
+    chunks = [lemma_candidates(token)[:4] for token in tokens[start:start + length]]
+    return {" ".join(parts) for parts in product(*chunks)}
+
+
+def build_text_candidate_set(text: str) -> set[str]:
+    normalized = normalize_vocab_item(clean_text(text))
+    tokens = TOKEN_PATTERN.findall(normalized)
+    candidates = set()
+
+    for idx, token in enumerate(tokens):
+        candidates.update(lemma_candidates(token))
+        for length in range(2, MAX_PHRASE_WORDS + 1):
+            if idx + length <= len(tokens):
+                candidates.update(token_candidates(tokens, idx, length))
+
+    return candidates
+
+
+def extract_cefr_vocab(text: str, cefr_level: str) -> list[str]:
+    entries, form_to_word = load_cefr_index()
+    threshold = level_rank(cefr_level)
+    if threshold < 0:
+        return []
+
+    normalized = normalize_vocab_item(clean_text(text))
+    tokens = TOKEN_PATTERN.findall(normalized)
+    found = []
+    seen = set()
+
+    def add_if_match(candidate: str):
+        word = form_to_word.get(candidate)
+        if not word or word in seen:
+            return
+        entry = entries.get(word)
+        if entry and level_rank(entry["level"]) >= threshold:
+            seen.add(word)
+            found.append(word)
+
+    for idx, token in enumerate(tokens):
+        for length in range(MAX_PHRASE_WORDS, 1, -1):
+            if idx + length <= len(tokens):
+                for candidate in token_candidates(tokens, idx, length):
+                    add_if_match(candidate)
+        if idx + 1 < len(tokens) and tokens[idx + 1] in PHRASAL_PARTICLES:
+            continue
+        for candidate in lemma_candidates(token):
+            add_if_match(candidate)
+
+    return found
+
+
+def vocab_items_to_list(vocab) -> list[str]:
+    if not vocab:
+        return []
+    result = []
+    for item in vocab:
+        if isinstance(item, str):
+            word = normalize_vocab_item(item)
+        elif isinstance(item, dict):
+            word = normalize_vocab_item(item.get("word", ""))
+        else:
+            word = ""
+        if word and word not in result:
+            result.append(word)
+    return result
+
+
+def merge_vocab_lists(*lists, text_candidates: set[str] | None = None) -> list[str]:
+    merged = []
+    seen = set()
+    for vocab in lists:
+        for word in vocab_items_to_list(vocab):
+            if text_candidates is not None and word not in text_candidates:
+                continue
+            if word not in seen:
+                seen.add(word)
+                merged.append(word)
+    return merged
+
+
+def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) -> dict:
+    cefr_level = str(result.get("cefr", "")).strip()
+    if level_rank(cefr_level) < 0:
+        return result
+
+    normal_candidates = build_text_candidate_set(normal)
+    easy_candidates = build_text_candidate_set(easy)
+    difficult_candidates = build_text_candidate_set(difficult)
+
+    normal_vocab = merge_vocab_lists(
+        extract_cefr_vocab(normal, cefr_level),
+        result.get("normal_vocab", []),
+        text_candidates=normal_candidates,
+    )
+    easy_vocab = merge_vocab_lists(
+        extract_cefr_vocab(easy, cefr_level),
+        result.get("easy_vocab", []),
+        text_candidates=easy_candidates,
+    )
+    difficult_vocab = merge_vocab_lists(
+        extract_cefr_vocab(difficult, cefr_level),
+        result.get("difficult_vocab", []),
+        text_candidates=difficult_candidates,
+    )
+
+    result["normal_vocab"] = normal_vocab
+    result["easy_vocab"] = easy_vocab
+    result["difficult_vocab"] = difficult_vocab
+
+    normal_set = set(normal_vocab)
+    api_click_words = [
+        word for word in vocab_items_to_list(result.get("vocab", []))
+        if word in normal_set or word in normal_candidates
+    ]
+    result["vocab"] = merge_vocab_lists(api_click_words)
+    return result
 
 
 def build_prompt(title: str, normal: str, easy: str, difficult: str) -> str:
@@ -439,6 +734,7 @@ def analyze(client, model_name: str, row: pd.Series) -> dict | None:
     prompt    = build_prompt(str(row["Title"]), normal, easy, difficult)
     result    = call_gemini(client, model_name, prompt)
     if result:
+        result = apply_db_vocab_filter(result, normal, easy, difficult)
         result["id"]    = row["ID"]
         result["title"] = str(row["Title"])
     return result

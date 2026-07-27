@@ -6,7 +6,7 @@
 
 - `streamlit_app.py`: 가이드와 어휘 추출 UI
 - `03_vocab&click.py`: 기존 CLI 분석 로직
-- `merged_cefr.csv`: 병합된 CEFR 단어 데이터베이스
+- `lcms_cefr.csv`: LCMS `0727 단어메타` 기준 CEFR 단어 데이터베이스
 - `scripts/build_cefr_database.py`: 로컬 PDF 기준 CEFR 데이터베이스 재생성 스크립트
 - `requirements.txt`: Streamlit 배포/실행 의존성
 
@@ -20,25 +20,27 @@ cd "C:\Users\IM_1500\Desktop\스토리 텍스트\02_Vocab"
 
 ## CEFR 데이터베이스
 
-`merged_cefr.csv`는 다음 PDF를 순서대로 읽어 만듭니다.
+`lcms_cefr.csv`는 `LCMS 단어 업로드용.xlsx`의 `0727 단어메타` 시트에서 만듭니다.
+분석 기준으로 사용하는 핵심 컬럼은 `표제어`와 `단어 Level`이며, 매칭 보조용으로 `굴절형`, `품사`, `단어 카테고리`도 함께 저장합니다.
 
-1. `Cambridge-starters-movers-flyers-word-list-2025.pdf` -> `Cambridge_Starters`
-2. `Cambridge-b1-preliminary-vocabulary-list.pdf` -> `Cambridge_B1 Preliminary`
-3. `The_Oxford_3000_by_CEFR_level.pdf` -> `Oxford 3000`
-4. `The_Oxford_5000_by_CEFR_level.pdf` -> `Oxford 5000`
-
-동일 단어가 여러 자료에 나오면 가장 먼저 등장한 자료의 `cefr_level`과 `source`를 주 값으로 사용합니다. 이후 등장한 레벨과 출처는 `all_references`, `additional_references`, `reference_details`에 남깁니다.
-
-로컬에서 PDF를 다시 반영하려면 `02_Vocab\Reference_Vocab`에 PDF 4개를 둔 뒤 실행합니다.
-
-```powershell
-cd "C:\Users\IM_1500\Desktop\스토리 텍스트\02_Vocab\vocab_click_app"
-..\.venv_vocab_click\Scripts\python.exe .\scripts\build_cefr_database.py
-```
+분석 엔진은 Gemini가 만든 어휘 목록을 그대로 쓰지 않고, 먼저 `lcms_cefr.csv`에서 스토리 CEFR 이상 단어를 코드로 필터링한 뒤 Gemini 후보 중 본문에 실제 등장하는 핵심/배경지식 어휘를 추가합니다.
 
 ## Streamlit 배포 메모
 
 API 키는 repo나 Streamlit secrets에 저장하지 않습니다. 각 사용자가 어휘 추출을 실행할 때 앱 화면에서 직접 입력합니다. 가이드 탭과 CEFR 검색은 API 키 없이 사용할 수 있습니다.
+
+## Gemini 모델/API 진단
+
+어휘 추출 탭의 기본 추천 모델은 `gemini-3.5-flash`입니다.
+API 키를 입력한 뒤 고급 설정에서 `API 키로 사용 가능한 모델 확인`을 누르면 해당 키로 접근 가능한 Gemini 텍스트 모델 목록을 불러옵니다.
+
+오류가 계속되면 다음 순서로 확인합니다.
+
+- 모델 목록이 나오지 않으면 API 키, 프로젝트 권한, 결제 또는 사용량 제한 문제일 가능성이 큽니다.
+- 모델 목록은 나오는데 추출이 실패하면 목록에서 다른 모델을 선택하거나 오류 원문을 확인합니다.
+- 특정 모델을 직접 시험하려면 `직접 입력할 모델명`에 `gemini-3.5-flash`처럼 입력합니다.
+
+모델 목록은 Google Gemini API 문서를 기준으로 변경될 수 있습니다.
 
 ### GitHub Desktop으로 올리기
 
