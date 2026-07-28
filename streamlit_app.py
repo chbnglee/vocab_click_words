@@ -113,7 +113,7 @@ def load_vocab_analyzer():
 
 
 st.set_page_config(
-    page_title="Story Info + Vocab & Click Words",
+    page_title="Story Info.",
     page_icon="",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -330,9 +330,9 @@ Required JSON keys:
   "lexile_rationale": "1 concise sentence based on sentence length and vocabulary difficulty",
   "category": "exactly 3 categories from the list, comma-separated, best match first",
   "book_mood": "exactly 3 moods from the list, comma-separated, best match first",
-  "book_info": "Korean pre-reading story introduction, 1-3 very short sentences, 35 words maximum",
+  "book_info": "Easy English pre-reading story introduction, 1-3 very short sentences, 35 words maximum",
   "keywords": ["6-12 lowercase content words, no proper nouns"],
-  "intro": "Korean spoken intro script for elementary/middle school video, preferably in the main character's voice, very easy, 35 words maximum",
+  "intro": "Easy English spoken intro script for elementary/middle school video, preferably in the main character's voice, 35 words maximum",
   "easy_version": "rewritten story preserving every #SC marker",
   "difficult_version": "rewritten story preserving every #SC marker"
 }}
@@ -354,7 +354,7 @@ Important separation of level logic:
 - Difficult version should be richer than the input production level but keep the same plot.
 - The category field must contain exactly 3 items from Category choices, ordered by relevance.
 - The book_mood field must contain exactly 3 items from Book mood choices, ordered by relevance.
-- Write book_info and intro in Korean for Korean elementary/middle school learners.
+- Write book_info and intro in easy English for elementary/middle school learners. Do not use Korean.
 - book_info is not a full spoiler summary. It should introduce the setup before reading, using simple words and only story events or characters that appear in the Base Story.
 - intro is for video narration, so keep it shorter and easier than ordinary reading text.
 - Keep both book_info and intro within 35 words each.
@@ -854,16 +854,16 @@ def guide_tab():
 
         `ID`, `Title`, `Platform Level`, `Base Text`만 입력합니다.
 
-        - 중점: Base Text만으로 Story Info를 먼저 생성합니다.
-        - 생성: 추정 CEFR, Lexile, 단어 수, 장면 수
-        - 생성: Category, Book Mood, Summary, Intro Script
-        - 생성: Easy Version, Difficult Version
+        - Base Text만으로 Story Info를 먼저 생성합니다.
+        - 추정 CEFR, Lexile, 단어 수, 장면 수
+        - Category, Book Mood, Summary, Intro Script
+        - Easy Version, Difficult Version
 
         **2단계 | Vocab & Click Words**
 
         `Normal Ver.`, `Easy Ver.`, `Difficult Ver.`가 모두 준비된 파일을 입력합니다.
 
-        - 중점: 세 수준의 텍스트에서 각각 클릭 단어를 추출합니다.
+        - 세 수준의 텍스트에서 각각 클릭 단어를 추출합니다.
         - 기준: 1단계에서 API가 추정한 `Detected CEFR`와 LCMS CEFR DB를 우선 적용합니다.
         - 보완: 레벨은 낮아도 주제 배경지식이 필요하거나 스토리 핵심 어휘인 단어를 API 판단으로 추가합니다.
         - 입력: 1단계 결과 엑셀의 `Vocab_Input` 시트 또는 기존 Vocab 템플릿 형식 파일을 사용할 수 있습니다.
@@ -875,9 +875,9 @@ def guide_tab():
     click_rules = pd.DataFrame(
         [
             {
-                "분류": "레벨 초과 어휘",
-                "설명": "EVP/LCMS 기준에서 텍스트 CEFR 밴드보다 같거나 높게 분류된 어휘",
-                "예시": "A2 텍스트의 age(A2), blossomed(B2)는 허용 / all(A1)은 불가",
+                "분류": "기준 레벨 이상 어휘",
+                "설명": "EVP/LCMS 기준에서 텍스트 CEFR 밴드와 같거나 그보다 높게 분류된 어휘",
+                "예시": "A2 텍스트의 age (A2) - 허용\nA2 텍스트의 blossomed (B2) - 허용\nA2 텍스트의 all (A1) - 불가",
             },
             {
                 "분류": "콘텐츠 특화 어휘",
@@ -905,7 +905,7 @@ def guide_tab():
     cefr_df = load_cefr_wordlist(str(CEFR_PATH), CEFR_PATH.stat().st_mtime)
     search_col, meta_col = st.columns([2, 3])
     with search_col:
-        search_word = st.text_input("단어 검색", placeholder="예: false", key="cefr_word_search")
+        search_word = st.text_input("단어 검색", placeholder="예: apple", key="cefr_word_search")
     with meta_col:
         st.markdown(
             (
@@ -1241,7 +1241,7 @@ def vocab_tab():
             )
 
 
-st.title("Story Info + Vocab & Click Words")
+st.title("Story Info.")
 tab_guide, tab_story_info, tab_vocab = st.tabs(["가이드", "1단계 Story Info", "2단계 Vocab & Click Words"])
 
 with tab_guide:
