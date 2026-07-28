@@ -40,6 +40,8 @@ Stage 2 requires all three text versions:
 
 You can use the current Stage 1 session result directly, or upload `Story_Info_Result.xlsx` later. The app reads the `Vocab_Input` sheet when it exists.
 
+You can also start from Stage 2 only with `Vocab_Only_Template.xlsx`. In that case, the app estimates CEFR and Lexile from `Normal Ver.` before extracting Vocab & Click Words.
+
 The download file is `Vocab_Click_Words_Analysis.xlsx`.
 
 ## Level Logic

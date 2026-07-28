@@ -127,6 +127,10 @@ st.markdown(
     .block-container { padding-top: 1.4rem; }
     div[data-testid="stMetricValue"] { font-size: 1.35rem; }
     .small-note { color: #5f6368; font-size: 0.9rem; }
+    .click-rule-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+    .click-rule-table th { background: #E6EEF7; text-align: center; font-weight: 700; }
+    .click-rule-table th, .click-rule-table td { border: 1px solid #D0D7DE; padding: 0.62rem 0.7rem; vertical-align: middle; }
+    .click-rule-table td:first-child { text-align: center; font-weight: 700; white-space: nowrap; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -267,6 +271,48 @@ def create_template_workbook() -> bytes:
     for row in ws.iter_rows(min_row=2, max_row=2):
         for cell in row:
             cell.alignment = Alignment(vertical="top", wrap_text=True)
+    ws.freeze_panes = "A2"
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    return output.getvalue()
+
+
+def create_vocab_template_workbook() -> bytes:
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Vocab_Only"
+    headers = ["ID", "Title", "Normal Ver.", "Easy Ver.", "Difficult Ver."]
+    ws.append(headers)
+    ws.append(
+        [
+            "OG0001",
+            "Sample Title",
+            "#SC01\nA small turtle finds a shiny seed.",
+            "#SC01\nA turtle sees a seed.",
+            "#SC01\nA curious turtle discovers a shining seed.",
+        ]
+    )
+    widths = [14, 30, 80, 80, 80]
+    header_fill = PatternFill("solid", start_color="1F3864")
+    header_font = Font(name="Arial", bold=True, color="FFFFFF")
+    thin = Side(style="thin", color="D9D9D9")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    for col_idx, width in enumerate(widths, 1):
+        ws.column_dimensions[get_column_letter(col_idx)].width = width
+        cell = ws.cell(1, col_idx)
+        cell.fill = header_fill
+        cell.font = header_font
+        cell.border = border
+        cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    for row in ws.iter_rows(min_row=2, max_row=2):
+        for cell in row:
+            cell.border = border
+            cell.alignment = Alignment(
+                horizontal="center" if cell.column == 1 else "left",
+                vertical="top",
+                wrap_text=True,
+            )
     ws.freeze_panes = "A2"
     output = io.BytesIO()
     wb.save(output)
@@ -864,39 +910,51 @@ def guide_tab():
         `Normal Ver.`, `Easy Ver.`, `Difficult Ver.`가 모두 준비된 파일을 입력합니다.
 
         - 세 수준의 텍스트에서 각각 클릭 단어를 추출합니다.
-        - 기준: 1단계에서 API가 추정한 `Detected CEFR`와 LCMS CEFR DB를 우선 적용합니다.
-        - 보완: 레벨은 낮아도 주제 배경지식이 필요하거나 스토리 핵심 어휘인 단어를 API 판단으로 추가합니다.
-        - 입력: 1단계 결과 엑셀의 `Vocab_Input` 시트 또는 기존 Vocab 템플릿 형식 파일을 사용할 수 있습니다.
+        - 1단계 결과를 사용할 경우, `Detected CEFR`와 LCMS CEFR DB를 우선 적용합니다.
+        - 2단계만 단독 진행할 경우, Normal 텍스트 기준으로 CEFR/Lexile을 먼저 추정한 뒤 LCMS CEFR DB를 적용합니다.
+        - 레벨은 낮아도 주제 배경지식이 필요하거나 스토리 핵심 어휘인 단어를 API 판단으로 추가합니다.
+        - 1단계 결과 엑셀의 `Vocab_Input` 시트 또는 2단계 단독 템플릿 파일을 사용할 수 있습니다.
 
         `Platform Level`은 Easy/Difficult 생성 기준이고, Vocab 필터링 기준은 별도로 추정한 `Detected CEFR`입니다.
         """
     )
     st.markdown("**클릭 단어 추출 기준**")
-    click_rules = pd.DataFrame(
-        [
-            {
-                "분류": "기준 레벨 이상 어휘",
-                "설명": "EVP/LCMS 기준에서 텍스트 CEFR 밴드와 같거나 그보다 높게 분류된 어휘",
-                "예시": "A2 텍스트의 age (A2) - 허용\nA2 텍스트의 blossomed (B2) - 허용\nA2 텍스트의 all (A1) - 불가",
-            },
-            {
-                "분류": "콘텐츠 특화 어휘",
-                "설명": "레벨은 낮아도 해당 주제 배경지식 없으면 모르거나 해당 스토리의 핵심 어휘",
-                "예시": "pea-shooter, pod, moss",
-            },
-            {
-                "분류": "의미 확장 어휘",
-                "설명": "문자적 의미만으로 파악하기 어려운 비유, 관용 표현, 뜻이 다양하게 쓰이는 동사",
-                "예시": "have, take",
-            },
-            {
-                "분류": "제외 대상",
-                "설명": "고유명사, 맥락만으로 100% 추론 가능한 어휘",
-                "예시": "Hans, Christmas Eve",
-            },
-        ]
+    st.markdown(
+        """
+        <table class="click-rule-table">
+          <thead>
+            <tr>
+              <th>분류</th>
+              <th>설명</th>
+              <th>예시</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>기준 레벨 이상 어휘</td>
+              <td>EVP/LCMS 기준에서 텍스트 CEFR 밴드와 같거나 그보다 높게 분류된 어휘</td>
+              <td>A2 텍스트의 age (A2) - 허용<br>A2 텍스트의 blossomed (B2) - 허용<br>A2 텍스트의 all (A1) - 불가</td>
+            </tr>
+            <tr>
+              <td>콘텐츠 특화 어휘</td>
+              <td>레벨은 낮아도 해당 주제 배경지식 없으면 모르거나 해당 스토리의 핵심 어휘</td>
+              <td>pea-shooter, pod, moss</td>
+            </tr>
+            <tr>
+              <td>의미 확장 어휘</td>
+              <td>문자적 의미만으로 파악하기 어려운 비유, 관용 표현, 뜻이 다양하게 쓰이는 동사</td>
+              <td>have, take</td>
+            </tr>
+            <tr>
+              <td>제외 대상</td>
+              <td>고유명사, 맥락만으로 100% 추론 가능한 어휘</td>
+              <td>Hans, Christmas Eve</td>
+            </tr>
+          </tbody>
+        </table>
+        """,
+        unsafe_allow_html=True,
     )
-    st.dataframe(click_rules, use_container_width=True, hide_index=True)
     st.divider()
     st.subheader("LCMS CEFR 단어 리스트")
     if not CEFR_PATH.exists():
@@ -1110,15 +1168,25 @@ def story_info_tab():
 def vocab_tab():
     st.subheader("2단계. Vocab & Click Words 분석")
     st.caption("입력: ID / Title / Normal Ver. / Easy Ver. / Difficult Ver.")
+    st.download_button(
+        "2단계 단독 템플릿 다운로드",
+        create_vocab_template_workbook(),
+        file_name="Vocab_Only_Template.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        use_container_width=True,
+    )
+    st.caption("2단계 단독 템플릿에는 CEFR/Lexile 입력칸이 없습니다. 분석 실행 시 Normal Ver. 기준으로 CEFR/Lexile을 먼저 추정합니다.")
 
-    source_mode = "파일 업로드"
+    source_mode = "2단계 단독 파일 업로드"
     if "story_info_source_df" in st.session_state and "story_info_by_id" in st.session_state:
         source_mode = st.radio(
             "Vocab 입력 방식",
-            ["현재 세션의 1단계 결과 사용", "파일 업로드"],
+            ["현재 세션의 1단계 결과 사용", "2단계 단독 파일 업로드"],
             horizontal=True,
             key="vocab_source_mode",
         )
+    else:
+        st.info("현재 세션에 1단계 결과가 없으므로 2단계 단독 파일 업로드로 진행합니다.")
 
     vocab_df: pd.DataFrame | None = None
     if source_mode == "현재 세션의 1단계 결과 사용":
@@ -1131,11 +1199,11 @@ def vocab_tab():
             "Vocab 입력 파일 업로드",
             type=["xlsx", "csv"],
             accept_multiple_files=False,
-            help="1단계 결과 엑셀의 Vocab_Input 시트 또는 기존 Vocab 템플릿 형식을 사용할 수 있습니다.",
+            help="1단계 결과 엑셀의 Vocab_Input 시트 또는 2단계 단독 템플릿 형식을 사용할 수 있습니다.",
             key="vocab_upload",
         )
         if uploaded_vocab is None:
-            st.info("1단계에서 생성한 Story_Info_Result.xlsx 또는 Normal/Easy/Difficult가 있는 파일을 업로드해 주세요.")
+            st.info("1단계에서 생성한 Story_Info_Result.xlsx 또는 2단계 단독 템플릿 파일을 업로드해 주세요.")
             return
         try:
             vocab_df = read_vocab_input(uploaded_vocab)
@@ -1158,6 +1226,11 @@ def vocab_tab():
         st.error("Vocab 입력 파일을 먼저 수정해야 합니다.")
         st.code("\n".join(errors[:30]), language="text")
         return
+
+    if "Detected CEFR" in vocab_df.columns and vocab_df["Detected CEFR"].astype(str).str.strip().any():
+        st.caption("Detected CEFR가 있는 행은 해당 값을 우선 사용합니다.")
+    else:
+        st.caption("Detected CEFR/Lexile이 없는 입력이므로 분석 실행 시 Normal Ver. 기준으로 먼저 추정합니다.")
 
     labels = [f"{row['ID']} | {row['Title']}" for _, row in vocab_df.iterrows()]
     selected_labels = st.multiselect(
