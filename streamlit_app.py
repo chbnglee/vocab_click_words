@@ -250,9 +250,9 @@ def get_platform_max_cefr(platform_level: Any) -> str:
 
 
 @st.cache_data
-def load_platform_cefr_index(path: str, mtime: float) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
+def load_platform_cefr_index(path: str, mtime: float) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
     _ = mtime
-    entries: dict[str, dict[str, str]] = {}
+    entries: dict[str, dict[str, Any]] = {}
     form_to_word: dict[str, str] = {}
     csv_path = Path(path)
     if not csv_path.exists():
@@ -264,17 +264,68 @@ def load_platform_cefr_index(path: str, mtime: float) -> tuple[dict[str, dict[st
         level = normalize_level(row.get("cefr_level", ""))
         if not word or level not in CEFR_ORDER:
             continue
-        current = entries.get(word)
-        if current is None or CEFR_ORDER.index(level) < CEFR_ORDER.index(current["level"]):
-            entries[word] = {"level": level}
+        entry = entries.setdefault(word, {"level": level, "forms": set(), "pos": set(), "synonyms": []})
+        if CEFR_ORDER.index(level) < CEFR_ORDER.index(entry["level"]):
+            entry["level"] = level
+        pos = str(row.get("pos", "")).strip()
+        if pos:
+            entry["pos"].add(pos.lower())
+        entry["forms"].add(word)
         for form in re.split(r"[,;]", str(row.get("forms", ""))):
             normalized_form = vocab_analyzer.normalize_vocab_item(form)
             if normalized_form:
-                previous = form_to_word.get(normalized_form)
-                if previous is None or CEFR_ORDER.index(level) < CEFR_ORDER.index(entries[previous]["level"]):
-                    form_to_word[normalized_form] = word
+                entry["forms"].add(normalized_form)
+        for synonym in re.split(r"[,;]", str(row.get("synonyms", ""))):
+            normalized_synonym = vocab_analyzer.normalize_vocab_item(synonym)
+            if normalized_synonym and normalized_synonym != word and normalized_synonym not in entry["synonyms"]:
+                entry["synonyms"].append(normalized_synonym)
+
+    for word, entry in entries.items():
+        for form in entry["forms"]:
+            previous = form_to_word.get(form)
+            if previous is None or CEFR_ORDER.index(entry["level"]) < CEFR_ORDER.index(entries[previous]["level"]):
+                form_to_word[form] = word
         form_to_word.setdefault(word, word)
     return entries, form_to_word
+
+
+def platform_replacement_suggestions(
+    word: str,
+    max_rank: int,
+    entries: dict[str, dict[str, Any]],
+    form_to_word: dict[str, str],
+    max_count: int = 3,
+) -> list[tuple[str, str]]:
+    entry = entries.get(word, {})
+    synonyms = entry.get("synonyms", [])
+    suggestions: list[tuple[str, str]] = []
+    seen: set[str] = set()
+
+    def add(candidate: str, level: str):
+        candidate = vocab_analyzer.normalize_vocab_item(candidate)
+        if candidate and candidate != word and candidate not in seen:
+            seen.add(candidate)
+            suggestions.append((candidate, level))
+
+    for synonym in synonyms:
+        candidate_word = form_to_word.get(synonym)
+        candidate_entry = entries.get(candidate_word or "")
+        if not candidate_entry:
+            continue
+        candidate_rank = CEFR_ORDER.index(candidate_entry["level"])
+        if candidate_rank <= max_rank:
+            add(candidate_word or synonym, candidate_entry["level"])
+        if len(suggestions) >= max_count:
+            return suggestions
+
+    for synonym in synonyms:
+        if form_to_word.get(synonym):
+            continue
+        add(synonym, "-")
+        if len(suggestions) >= max_count:
+            return suggestions
+
+    return suggestions
 
 
 def flag_platform_cefr_words(text: str, platform_level: Any) -> str:
@@ -299,8 +350,14 @@ def flag_platform_cefr_words(text: str, platform_level: Any) -> str:
                 continue
             level = entry["level"]
             if CEFR_ORDER.index(level) > max_rank and word not in seen:
+                suggestions = platform_replacement_suggestions(word, max_rank, entries, form_to_word)
+                suggestion_text = (
+                    ", ".join(f"{suggestion} ({suggestion_level})" for suggestion, suggestion_level in suggestions)
+                    if suggestions
+                    else "no suggestion"
+                )
                 seen.add(word)
-                flagged.append(f"{word} ({level})")
+                flagged.append(f"{word} ({level}) => {suggestion_text}")
             break
 
     return "\n".join(flagged)
@@ -736,7 +793,6 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "ID",
         "Title",
         "Platform Level",
-        "Flagged Words",
         "Base Text",
         "Detected CEFR",
         "CEFR Rationale",
@@ -751,25 +807,23 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Intro Script",
         "Easy Version",
         "Difficult Version",
+        "Flagged Words",
     ]
     story_rows: list[list[Any]] = []
     for _, row in source_df.iterrows():
         sid = str(row["ID"])
         story = story_info_by_id.get(sid, {})
-        flagged_words = story.get("flagged_words")
-        if flagged_words is None:
-            flagged_words = flag_platform_cefr_words(
-                story.get("base_text", row.get("Base Text", "")),
-                story.get("platform_level", get_platform_level(row)),
-            )
-            if story:
-                story["flagged_words"] = flagged_words
+        flagged_words = flag_platform_cefr_words(
+            story.get("base_text", row.get("Base Text", "")),
+            story.get("platform_level", get_platform_level(row)),
+        )
+        if story:
+            story["flagged_words"] = flagged_words
         story_rows.append(
             [
                 sid,
                 row["Title"],
                 story.get("platform_level", get_platform_level(row)),
-                flagged_words,
                 story.get("base_text", row.get("Base Text", "")),
                 story.get("detected_level", ""),
                 story.get("detected_level_rationale", ""),
@@ -784,6 +838,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
                 story.get("intro", ""),
                 story.get("easy_version", ""),
                 story.get("difficult_version", ""),
+                flagged_words,
             ]
         )
 
@@ -792,7 +847,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Story_Info",
         story_headers,
         story_rows,
-        [12, 30, 15, 42, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 80, 80],
+        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 80, 80, 42],
         "385723",
     )
 
@@ -992,7 +1047,7 @@ def guide_tab():
         - Base Text만으로 Story Info를 먼저 생성합니다.
         - 추정 CEFR, Lexile, 단어 수, 장면 수
         - Category, Book Mood, Summary, Intro Script
-        - Platform Level 기준 Flagged Words
+        - Platform Level 기준 Flagged Words와 대체어 제안
         - Easy Version, Difficult Version
 
         **2단계 | Vocab & Click Words**
