@@ -20,6 +20,7 @@ Download `Story_Confirmed_Template.xlsx` in the app and fill:
 Stage 1 creates:
 
 - estimated CEFR and Lexile from `Base Text`
+- `Flagged Words` that exceed the CEFR ceiling mapped from `Platform Level`
 - word count and scene count
 - three ordered categories, three ordered book moods, summary, keywords, intro script
 - `Easy Version`
@@ -47,6 +48,7 @@ The download file is `Vocab_Click_Words_Analysis.xlsx`.
 ## Level Logic
 
 - Input `Platform Level` is used only for generating `Easy Version` and `Difficult Version`.
+- Stage 1 `Flagged Words` uses `Platform Level`: 1 -> A2, 2 -> B1, 3 -> B2, 4 -> C1. Words strictly above that ceiling are listed.
 - `Detected CEFR` and `Lexile` are estimated from `Base Text`.
 - Vocab & Click Words filtering uses the estimated `Detected CEFR` with `lcms_cefr.csv`.
 

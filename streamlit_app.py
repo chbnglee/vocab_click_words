@@ -42,6 +42,12 @@ LEVEL_MAP = {
     "c1": "C1",
     "c2": "C2",
 }
+PLATFORM_LEVEL_TO_MAX_CEFR = {
+    "1": "A2",
+    "2": "B1",
+    "3": "B2",
+    "4": "C1",
+}
 BOOK_MOODS = [
     "Exciting",
     "Playful",
@@ -226,6 +232,78 @@ def count_story_words(text: str) -> int:
 
 def count_story_scenes(text: str) -> int:
     return len(re.findall(r"#SC\d+\b", str(text or "")))
+
+
+def platform_level_key(raw: Any) -> str:
+    value = str(raw or "").strip()
+    if re.fullmatch(r"\d+\.0+", value):
+        value = str(int(float(value)))
+    return value
+
+
+def get_platform_max_cefr(platform_level: Any) -> str:
+    key = platform_level_key(platform_level)
+    if key in PLATFORM_LEVEL_TO_MAX_CEFR:
+        return PLATFORM_LEVEL_TO_MAX_CEFR[key]
+    normalized = normalize_level(key)
+    return normalized if normalized in CEFR_ORDER else ""
+
+
+@st.cache_data
+def load_platform_cefr_index(path: str, mtime: float) -> tuple[dict[str, dict[str, str]], dict[str, str]]:
+    _ = mtime
+    entries: dict[str, dict[str, str]] = {}
+    form_to_word: dict[str, str] = {}
+    csv_path = Path(path)
+    if not csv_path.exists():
+        return entries, form_to_word
+
+    df = pd.read_csv(csv_path, dtype=str, encoding="utf-8-sig").fillna("")
+    for _, row in df.iterrows():
+        word = vocab_analyzer.normalize_vocab_item(row.get("word", ""))
+        level = normalize_level(row.get("cefr_level", ""))
+        if not word or level not in CEFR_ORDER:
+            continue
+        current = entries.get(word)
+        if current is None or CEFR_ORDER.index(level) < CEFR_ORDER.index(current["level"]):
+            entries[word] = {"level": level}
+        for form in re.split(r"[,;]", str(row.get("forms", ""))):
+            normalized_form = vocab_analyzer.normalize_vocab_item(form)
+            if normalized_form:
+                previous = form_to_word.get(normalized_form)
+                if previous is None or CEFR_ORDER.index(level) < CEFR_ORDER.index(entries[previous]["level"]):
+                    form_to_word[normalized_form] = word
+        form_to_word.setdefault(word, word)
+    return entries, form_to_word
+
+
+def flag_platform_cefr_words(text: str, platform_level: Any) -> str:
+    max_cefr = get_platform_max_cefr(platform_level)
+    if not max_cefr or not CEFR_PATH.exists():
+        return ""
+
+    entries, form_to_word = load_platform_cefr_index(str(CEFR_PATH), CEFR_PATH.stat().st_mtime)
+    max_rank = CEFR_ORDER.index(max_cefr)
+    normalized = vocab_analyzer.normalize_vocab_item(re.sub(r"#SC\d+\b", " ", str(text or "")))
+    tokens = vocab_analyzer.TOKEN_PATTERN.findall(normalized)
+    flagged: list[str] = []
+    seen: set[str] = set()
+
+    for token in tokens:
+        for candidate in vocab_analyzer.lemma_candidates(token):
+            word = form_to_word.get(candidate)
+            if not word:
+                continue
+            entry = entries.get(word)
+            if not entry:
+                continue
+            level = entry["level"]
+            if CEFR_ORDER.index(level) > max_rank and word not in seen:
+                seen.add(word)
+                flagged.append(f"{word} ({level})")
+            break
+
+    return "\n".join(flagged)
 
 
 def clean_json_text(text: str) -> str:
@@ -514,6 +592,7 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
         "platform_level": platform_level,
         "input_level": input_level,
         "base_text": base_story,
+        "flagged_words": flag_platform_cefr_words(base_story, platform_level),
         "detected_level": detected_level,
         "detected_level_rationale": str(parsed.get("detected_level_rationale", "")).strip(),
         "lexile": str(parsed.get("lexile", "")).strip(),
@@ -657,6 +736,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "ID",
         "Title",
         "Platform Level",
+        "Flagged Words",
         "Base Text",
         "Detected CEFR",
         "CEFR Rationale",
@@ -676,11 +756,20 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
     for _, row in source_df.iterrows():
         sid = str(row["ID"])
         story = story_info_by_id.get(sid, {})
+        flagged_words = story.get("flagged_words")
+        if flagged_words is None:
+            flagged_words = flag_platform_cefr_words(
+                story.get("base_text", row.get("Base Text", "")),
+                story.get("platform_level", get_platform_level(row)),
+            )
+            if story:
+                story["flagged_words"] = flagged_words
         story_rows.append(
             [
                 sid,
                 row["Title"],
                 story.get("platform_level", get_platform_level(row)),
+                flagged_words,
                 story.get("base_text", row.get("Base Text", "")),
                 story.get("detected_level", ""),
                 story.get("detected_level_rationale", ""),
@@ -703,7 +792,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Story_Info",
         story_headers,
         story_rows,
-        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 80, 80],
+        [12, 30, 15, 42, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 80, 80],
         "385723",
     )
 
@@ -903,6 +992,7 @@ def guide_tab():
         - Base Text만으로 Story Info를 먼저 생성합니다.
         - 추정 CEFR, Lexile, 단어 수, 장면 수
         - Category, Book Mood, Summary, Intro Script
+        - Platform Level 기준 Flagged Words
         - Easy Version, Difficult Version
 
         **2단계 | Vocab & Click Words**
