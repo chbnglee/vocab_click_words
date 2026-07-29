@@ -65,6 +65,21 @@ TOKEN_PATTERN = re.compile(r"[a-z]+(?:[-'][a-z]+)?")
 MAX_PHRASE_WORDS = 4
 EXCLUDED_DB_CATEGORIES = {"grammar & function words"}
 EXCLUDED_DB_POS = {"article", "conjunction", "determiner", "preposition", "pronoun"}
+API_OVERRIDE_STOPWORDS = {
+    "a", "an", "the", "and", "or", "but", "so", "because", "if", "then", "than",
+    "that", "this", "these", "those", "there", "here", "where", "when", "while",
+    "who", "what", "which", "why", "how", "all", "any", "some", "many", "much",
+    "few", "more", "most", "one", "two", "first", "last", "i", "me", "my", "mine",
+    "you", "your", "yours", "he", "him", "his", "she", "her", "hers", "it", "its",
+    "we", "us", "our", "ours", "they", "them", "their", "theirs", "am", "is",
+    "are", "was", "were", "be", "been", "being", "do", "does", "did", "done",
+    "have", "has", "had", "can", "could", "will", "would", "shall", "should",
+    "may", "might", "must", "not", "no", "yes", "very", "too", "also", "just",
+    "only", "even", "again", "still", "already", "now", "then", "to", "of", "in",
+    "on", "at", "by", "for", "from", "with", "about", "as", "into", "over",
+    "under", "up", "down", "out", "off", "back", "around",
+}
+MAX_API_UNKNOWN_OVERRIDES = 8
 PHRASAL_PARTICLES = {
     "around",
     "away",
@@ -486,6 +501,67 @@ def vocab_items_to_list(vocab) -> list[str]:
     return result
 
 
+def resolve_cefr_entry(word: str, entries: dict, form_to_word: dict[str, str]) -> tuple[str, dict | None]:
+    word = normalize_vocab_item(word)
+    candidates = [word]
+    if " " not in word:
+        candidates.extend(candidate for candidate in lemma_candidates(word) if candidate not in candidates)
+    for candidate in candidates:
+        canonical = form_to_word.get(candidate)
+        if canonical and canonical in entries:
+            return canonical, entries[canonical]
+    return "", None
+
+
+def is_api_unknown_override(word: str) -> bool:
+    word = normalize_vocab_item(word)
+    if not word:
+        return False
+    tokens = TOKEN_PATTERN.findall(word)
+    if not tokens:
+        return False
+    if word in API_OVERRIDE_STOPWORDS or all(token in API_OVERRIDE_STOPWORDS for token in tokens):
+        return False
+    if len(tokens) == 1 and len(tokens[0]) <= 2:
+        return False
+    return True
+
+
+def filter_api_vocab_overrides(
+    api_vocab,
+    text_candidates: set[str],
+    cefr_level: str,
+    max_unknown_overrides: int = MAX_API_UNKNOWN_OVERRIDES,
+) -> list[str]:
+    entries, form_to_word = load_cefr_index()
+    threshold = level_rank(cefr_level)
+    if threshold < 0:
+        return []
+
+    filtered: list[str] = []
+    seen: set[str] = set()
+    unknown_count = 0
+
+    for item in vocab_items_to_list(api_vocab):
+        if item not in text_candidates:
+            continue
+
+        canonical, entry = resolve_cefr_entry(item, entries, form_to_word)
+        if entry:
+            if level_rank(entry["level"]) >= threshold and canonical not in seen:
+                seen.add(canonical)
+                filtered.append(canonical)
+            continue
+
+        if item in seen or unknown_count >= max_unknown_overrides or not is_api_unknown_override(item):
+            continue
+        seen.add(item)
+        unknown_count += 1
+        filtered.append(item)
+
+    return filtered
+
+
 def merge_vocab_lists(*lists, text_candidates: set[str] | None = None) -> list[str]:
     merged = []
     seen = set()
@@ -510,18 +586,15 @@ def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) 
 
     normal_vocab = merge_vocab_lists(
         extract_cefr_vocab(normal, cefr_level),
-        result.get("normal_vocab", []),
-        text_candidates=normal_candidates,
+        filter_api_vocab_overrides(result.get("normal_vocab", []), normal_candidates, cefr_level),
     )
     easy_vocab = merge_vocab_lists(
         extract_cefr_vocab(easy, cefr_level),
-        result.get("easy_vocab", []),
-        text_candidates=easy_candidates,
+        filter_api_vocab_overrides(result.get("easy_vocab", []), easy_candidates, cefr_level),
     )
     difficult_vocab = merge_vocab_lists(
         extract_cefr_vocab(difficult, cefr_level),
-        result.get("difficult_vocab", []),
-        text_candidates=difficult_candidates,
+        filter_api_vocab_overrides(result.get("difficult_vocab", []), difficult_candidates, cefr_level),
     )
 
     result["normal_vocab"] = normal_vocab
@@ -530,8 +603,8 @@ def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) 
 
     normal_set = set(normal_vocab)
     api_click_words = [
-        word for word in vocab_items_to_list(result.get("vocab", []))
-        if word in normal_set or word in normal_candidates
+        word for word in filter_api_vocab_overrides(result.get("vocab", []), normal_candidates, cefr_level)
+        if word in normal_set
     ]
     result["vocab"] = merge_vocab_lists(api_click_words)
     return result

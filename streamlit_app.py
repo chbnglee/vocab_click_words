@@ -1057,7 +1057,7 @@ def guide_tab():
         - 세 수준의 텍스트에서 각각 클릭 단어를 추출합니다.
         - 1단계 결과를 사용할 경우, `Detected CEFR`와 LCMS CEFR DB를 우선 적용합니다.
         - 2단계만 단독 진행할 경우, Normal 텍스트 기준으로 CEFR/Lexile을 먼저 추정한 뒤 LCMS CEFR DB를 적용합니다.
-        - 레벨은 낮아도 주제 배경지식이 필요하거나 스토리 핵심 어휘인 단어를 API 판단으로 추가합니다.
+        - Gemini가 제안한 단어도 LCMS DB에 있고 기준 CEFR보다 낮으면 제외하며, DB에 없는 예외 후보만 제한적으로 추가합니다.
         - 1단계 결과 엑셀의 `Vocab_Input` 시트 또는 2단계 단독 템플릿 파일을 사용할 수 있습니다.
 
         `Platform Level`은 Easy/Difficult 생성 기준이고, Vocab 필터링 기준은 별도로 추정한 `Detected CEFR`입니다.
@@ -1082,7 +1082,7 @@ def guide_tab():
             </tr>
             <tr>
               <td>콘텐츠 특화 어휘</td>
-              <td>레벨은 낮아도 해당 주제 배경지식 없으면 모르거나 해당 스토리의 핵심 어휘</td>
+              <td>LCMS DB에 없고, 해당 주제 배경지식 없으면 모르거나 해당 스토리의 핵심 어휘로 볼 수 있는 제한적 예외 후보</td>
               <td>pea-shooter, pod, moss</td>
             </tr>
             <tr>
