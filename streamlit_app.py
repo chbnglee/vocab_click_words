@@ -1051,6 +1051,10 @@ def guide_tab():
         st.warning("lcms_cefr.csv 파일을 찾을 수 없습니다.")
         return
     cefr_df = load_cefr_wordlist(str(CEFR_PATH), CEFR_PATH.stat().st_mtime)
+    source_label = ""
+    if "source" in cefr_df.columns:
+        source_values = [str(item).strip() for item in cefr_df["source"].dropna().unique() if str(item).strip()]
+        source_label = ", ".join(source_values[:2])
     search_col, meta_col = st.columns([2, 3])
     with search_col:
         search_word = st.text_input("단어 검색", placeholder="예: apple", key="cefr_word_search")
@@ -1060,7 +1064,7 @@ def guide_tab():
                 "<div style='text-align:right; color:#5f6368; font-size:0.85rem; padding-top:2rem;'>"
                 f"전체 단어 {len(cefr_df):,} · "
                 f"CEFR 단계 {cefr_df['cefr_level'].nunique() if 'cefr_level' in cefr_df else 0} · "
-                "출처 LCMS_0727 단어메타"
+                f"출처 {source_label or 'lcms_cefr.csv'}"
                 "</div>"
             ),
             unsafe_allow_html=True,
