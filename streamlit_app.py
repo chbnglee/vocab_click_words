@@ -511,7 +511,7 @@ Required JSON keys:
   "lexile_rationale": "1 concise sentence based on sentence length and vocabulary difficulty",
   "category": "exactly 3 categories from the list, comma-separated, best match first",
   "book_mood": "exactly 3 moods from the list, comma-separated, best match first",
-  "book_info": "Easy English pre-reading story introduction, 1-3 very short sentences, 35 words maximum",
+  "book_info": "Easy English pre-reading story introduction, 1-3 very short declarative sentences, 35 words maximum, do not end with a question",
   "keywords": ["6-12 lowercase content words, no proper nouns"],
   "intro": "Easy English spoken intro script for elementary/middle school video, preferably in the main character's voice, 35 words maximum",
   "easy_version": "rewritten story preserving every #SC marker",
@@ -537,6 +537,7 @@ Important separation of level logic:
 - The book_mood field must contain exactly 3 items from Book mood choices, ordered by relevance.
 - Write book_info and intro in easy English for elementary/middle school learners. Do not use Korean.
 - book_info is not a full spoiler summary. It should introduce the setup before reading, using simple words and only story events or characters that appear in the Base Story.
+- book_info should be declarative, not a teaser question. Avoid endings like "Can ...?", "Will ...?", or "What will happen?". Prefer sentences like "Milo goes to find his colors." or "The girl tries to solve the problem."
 - intro is for video narration, so keep it shorter and easier than ordinary reading text.
 - Keep both book_info and intro within 35 words each.
 
@@ -626,6 +627,32 @@ def normalize_ordered_choices(raw: Any, valid_choices: list[str], limit: int = 3
     return ", ".join(selected)
 
 
+def normalize_book_info(value: Any) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    if text.endswith("?"):
+        question = text[:-1].strip()
+        if re.match(r"(?i)^what\s+(?:will\s+)?happens?\s+(?:next|now)?$", question):
+            return "The story follows the next part of the adventure."
+        match = re.match(r"(?i)^what\s+(?:will\s+)?happens?\s+when\s+(.+)$", question)
+        if match:
+            return f"The story begins when {match.group(1).strip()}."
+        verbs = (
+            "look for|search for|find|get|save|help|learn|make|reach|escape|solve|bring|"
+            "turn|become|discover|return|stop|win|fix|follow|meet|catch|use|remember|"
+            "choose|share|finish|cross|open|close|keep|wake|fly|grow|glow|sing|dance|"
+            "play|build|protect|rescue|see|hear|feel|understand|take|give|show|tell|be"
+        )
+        match = re.match(rf"(?i)^(?:can|will)\s+(.+?)\s+({verbs})(.*)$", question)
+        if match:
+            subject = match.group(1).strip()
+            verb = match.group(2).strip()
+            rest = match.group(3).strip()
+            text = f"{subject[:1].upper()}{subject[1:]} tries to {verb}{(' ' + rest) if rest else ''}."
+        else:
+            text = question + "."
+    return text
+
+
 def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, Any]:
     base_story = str(row["Base Text"]).strip()
     platform_level = get_platform_level(row)
@@ -658,7 +685,7 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
         "scene_count": count_story_scenes(base_story),
         "category": category,
         "book_mood": mood,
-        "book_info": str(parsed.get("book_info", "")).strip(),
+        "book_info": normalize_book_info(parsed.get("book_info", "")),
         "keywords": [str(item).strip().lower() for item in keywords if str(item).strip()],
         "intro": str(parsed.get("intro", "")).strip(),
         "easy_version": str(parsed.get("easy_version", "")).strip(),
