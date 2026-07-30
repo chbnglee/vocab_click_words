@@ -51,6 +51,6 @@ The download file is `Vocab_Click_Words_Analysis.xlsx`.
 - Stage 1 `Flagged Words` uses `Platform Level`: 1 -> A2, 2 -> B1, 3 -> B2, 4 -> C1. Words strictly above that ceiling are listed with up to three LCMS synonym-based suggestions.
 - `Detected CEFR` and `Lexile` are estimated from `Base Text`.
 - Vocab & Click Words filtering uses the estimated `Detected CEFR` with `lcms_cefr.csv`.
-- Gemini suggestions are post-filtered: words already in the LCMS DB but below the detected CEFR are excluded, while DB-missing exception candidates are kept only in a small capped set.
+- Gemini suggestions are post-filtered with the LCMS DB. Known words below the detected CEFR are usually excluded, but a one-band-lower story-core click candidate can be kept when it is essential to comprehension.
 
 Both stages support checkpoint JSON files for longer batches.

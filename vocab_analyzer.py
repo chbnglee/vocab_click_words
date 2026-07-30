@@ -65,6 +65,7 @@ TOKEN_PATTERN = re.compile(r"[a-z]+(?:[-'][a-z]+)?")
 MAX_PHRASE_WORDS = 4
 EXCLUDED_DB_CATEGORIES = {"grammar & function words"}
 EXCLUDED_DB_POS = {"article", "conjunction", "determiner", "preposition", "pronoun"}
+CORE_OVERRIDE_EXCLUDED_CATEGORIES = EXCLUDED_DB_CATEGORIES | {"abstract concepts", "numbers & time"}
 API_OVERRIDE_STOPWORDS = {
     "a", "an", "the", "and", "or", "but", "so", "because", "if", "then", "than",
     "that", "this", "these", "those", "there", "here", "where", "when", "while",
@@ -80,6 +81,7 @@ API_OVERRIDE_STOPWORDS = {
     "under", "up", "down", "out", "off", "back", "around",
 }
 MAX_API_UNKNOWN_OVERRIDES = 8
+CORE_OVERRIDE_MAX_LEVEL_GAP = 1
 PHRASAL_PARTICLES = {
     "around",
     "away",
@@ -412,11 +414,17 @@ def load_cefr_index():
                 {
                     "level": level,
                     "forms": set(),
+                    "pos": set(),
+                    "categories": set(),
                 },
             )
             if level_rank(level) < level_rank(entry["level"]):
                 entry["level"] = level
 
+            if pos:
+                entry["pos"].add(pos)
+            if category:
+                entry["categories"].add(category)
             entry["forms"].add(word)
             for form in re.split(r"[,;]", str(row.get("forms", ""))):
                 normalized_form = normalize_vocab_item(form)
@@ -527,10 +535,42 @@ def is_api_unknown_override(word: str) -> bool:
     return True
 
 
+def build_api_core_vocab(api_vocab, text_candidates: set[str]) -> set[str]:
+    entries, form_to_word = load_cefr_index()
+    core_vocab: set[str] = set()
+    for item in vocab_items_to_list(api_vocab):
+        if item not in text_candidates:
+            continue
+        canonical, entry = resolve_cefr_entry(item, entries, form_to_word)
+        core_vocab.add(canonical if entry else item)
+    return core_vocab
+
+
+def is_known_core_override(word: str, entry: dict, threshold: int, core_vocab: set[str] | None) -> bool:
+    if not core_vocab or word not in core_vocab:
+        return False
+    rank = level_rank(entry.get("level", ""))
+    if rank < 0 or rank >= threshold:
+        return False
+    if threshold - rank > CORE_OVERRIDE_MAX_LEVEL_GAP:
+        return False
+    if not is_api_unknown_override(word):
+        return False
+
+    pos_set = entry.get("pos", set())
+    category_set = entry.get("categories", set())
+    if pos_set and pos_set.issubset(EXCLUDED_DB_POS):
+        return False
+    if category_set and category_set.issubset(CORE_OVERRIDE_EXCLUDED_CATEGORIES):
+        return False
+    return True
+
+
 def filter_api_vocab_overrides(
     api_vocab,
     text_candidates: set[str],
     cefr_level: str,
+    core_vocab: set[str] | None = None,
     max_unknown_overrides: int = MAX_API_UNKNOWN_OVERRIDES,
 ) -> list[str]:
     entries, form_to_word = load_cefr_index()
@@ -548,7 +588,11 @@ def filter_api_vocab_overrides(
 
         canonical, entry = resolve_cefr_entry(item, entries, form_to_word)
         if entry:
-            if level_rank(entry["level"]) >= threshold and canonical not in seen:
+            entry_rank = level_rank(entry["level"])
+            if entry_rank >= threshold and canonical not in seen:
+                seen.add(canonical)
+                filtered.append(canonical)
+            elif is_known_core_override(canonical, entry, threshold, core_vocab) and canonical not in seen:
                 seen.add(canonical)
                 filtered.append(canonical)
             continue
@@ -583,18 +627,19 @@ def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) 
     normal_candidates = build_text_candidate_set(normal)
     easy_candidates = build_text_candidate_set(easy)
     difficult_candidates = build_text_candidate_set(difficult)
+    normal_core_vocab = build_api_core_vocab(result.get("vocab", []), normal_candidates)
 
     normal_vocab = merge_vocab_lists(
         extract_cefr_vocab(normal, cefr_level),
-        filter_api_vocab_overrides(result.get("normal_vocab", []), normal_candidates, cefr_level),
+        filter_api_vocab_overrides(result.get("normal_vocab", []), normal_candidates, cefr_level, normal_core_vocab),
     )
     easy_vocab = merge_vocab_lists(
         extract_cefr_vocab(easy, cefr_level),
-        filter_api_vocab_overrides(result.get("easy_vocab", []), easy_candidates, cefr_level),
+        filter_api_vocab_overrides(result.get("easy_vocab", []), easy_candidates, cefr_level, normal_core_vocab),
     )
     difficult_vocab = merge_vocab_lists(
         extract_cefr_vocab(difficult, cefr_level),
-        filter_api_vocab_overrides(result.get("difficult_vocab", []), difficult_candidates, cefr_level),
+        filter_api_vocab_overrides(result.get("difficult_vocab", []), difficult_candidates, cefr_level, normal_core_vocab),
     )
 
     result["normal_vocab"] = normal_vocab
@@ -603,7 +648,7 @@ def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) 
 
     normal_set = set(normal_vocab)
     api_click_words = [
-        word for word in filter_api_vocab_overrides(result.get("vocab", []), normal_candidates, cefr_level)
+        word for word in filter_api_vocab_overrides(result.get("vocab", []), normal_candidates, cefr_level, normal_core_vocab)
         if word in normal_set
     ]
     result["vocab"] = merge_vocab_lists(api_click_words)
@@ -665,6 +710,12 @@ with exactly these fields:
          - Figurative or idiomatic uses not transparent from literal meaning
          - Words whose meaning is critical to the plot but not signalled by
            surrounding sentences
+       If a word is already known to be BELOW the text's CEFR level, include it
+       only when it is at most ONE CEFR band below and is a true story-core
+       keyword: a key character, object, setting, action, or emotion that the
+       reader must understand to follow the story. Do not use this exception
+       for helper verbs, question words, time words, abstract descriptors, or
+       transparent everyday words used only in passing.
 
   EXCLUSIONS (do NOT include any of the following):
     - Proper nouns (names of people, places)
@@ -699,6 +750,10 @@ with exactly these fields:
                 character trait, object, action, setting, or emotion), AND the
                 resulting set of words, heard in sequence, gives a "story trailer"
                 feel — key characters, objects and events should be sensed.
+                For below-level words, keep only one-band-lower story-core
+                keywords; do not keep ordinary support words such as "do",
+                "why", "year", abstract descriptors, or emotions/actions
+                mentioned only in passing.
   STEP 3 — count (based on the CEFR of the NORMAL version):
              A1 or A2 → 5–8 words   |   B1 or B2 → 6–10 words
 
