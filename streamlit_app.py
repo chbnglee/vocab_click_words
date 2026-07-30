@@ -514,6 +514,7 @@ Required JSON keys:
   "book_info": "Easy English pre-reading story introduction, 1-3 very short declarative sentences, 35 words maximum, do not end with a question",
   "keywords": ["6-12 lowercase content words, no proper nouns"],
   "intro": "Easy English spoken intro script for elementary/middle school video, preferably in the main character's voice, 35 words maximum",
+  "movie_book_script": "Short movie book script summary, 2-4 short paragraphs, easy picture-book narration",
   "easy_version": "rewritten story preserving every #SC marker",
   "difficult_version": "rewritten story preserving every #SC marker"
 }}
@@ -540,6 +541,10 @@ Important separation of level logic:
 - book_info should be declarative, not a teaser question. Avoid endings like "Can ...?", "Will ...?", or "What will happen?". Prefer sentences like "Milo goes to find his colors." or "The girl tries to solve the problem."
 - intro is for video narration, so keep it shorter and easier than ordinary reading text.
 - Keep both book_info and intro within 35 words each.
+- movie_book_script should feel like a children's movie book narration for Korean elementary English learners aged 6-8, CEFR A0-A2. Use language similar to the Base Story. Do not use harder words or longer sentences than the Base Story.
+- movie_book_script should keep the story flow, not just summarize the plot. Include the setting/background, main character, important events, problem or challenge, solution, and ending or lesson only when they exist in the Base Story. Do not add new events, morals, emotions, or background information.
+- movie_book_script should use 2-4 short paragraphs. Each paragraph should show a clear scene. Prefer one idea per sentence and short, simple sentences. Reuse simple original expressions when they are important. Keep the tone simple, warm, visual, easy to read aloud, and suitable for animation.
+- For very short or low-plot stories, do not force drama. Keep the original feeling and focus on introduction, meeting, activity, and happy ending.
 
 Category choices:
 {categories}
@@ -688,6 +693,7 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
         "book_info": normalize_book_info(parsed.get("book_info", "")),
         "keywords": [str(item).strip().lower() for item in keywords if str(item).strip()],
         "intro": str(parsed.get("intro", "")).strip(),
+        "movie_book_script": str(parsed.get("movie_book_script", "")).strip(),
         "easy_version": str(parsed.get("easy_version", "")).strip(),
         "difficult_version": str(parsed.get("difficult_version", "")).strip(),
     }
@@ -832,6 +838,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Summary",
         "Keywords",
         "Intro Script",
+        "Movie Book Script",
         "Easy Version",
         "Difficult Version",
         "Flagged Words",
@@ -863,6 +870,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
                 story.get("book_info", ""),
                 ", ".join(story.get("keywords", [])),
                 story.get("intro", ""),
+                story.get("movie_book_script", ""),
                 story.get("easy_version", ""),
                 story.get("difficult_version", ""),
                 flagged_words,
@@ -874,7 +882,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Story_Info",
         story_headers,
         story_rows,
-        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 80, 80, 42],
+        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 70, 80, 80, 42],
         "385723",
     )
 
@@ -1073,7 +1081,7 @@ def guide_tab():
 
         - Base Text만으로 Story Info를 먼저 생성합니다.
         - 추정 CEFR, Lexile, 단어 수, 장면 수
-        - Category, Book Mood, Summary, Intro Script
+        - Category, Book Mood, Summary, Intro Script, Movie Book Script
         - Platform Level 기준 Flagged Words와 대체어 제안
         - Easy Version, Difficult Version
 

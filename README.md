@@ -22,7 +22,7 @@ Stage 1 creates:
 - estimated CEFR and Lexile from `Base Text`
 - `Flagged Words` that exceed the CEFR ceiling mapped from `Platform Level`, with replacement suggestions when available
 - word count and scene count
-- three ordered categories, three ordered book moods, summary, keywords, intro script
+- three ordered categories, three ordered book moods, summary, keywords, intro script, movie book script
 - `Easy Version`
 - `Difficult Version`
 
