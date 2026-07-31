@@ -867,8 +867,9 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
     for _, row in source_df.iterrows():
         sid = str(row["ID"])
         story = story_info_by_id.get(sid, {})
+        base_text = story.get("base_text", row.get("Base Text", ""))
         flagged_words = flag_platform_cefr_words(
-            story.get("base_text", row.get("Base Text", "")),
+            base_text,
             story.get("platform_level", get_platform_level(row)),
         )
         if story:
@@ -878,7 +879,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
                 sid,
                 row["Title"],
                 story.get("platform_level", get_platform_level(row)),
-                story.get("base_text", row.get("Base Text", "")),
+                base_text,
                 story.get("detected_level", ""),
                 story.get("detected_level_rationale", ""),
                 story.get("lexile", ""),
@@ -892,7 +893,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
                 story.get("difficult_version", ""),
                 flagged_words,
                 vocab_to_cell(story.get("vocab", [])),
-                vocab_to_cell(story.get("words_n", [])),
+                vocab_to_cell(vocab_analyzer.sort_vocab_by_text_order(story.get("words_n", []), base_text)),
                 story.get("intro", ""),
                 story.get("movie_book_script", ""),
             ]

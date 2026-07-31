@@ -460,6 +460,32 @@ def build_text_candidate_set(text: str) -> set[str]:
     return candidates
 
 
+def build_text_position_map(text: str) -> dict[str, int]:
+    _, form_to_word = load_cefr_index()
+    normalized = normalize_vocab_item(clean_text(text))
+    tokens = TOKEN_PATTERN.findall(normalized)
+    positions: dict[str, int] = {}
+
+    def add(candidate: str, idx: int):
+        candidate = normalize_vocab_item(candidate)
+        if not candidate:
+            return
+        positions.setdefault(candidate, idx)
+        canonical = form_to_word.get(candidate)
+        if canonical:
+            positions.setdefault(canonical, idx)
+
+    for idx, token in enumerate(tokens):
+        for candidate in lemma_candidates(token):
+            add(candidate, idx)
+        for length in range(2, MAX_PHRASE_WORDS + 1):
+            if idx + length <= len(tokens):
+                for candidate in token_candidates(tokens, idx, length):
+                    add(candidate, idx)
+
+    return positions
+
+
 def extract_cefr_vocab(text: str, cefr_level: str) -> list[str]:
     entries, form_to_word = load_cefr_index()
     threshold = level_rank(cefr_level)
@@ -619,6 +645,18 @@ def merge_vocab_lists(*lists, text_candidates: set[str] | None = None) -> list[s
     return merged
 
 
+def sort_vocab_by_text_order(vocab, text: str) -> list[str]:
+    words = vocab_items_to_list(vocab)
+    positions = build_text_position_map(text)
+    return [
+        word
+        for _, word in sorted(
+            enumerate(words),
+            key=lambda item: (positions.get(item[1], float("inf")), item[0]),
+        )
+    ]
+
+
 def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) -> dict:
     cefr_level = str(result.get("cefr", "")).strip()
     if level_rank(cefr_level) < 0:
@@ -633,6 +671,7 @@ def apply_db_vocab_filter(result: dict, normal: str, easy: str, difficult: str) 
         extract_cefr_vocab(normal, cefr_level),
         filter_api_vocab_overrides(result.get("normal_vocab", []), normal_candidates, cefr_level, normal_core_vocab),
     )
+    normal_vocab = sort_vocab_by_text_order(normal_vocab, normal)
     easy_vocab = merge_vocab_lists(
         extract_cefr_vocab(easy, cefr_level),
         filter_api_vocab_overrides(result.get("easy_vocab", []), easy_candidates, cefr_level, normal_core_vocab),
