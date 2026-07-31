@@ -521,7 +521,7 @@ Required JSON keys:
 
 Story ID: {story_id}
 Title: {title}
-Input production level for rewriting: {input_level or "(blank)"}
+Input production level for rewriting (Platform Level): {input_level or "(blank)"}
 Easy rewrite target: {easy_rule}
 Difficult rewrite target: {difficult_rule}
 Known word count: {word_count}
@@ -530,10 +530,20 @@ Known scene count: {scene_count}
 Important separation of level logic:
 - Detect "detected_level" and "lexile" independently from the Base Story only.
 - Do not force detected_level to match the input production level.
-- Use the input production level only to decide the Easy/Difficult rewrite targets.
+- Use the input production level only to decide the Easy/Difficult rewrite targets. In the rewrite rules below, "level" means Platform Level.
 - Preserve all #SC markers exactly. Do not remove, merge, or invent scenes.
-- Easy version should be clearly simpler than the input production level.
-- Difficult version should be richer than the input production level but keep the same plot.
+- Easy version: rewrite the Base Story one Platform Level below the input production level.
+  - Replace every word above the Easy target level with an easier synonym.
+  - Keep every scene's event order. Do not omit, merge, or skip scenes.
+  - Keep a similar or shorter length than the Base Story. Do not pad.
+  - Fairy-tale expressions such as "Off she ran!" are allowed when natural.
+  - Each scene must be clearly easier than the matching Base scene.
+- Difficult version: rewrite the Base Story one Platform Level above the input production level.
+  - Upgrade words to more precise or richer synonyms that fit the Difficult target level.
+  - Scale the upgrade by the level gap: A1 to A2 should be a small lift, while C1/C2 may be literary.
+  - Keep every event in order. Do not add a new plot.
+  - The text may become slightly longer than the Base Story because of added description, but do not pad.
+  - Keep a storybook tone, not an academic essay tone.
 - The category field must contain exactly 3 items from Category choices, ordered by relevance.
 - The book_mood field must contain exactly 3 items from Book mood choices, ordered by relevance.
 - Write book_info and intro in easy English for elementary/middle school learners. Do not use Korean.
