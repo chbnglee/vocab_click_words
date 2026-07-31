@@ -539,8 +539,9 @@ Important separation of level logic:
   - Fairy-tale expressions such as "Off she ran!" are allowed when natural.
   - Each scene must be clearly easier than the matching Base scene.
 - Difficult version: rewrite the Base Story one Platform Level above the input production level.
-  - Upgrade words to more precise or richer synonyms that fit the Difficult target level.
-  - Scale the upgrade by the level gap: A1 to A2 should be a small lift, while C1/C2 may be literary.
+  - Upgrade words only to slightly more precise or slightly more difficult expressions that fit the Difficult target level.
+  - Avoid overly difficult words, archaic words, stiff literary diction, or formal written expressions that do not fit a children's storybook.
+  - Scale the upgrade by the level gap: A1 to A2 should be a small lift, and higher levels may be more expressive but must still sound natural.
   - Keep every event in order. Do not add a new plot.
   - The text may become slightly longer than the Base Story because of added description, but do not pad.
   - Keep a storybook tone, not an academic essay tone.
