@@ -106,6 +106,7 @@ PREFERRED_MODELS = [
 ]
 DEFAULT_MODEL = PREFERRED_MODELS[0]
 MODEL_SESSION_KEY = "story_vocab_available_models"
+APP_TITLE = "Story Text Pipeline"
 
 
 @st.cache_resource
@@ -119,7 +120,7 @@ def load_vocab_analyzer():
 
 
 st.set_page_config(
-    page_title="Story Info.",
+    page_title=APP_TITLE,
     page_icon="",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -511,8 +512,7 @@ Required JSON keys:
   "lexile_rationale": "1 concise sentence based on sentence length and vocabulary difficulty",
   "category": "exactly 3 categories from the list, comma-separated, best match first",
   "book_mood": "exactly 3 moods from the list, comma-separated, best match first",
-  "book_info": "Easy English pre-reading story introduction, 1-3 very short declarative sentences, 35 words maximum, do not end with a question",
-  "keywords": ["6-12 lowercase content words, no proper nouns"],
+  "book_info": "Easy English non-spoiler back-cover style story introduction, 1-3 very short declarative sentences, 35 words maximum, do not end with a question",
   "intro": "Easy English spoken intro script for elementary/middle school video, preferably in the main character's voice, 35 words maximum",
   "movie_book_script": "Short movie book script summary, 2-4 short paragraphs, easy picture-book narration",
   "easy_version": "rewritten story preserving every #SC marker",
@@ -550,6 +550,7 @@ Important separation of level logic:
 - The book_mood field must contain exactly 3 items from Book mood choices, ordered by relevance.
 - Write book_info and intro in easy English for elementary/middle school learners. Do not use Korean.
 - book_info is not a full spoiler summary. It should introduce the setup before reading, using simple words and only story events or characters that appear in the Base Story.
+- book_info should feel like text for the front/back cover of a book. Do not reveal the final solution, rescue, lesson, or ending. Stop around the main problem, strange event, promise, or character's attempt.
 - book_info should be declarative, not a teaser question. Avoid endings like "Can ...?", "Will ...?", or "What will happen?". Prefer sentences like "Milo goes to find his colors." or "The girl tries to solve the problem."
 - intro is for video narration, so keep it shorter and easier than ordinary reading text.
 - Keep both book_info and intro within 35 words each.
@@ -674,11 +675,6 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
     base_story = str(row["Base Text"]).strip()
     platform_level = get_platform_level(row)
     input_level = normalize_level(platform_level)
-    keywords = parsed.get("keywords", [])
-    if isinstance(keywords, str):
-        keywords = [item.strip() for item in keywords.split(",") if item.strip()]
-    elif not isinstance(keywords, list):
-        keywords = []
 
     detected_level = normalize_level(parsed.get("detected_level", ""))
     if detected_level not in CEFR_ORDER:
@@ -703,7 +699,6 @@ def normalize_story_info(parsed: dict[str, Any], row: pd.Series) -> dict[str, An
         "category": category,
         "book_mood": mood,
         "book_info": normalize_book_info(parsed.get("book_info", "")),
-        "keywords": [str(item).strip().lower() for item in keywords if str(item).strip()],
         "intro": str(parsed.get("intro", "")).strip(),
         "movie_book_script": str(parsed.get("movie_book_script", "")).strip(),
         "easy_version": str(parsed.get("easy_version", "")).strip(),
@@ -732,6 +727,17 @@ def call_vocab_analysis(client, model_name: str, story_info: dict[str, Any]) -> 
     raw["id"] = story_info["id"]
     raw["title"] = story_info["title"]
     return raw
+
+
+def story_info_has_vocab_fields(story_info: dict[str, Any]) -> bool:
+    return "vocab" in story_info and "words_n" in story_info
+
+
+def attach_story_info_vocab_fields(client, model_name: str, story_info: dict[str, Any]) -> dict[str, Any]:
+    vocab_result = call_vocab_analysis(client, model_name, story_info)
+    story_info["vocab"] = vocab_result.get("vocab", [])
+    story_info["words_n"] = vocab_result.get("normal_vocab", [])
+    return vocab_result
 
 
 def vocab_to_cell(vocab: Any) -> str:
@@ -769,6 +775,7 @@ def write_table_sheet(
     rows: list[list[Any]],
     widths: list[int],
     fill_color: str,
+    freeze_panes: str = "A2",
 ):
     ws = wb.create_sheet(title)
     thin = Side(style="thin", color="D9D9D9")
@@ -804,7 +811,7 @@ def write_table_sheet(
                 wrap_text=True,
             )
         ws.row_dimensions[row_idx].height = 52
-    ws.freeze_panes = "A2"
+    ws.freeze_panes = freeze_panes
     return ws
 
 
@@ -848,12 +855,13 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Category",
         "Book Mood",
         "Summary",
-        "Keywords",
-        "Intro Script",
-        "Movie Book Script",
         "Easy Version",
         "Difficult Version",
         "Flagged Words",
+        "Vocab",
+        "Words_N",
+        "Intro Script",
+        "Movie Book Script",
     ]
     story_rows: list[list[Any]] = []
     for _, row in source_df.iterrows():
@@ -880,12 +888,13 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
                 story.get("category", ""),
                 story.get("book_mood", ""),
                 story.get("book_info", ""),
-                ", ".join(story.get("keywords", [])),
-                story.get("intro", ""),
-                story.get("movie_book_script", ""),
                 story.get("easy_version", ""),
                 story.get("difficult_version", ""),
                 flagged_words,
+                vocab_to_cell(story.get("vocab", [])),
+                vocab_to_cell(story.get("words_n", [])),
+                story.get("intro", ""),
+                story.get("movie_book_script", ""),
             ]
         )
 
@@ -894,8 +903,9 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         "Story_Info",
         story_headers,
         story_rows,
-        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 36, 48, 70, 80, 80, 42],
+        [12, 30, 15, 80, 14, 42, 12, 42, 12, 12, 22, 28, 46, 80, 80, 42, 35, 50, 48, 70],
         "385723",
+        freeze_panes="C2",
     )
 
     vocab_df = story_info_to_vocab_df(source_df, story_info_by_id)
@@ -906,6 +916,7 @@ def build_story_info_workbook(source_df: pd.DataFrame, story_info_by_id: dict[st
         vocab_df.fillna("").values.tolist(),
         [12, 30, 80, 80, 80, 14, 42, 12, 42],
         "1F3864",
+        freeze_panes="C2",
     )
 
     output = io.BytesIO()
@@ -1093,7 +1104,7 @@ def guide_tab():
 
         - Base Text만으로 Story Info를 먼저 생성합니다.
         - 추정 CEFR, Lexile, 단어 수, 장면 수
-        - Category, Book Mood, Summary, Intro Script, Movie Book Script
+        - Category, Book Mood, Summary, Vocab, Words_N, Intro Script, Movie Book Script
         - Platform Level 기준 Flagged Words와 대체어 제안
         - Easy Version, Difficult Version
 
@@ -1263,7 +1274,11 @@ def story_info_tab():
         for sid, item in checkpoint.items()
         if isinstance(item, dict)
     }
-    completed_ids = {sid for sid, item in story_info_checkpoint.items() if item.get("easy_version")}
+    completed_ids = {
+        sid
+        for sid, item in story_info_checkpoint.items()
+        if item.get("easy_version") and story_info_has_vocab_fields(item)
+    }
 
     labels = [f"{row['ID']} | {row['Title']}" for _, row in story_df.iterrows()]
     selected_labels = st.multiselect(
@@ -1311,20 +1326,26 @@ def story_info_tab():
         for idx, (_, row) in enumerate(selected_df.iterrows(), 1):
             sid = str(row["ID"])
             title = str(row["Title"])
-            if story_info_by_id.get(sid, {}).get("easy_version"):
+            story_info = story_info_by_id.get(sid, {})
+            if story_info.get("easy_version") and story_info_has_vocab_fields(story_info):
                 progress.progress(idx / len(selected_df))
                 continue
 
-            log_box.info(f"{idx}/{len(selected_df)} Story Info 생성 중: {sid} / {title}")
-            story_info = call_story_info(client, model_name, row)
-            if not story_info:
-                message = st.session_state.get("last_story_info_error", "")
-                st.warning(f"{sid} Story Info 생성 실패")
-                if message:
-                    st.error(describe_gemini_error(message))
-                    st.code(message, language="text")
-                progress.progress(idx / len(selected_df))
-                continue
+            if not story_info.get("easy_version"):
+                log_box.info(f"{idx}/{len(selected_df)} Story Info 생성 중: {sid} / {title}")
+                story_info = call_story_info(client, model_name, row)
+                if not story_info:
+                    message = st.session_state.get("last_story_info_error", "")
+                    st.warning(f"{sid} Story Info 생성 실패")
+                    if message:
+                        st.error(describe_gemini_error(message))
+                        st.code(message, language="text")
+                    progress.progress(idx / len(selected_df))
+                    continue
+
+            if not story_info_has_vocab_fields(story_info):
+                log_box.info(f"{idx}/{len(selected_df)} Vocab / Words_N 생성 중: {sid} / {title}")
+                attach_story_info_vocab_fields(client, model_name, story_info)
 
             story_info_by_id[sid] = story_info
             progress.progress(idx / len(selected_df))
@@ -1510,7 +1531,7 @@ def vocab_tab():
             )
 
 
-st.title("Story Info.")
+st.title(APP_TITLE)
 tab_guide, tab_story_info, tab_vocab = st.tabs(["가이드", "1단계 Story Info", "2단계 Vocab & Click Words"])
 
 with tab_guide:
